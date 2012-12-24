@@ -394,7 +394,7 @@ class gradingform_btec_controller extends gradingform_controller {
 	public static function get_default_options() {
 		$options = array(
 				'alwaysshowdefinition' => 1,
-				
+				'showmarkspercriterionstudents' => 1,
 		);
 		return $options;
 	}
