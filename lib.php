@@ -45,7 +45,7 @@ function list_of_components(){
 			'P4'=>get_string("P4",'gradingform_btec'),
 			'P5'=>get_string("P5",'gradingform_btec'),
 			'P6'=>get_string("P6",'gradingform_btec'),
-			'P7'=>get_string("P6",'gradingform_btec'),
+			'P7'=>get_string("P7",'gradingform_btec'),
 			'P8'=>get_string("P8",'gradingform_btec'),
 			'P9'=>get_string("P9",'gradingform_btec'),
 			'M1'=>get_string("M1",'gradingform_btec'),
