@@ -18,14 +18,15 @@
  * Marking btec, advanced grade plugin
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green <marcusavgreen at gmail.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component  = 'gradingform_btec';
-$plugin->version    = 2012081700;
+$plugin->version    = 2012081704;
 $plugin->requires   = 2012061700;
+$plugin->release    = '0.1';
 $plugin->maturity   = MATURITY_ALPHA;
 
