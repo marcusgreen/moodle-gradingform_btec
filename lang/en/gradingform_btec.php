@@ -65,43 +65,19 @@ $string['hidestudentdesc'] = 'Hide student criterion descriptions';
 $string['maxscore'] = 'Maximum mark';
 $string['name'] = 'Name';
 $string['needregrademessage'] = 'The BTEC marking definition was changed after this student had been graded. The student can not see this BTEC marking until you check the BTEC marking and update the grade.';
-
-$string['P1']="P1";
-$string['P2']="P2";
-$string['P3']="P3";
-$string['P4']="P4";
-$string['P5']="P5";
-$string['P6']="P6";
-$string['P7']="P7";
-$string['P8']="P8";
-$string['P9']="P9";
-$string['M1']="M1";
-$string['M2']="M2";
-$string['M3']="M3";
-$string['M4']="M4";
-$string['M5']="M5";
-$string['D1']="D1";
-$string['D2']="D2";
-$string['D3']="D3";
-$string['D4']="D4";
-$string['D5']="D5";
-
 $string['gradelevels']='Grade Levels';
-$string['gradelevels_help']='P, M and D stand for Pass Merit and Distinction';
+$string['gradelevels_help']='Criteron names must start with the letters P, M or D (Pass, Merit or Distinction) and be followed by a number, e.g. P1 or M2 or D3 etc';
 
 $string['btecgrading']='How BTEC grading works';
 $string['btecgrading_help']='BTEC grading is binary and accumulative. Students can either get or not get a level, there are no numbers or percentages. They can only get a level
-		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit 
+		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit
 		criteria, you only get a Distinction if you get all Pass, all Merit and all Distinction. If a student does not get all Pass criteria they get a Refer';
-
+$string['btecgrading_link']='BTEC_marking';
 
 $string['duplicateelements']='Duplicate criteria element, see ';
 
-
-
-
-
 $string['pluginname'] = 'BTEC marking';
+
 $string['previewbtecmarking'] = 'Preview BTEC marking';
 $string['regrademessage1'] = 'You are about to save changes to a BTEC marking that has already been used for grading. Please indicate if existing grades need to be reviewed. If you set this then the BTEC marking will be hidden from students until their item is regraded.';
 $string['regrademessage5'] = 'You are about to save significant changes to a BTEC marking that has already been used for grading. The gradebook value will be unchanged, but the BTEC marking will be hidden from students until their item is regraded.';
@@ -116,10 +92,9 @@ $string['showdescriptionstudent'] = 'Display description to those being graded';
 $string['showmarkerdesc'] = 'Show marker criterion descriptions';
 $string['showmarkspercriterionstudents'] = 'Show marks per criterion to students';
 $string['showstudentdesc'] = 'Show student criterion descriptions';
-
-
-
 $string['criteriarequiremen'] = 'Requirements for completing criteria';
 $string['yes'] = 'yes';
 $string['no'] = 'no';
-
+$string['startwithpmd']=' {$a} must start with a  P,M or D ';
+$string['endwithadigit']=' must end with a digit ';
+$string['and']=' and ';
