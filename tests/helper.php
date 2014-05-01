@@ -25,8 +25,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class moodlequickform_bteceditor_helper {
 
-	public function get_btec_editor() {
-          return new moodlequickform_bteceditor('testbteceditor', 'elementlabel', null);
+    public function get_btec_editor() {
+        return new moodlequickform_bteceditor('testbteceditor', 'elementlabel', null);
     }
-        
 }
