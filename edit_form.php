@@ -42,32 +42,27 @@ class gradingform_btec_editbtec extends moodleform {
      * Form element definition
      */
     public function definition() {
-        
         $form = $this->_form;
-
         $form->addElement('hidden', 'areaid');
         $form->setType('areaid', PARAM_INT);
-
         $form->addElement('hidden', 'returnurl');
-        
-        $form->addElement('header', 'btecheader');
+        $form->setType('returnurl', PARAM_RAW);
 
-        $form->addHelpButton('btecheader','btecgrading','gradingform_btec');
-        
-         
+
+        $form->addElement('header', 'btecheader');
+        $form->setExpanded('btecheader');
+        $form->addHelpButton('btecheader', 'btecgrading', 'gradingform_btec');
+
+
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
-        
-        
         // Description.
         $options = gradingform_btec_controller::description_form_field_options($this->_customdata['context']);
         $form->addElement('editor', 'description_editor', get_string('description'), null, $options);
         $form->setType('description_editor', PARAM_RAW);
-
-        
-        // btec completion status.
+        /* btec completion status. */
         $choices = array();
         $choices[gradingform_controller::DEFINITION_STATUS_DRAFT]    = html_writer::tag('span',
             get_string('statusdraft', 'core_grading'), array('class' => 'status draft'));
@@ -75,10 +70,10 @@ class gradingform_btec_editbtec extends moodleform {
             get_string('statusready', 'core_grading'), array('class' => 'status ready'));
         $form->addElement('select', 'status', get_string('btecstatus', 'gradingform_btec'), $choices)->freeze();
 
-        // btec editor.
+        /* btec editor. */
         $form->addElement('bteceditor', 'btec', get_string('pluginname', 'gradingform_btec'));
 
-        $form->addHelpButton('btec','gradelevels','gradingform_btec');
+        $form->addHelpButton('btec', 'gradelevels', 'gradingform_btec');
 
         $form->setType('btec', PARAM_RAW);
 
