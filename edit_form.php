@@ -47,15 +47,16 @@ class gradingform_btec_editbtec extends moodleform {
         $form->setType('areaid', PARAM_INT);
         $form->addElement('hidden', 'returnurl');
         $form->setType('returnurl', PARAM_RAW);
+        
 
 
-        $form->addElement('header', 'btecheader');
-        $form->setExpanded('btecheader');
-        $form->addHelpButton('btecheader', 'btecgrading', 'gradingform_btec');
+        $form->addElement('header', 'btecheader','BTEC grade editing'); 
 
 
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
+        $form->addHelpButton('name', 'btecgrading', 'gradingform_btec');
+
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
         // Description.
