@@ -12,5 +12,4 @@ Where moodle is the root of your moodle install
 Login to your moodle installation as admin and allow the plugin to install. Further documentation can be seen at 
 http://docs.moodle.org/24/en/BTEC_marking
 
-Based on Marking Guide grading form written by Dan Marsden <dan@danmarsden.com> and developed by Matthew Cannings
- and Marcus Green
+Based on Marking Guide grading form written by Dan Marsden <dan@danmarsden.com> and developed by Matthew Cannings  and Marcus Green
