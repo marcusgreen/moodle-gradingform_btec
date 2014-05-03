@@ -60,7 +60,7 @@
 .jsenabled .gradingform_btec .markingbteccomment:before {content: url("[[pix:t/add]]");padding-right:2px;}
 .gradingform_btec .commentheader  {font-weight:bold;font-size:1.1em;padding-bottom:5px;}
 
-.gradingform_btec .criterionname {width: 100px;}
+.gradingform_btec .criterionname {width: 250px;}
 
 .jsenabled .gradingform_btec .criterionnamelabel {display: none;}
 .jsenabled .gradingform_btec .criterionshortname {font-weight:bold;}
