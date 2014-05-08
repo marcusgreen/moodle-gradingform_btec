@@ -207,22 +207,20 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             $criteriontemplate .= html_writer::tag('td', $input, array('class' => 'remark'));
             /*Insert yes/no achieved marking options*/
             if ($currentscore) {/*this could be neater, not sure better way to preload checked value though*/
-                $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
-                            'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                            'value' => 1, 'checked' => 'checked'));
-
-                $radio .= html_writer::tag('input', get_string('no', 'gradingform_btec'), array('type' => 'radio',
+                 $radio = html_writer::tag('input', get_string('no', 'gradingform_btec')." ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'value' => 0));
+                 $radio .= html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
+                            'name' => '{NAME}[criteria][{CRITERION-id}][score]',
+                            'value' => 1, 'checked' => 'checked'));
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             } else {
-                $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
-                            'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                            'value' => 1));
-
-                $radio .= html_writer::tag('input', get_string('no', 'gradingform_btec'), array('type' => 'radio',
+                $radio  = html_writer::tag('input', get_string('no', 'gradingform_btec')." ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'value' => 0, 'checked' => 'checked'));
+                $radio .= html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
+                            'name' => '{NAME}[criteria][{CRITERION-id}][score]',
+                            'value' => 1));
 
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             }
