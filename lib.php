@@ -22,43 +22,21 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
+
+
+class gradingform_btec_levels{
+      const REFER            = 1;
+      const PASS             = 2;
+      const MERIT            = 3;
+      const DISTINCTION      = 4;
+}
 /* These constants map to scales that need to be created */
 define("REFER", 1);
-define("PASS", 2);
-define("MERIT", 3);
-define("DISTINCTION", 4);
+//define("PASS", 2);
+//define("MERIT", 3);
+//define("DISTINCTION", 4);
 
 require_once($CFG->dirroot . '/grade/grading/form/lib.php');
-
-function list_of_components() {
-
-    /* There is an assumption that there will be no more than these number of criteria at each level. If you want more they
-     * can be created here and then the matching strings created in the language file
-     */
-
-    $componentlist = array(
-        'P1' => get_string("P1", 'gradingform_btec'),
-        'P2' => get_string("P2", 'gradingform_btec'),
-        'P3' => get_string("P3", 'gradingform_btec'),
-        'P4' => get_string("P4", 'gradingform_btec'),
-        'P5' => get_string("P5", 'gradingform_btec'),
-        'P6' => get_string("P6", 'gradingform_btec'),
-        'P7' => get_string("P7", 'gradingform_btec'),
-        'P8' => get_string("P8", 'gradingform_btec'),
-        'P9' => get_string("P9", 'gradingform_btec'),
-        'M1' => get_string("M1", 'gradingform_btec'),
-        'M2' => get_string("M2", 'gradingform_btec'),
-        'M3' => get_string("M3", 'gradingform_btec'),
-        'M4' => get_string("M4", 'gradingform_btec'),
-        'M5' => get_string("M5", 'gradingform_btec'),
-        'D1' => get_string("D1", 'gradingform_btec'),
-        'D2' => get_string("D2", 'gradingform_btec'),
-        'D3' => get_string("D3", 'gradingform_btec'),
-        'D4' => get_string("D4", 'gradingform_btec'),
-        'D5' => get_string("D5", 'gradingform_btec')
-    );
-    return $componentlist;
-}
 
 /**
  * This controller encapsulates the btec grading logic
@@ -818,7 +796,7 @@ class gradingform_btec_instance extends gradingform_instance {
 
     /* works out the overal grade */
     public function calculate_btec_grade(array $grade) {
-          /* X initialises the level to assume it is not present.
+         /* X initialises the level to assume it is not present.
          * X is checked later on to see if the level should be
          * ignored for not existing. Then the letters are
          * walked through to be set to P M or D if they do exist
@@ -864,7 +842,7 @@ class gradingform_btec_instance extends gradingform_instance {
          * if the overall grade means every available criteria has been met, e.g. PAM,MAM and DAM
          * for Pass (all met), Merit
          * */
-        $levelmet = REFER;
+        $levelmet = gradingform_btec_levels::REFER;
         if ($levels["P"] == 1) {
             $levelmet = PASS;
         }
