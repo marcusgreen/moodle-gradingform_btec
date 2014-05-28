@@ -18,7 +18,7 @@
  * Strings for the marking btec advanced grading plugin
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -73,11 +73,8 @@ $string['btecgrading_help']='BTEC grading is binary and accumulative. Students c
 		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit
 		criteria, you only get a Distinction if you get all Pass, all Merit and all Distinction. If a student does not get all Pass criteria they get a Refer';
 $string['btecgrading_link']='BTEC_marking';
-
 $string['duplicateelements']='Duplicate criteria element, see ';
-
 $string['pluginname'] = 'BTEC marking';
-
 $string['previewbtecmarking'] = 'Preview BTEC marking';
 $string['regrademessage1'] = 'You are about to save changes to a BTEC marking that has already been used for grading. Please indicate if existing grades need to be reviewed. If you set this then the BTEC marking will be hidden from students until their item is regraded.';
 $string['regrademessage5'] = 'You are about to save significant changes to a BTEC marking that has already been used for grading. The gradebook value will be unchanged, but the BTEC marking will be hidden from students until their item is regraded.';
@@ -92,9 +89,9 @@ $string['showdescriptionstudent'] = 'Display description to those being graded';
 $string['showmarkerdesc'] = 'Show marker criterion descriptions';
 $string['showmarkspercriterionstudents'] = 'Show marks per criterion to students';
 $string['showstudentdesc'] = 'Show student criterion descriptions';
-$string['criteriarequiremen'] = 'Requirements for completing criteria';
+$string['criteriarequirements'] = 'Requirements for completing criteria';
 $string['yes'] = 'yes';
 $string['no'] = 'no';
-$string['startwithpmd']=' {$a} must start with a  P,M or D ';
-$string['endwithadigit']=' must end with a digit ';
-$string['and']=' and ';
+$string['startwithpmd']='{$a} must start with a  P,M or D ';
+$string['endwithadigit']='must end with a digit';
+$string['and']='and';
