@@ -330,15 +330,15 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $level = substr($element['shortname'], 0, 1);
             $level = strtolower($level);
             if ($level != 'p' && $level != 'm' && $level != 'd') {
-                $this->validationerrors.=get_string('startwithpmd', 'gradingform_btec', $element['shortname']);
+                $this->validationerrors.=' '.get_string('startwithpmd', 'gradingform_btec', $element['shortname']);
                 $shortnamerror = true;
             }
             $number = substr($element['shortname'], 1, 99);
             if (!is_numeric($number)) {
                 if ($shortnamerror == true) {
-                    $this->validationerrors.=$element['shortname'] . get_string('and', 'gradingform_btec');
+                    $this->validationerrors.=$element['shortname'] . get_string('and', 'gradingform_btec').' ';
                 }
-                $this->validationerrors.=$element['shortname'] . get_string('endwithadigit', 'gradingform_btec');
+                $this->validationerrors.=$element['shortname'] .' '. get_string('endwithadigit', 'gradingform_btec').' ';
                 $shortnamerror = true;
             }
             $shortnames[$key] = $element['shortname'];
