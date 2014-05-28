@@ -175,7 +175,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL ||
                 $mode == gradingform_btec_controller::DISPLAY_PREVIEW) {
                 /* change descriptionstudents for criteriarequirement*/
-            $title .= html_writer::tag('label', get_string('criteriarequiremen', 'gradingform_btec'),
+            $title .= html_writer::tag('label', get_string('criteriarequirements', 'gradingform_btec'),
                     array('for' => '{NAME}[criteria][{CRITERION-id}][description]'));
             $title .= $description;
         } else if ($mode == gradingform_btec_controller::DISPLAY_PREVIEW_GRADED ||
