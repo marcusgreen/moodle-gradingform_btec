@@ -36,8 +36,9 @@ MoodleQuickForm::registerElementType('bteceditor', $CFG->dirroot.'/grade/grading
  * @copyright  2013 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class gradingform_btec_editbtec extends moodleform {
+class gradingform_btec_editbtec extends gradingform {
 
+   
     /**
      * Form element definition
      */
