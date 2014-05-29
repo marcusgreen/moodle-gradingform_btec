@@ -24,17 +24,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-class gradingform_btec_levels{
-      const REFER            = 1;
-      const PASS             = 2;
-      const MERIT            = 3;
-      const DISTINCTION      = 4;
-}
-/* These constants map to scales that need to be created */
-define("REFER", 1);
-//define("PASS", 2);
-//define("MERIT", 3);
-//define("DISTINCTION", 4);
 
 require_once($CFG->dirroot . '/grade/grading/form/lib.php');
 
@@ -74,6 +63,13 @@ class gradingform_btec_controller extends gradingform_controller {
 
     /** @var stdClass|false the definition structure */
     protected $moduleinstance = false;
+    
+    /* These constants map to BTEC scale created at install time; */
+
+    const REFER=1;
+    const PASS=2;
+    const MERIT=3;
+    const DISTINCTION=4;
 
     /**
      * Extends the module settings navigation with the btec grading settings
@@ -842,27 +838,27 @@ class gradingform_btec_instance extends gradingform_instance {
          * if the overall grade means every available criteria has been met, e.g. PAM,MAM and DAM
          * for Pass (all met), Merit
          * */
-        $levelmet = gradingform_btec_levels::REFER;
+        $levelmet = gradingform_btec_controller::REFER;
         if ($levels["P"] == 1) {
-            $levelmet = PASS;
+            $levelmet = gradingform_btec_controller::PASS;
         }
         if (($levels["P"] == 1) && ($levels["M"] == 1)) {
-            $levelmet = MERIT;
+            $levelmet = gradingform_btec_controller::MERIT;
         }
         if (($levels["P"] == "X") && ($levels["M"] == 1)) {
-            $levelmet = MERIT;
+            $levelmet = gradingform_btec_controller::MERIT;
         }
         if (($levels["P"] == 1) && ($levels["M"] == 1) && $levels["D"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         if (($levels["P"] == "X") && ($levels["M"] == 1) && $levels["D"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         if (($levels["P"] == 1) && ($levels["M"] == "X") && $levels["D"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         if (($levels["P"] == "X") && ($levels["M"] == "X") && $levels["D"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         return $levelmet;
     }
@@ -925,28 +921,28 @@ class gradingform_btec_instance extends gradingform_instance {
             }
         }
 
-        $levelmet = REFER;
+        $levelmet = gradingform_btec_controller::REFER;
         if ($levels["P"]["achieved"] == 1) {
-            $levelmet = PASS;
+            $levelmet = gradingform_btec_controller::PASS;
         }
         if (($levels["P"]["achieved"] == 1) && ($levels["M"]["achieved"] == 1)) {
-            $levelmet = MERIT;
+            $levelmet = gradingform_btec_controller::MERIT;
         }
         if (($levels["P"]["available"] == 0) && ($levels["M"]["achieved"] == 1)) {
-            $levelmet = MERIT;
+            $levelmet =gradingform_btec_controller::MERIT;
         }
         if (($levels["P"]["achieved"] == 1) && ($levels["M"]["achieved"] == 1) && $levels["D"]["achieved"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
 
         if (($levels["P"]["available"] == 0) && ($levels["M"]["achieved"] == 1) && $levels["D"]["achieved"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         if (($levels["P"]["achieved"] == 1) && ($levels["M"]["available"] == 0) && $levels["D"]["achieved"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         if (($levels["P"]["available"] == 0) && ($levels["M"]["available"] == 0) && $levels["D"]["achieved"] == 1) {
-            $levelmet = DISTINCTION;
+            $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         return $levelmet;
     }
