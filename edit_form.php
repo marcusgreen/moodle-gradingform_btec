@@ -38,7 +38,6 @@ MoodleQuickForm::registerElementType('bteceditor', $CFG->dirroot.'/grade/grading
  */
 class gradingform_btec_editbtec extends moodleform {
 
-   
     /**
      * Form element definition
      */
@@ -48,11 +47,8 @@ class gradingform_btec_editbtec extends moodleform {
         $form->setType('areaid', PARAM_INT);
         $form->addElement('hidden', 'returnurl');
         $form->setType('returnurl', PARAM_RAW);
-        
 
-
-        $form->addElement('header', 'btecheader','BTEC grade editing'); 
-
+        $form->addElement('header', 'btecheader', 'BTEC grade editing');
 
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
