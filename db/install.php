@@ -29,8 +29,8 @@ function xmldb_gradingform_btec_install() {
     $record->courseid = 0;
     $record->userid = 0;
     $record->name = 'BTEC';
-    $record->scale = 'Refer,Pass,Merit,Distinction';
-    $record->description = 'No numbers or percentages, a level is only gained if every item at that level and below is gained';
+    $record->scale = get_string('btecscale', 'gradingform_btec');
+    $record->description = get_string('btecscale_description', 'gradingform_btec');
     $record->descriptionformat = 1;
 
     $DB->insert_record('scale', $record);
