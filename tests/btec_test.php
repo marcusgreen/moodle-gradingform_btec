@@ -130,8 +130,7 @@ class btec_test extends basic_testcase {
         $template = $renderer->criterion_template(1, $options, 'btec', $options, $criterion, $validationerrors);
         $this->assertInternalType('string', $template, 'template returned should be of type string');
     }
-    
-        public function test_renderer_validation() {
+    public function test_renderer_validation() {
         $PAGE = new moodle_page();
         $renderer = new gradingform_btec_renderer($PAGE, 1);
         $options = array();
