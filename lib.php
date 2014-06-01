@@ -23,8 +23,6 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-
-
 require_once($CFG->dirroot . '/grade/grading/form/lib.php');
 
 /**
@@ -63,9 +61,8 @@ class gradingform_btec_controller extends gradingform_controller {
 
     /** @var stdClass|false the definition structure */
     protected $moduleinstance = false;
-    
-    /* These constants map to BTEC scale created at install time; */
 
+    /* These constants map to BTEC scale created at install time; */
     const REFER=1;
     const PASS=2;
     const MERIT=3;
@@ -797,18 +794,24 @@ class gradingform_btec_instance extends gradingform_instance {
          * ignored for not existing. Then the letters are
          * walked through to be set to P M or D if they do exist
          */
-        $levels = array("P" => "X", "M" => "X", "D" => "X");
+        global $DB;
+        $scale = $DB->get_record_sql('SELECT * FROM {scale} WHERE name = ?', array('btec'));
+        $scalearray=explode(",", $scale->scale);
+        $p=substr($scalearray[1], 0, 1);
+        $m=substr($scalearray[2], 0, 1);
+        $d=substr($scalearray[3], 0, 1);
+        $levels = array($p => "X", $m => "X", $d => "X");
         /* mark levels with an 1 if they are available */
         foreach ($grade['criteria'] as $record) {
             $letter = (substr($record['level'], 0, 1));
-            if ($letter == "P") {
-                $levels["P"] = 1;
+            if ($letter == $p) {
+                $levels[$p] = 1;
             }
-            if ($letter == "M") {
-                $levels["M"] = 1;
+            if ($letter == $m) {
+                $levels[$m] = 1;
             }
-            if ($letter == "D") {
-                $levels["D"] = 1;
+            if ($letter == $d) {
+                $levels[$d] = 1;
             }
         }
 
@@ -816,18 +819,18 @@ class gradingform_btec_instance extends gradingform_instance {
             $letter = (substr($record['level'], 0, 1));
             $score = $record['score'];
             /* if you dont get a P you cannot get anything higher */
-            if (( $score == 0) && ($letter == "P")) {
-                $levels["P"] = 0;
-                $levels["M"] = 0;
-                $levels["D"] = 0;
+            if (( $score == 0) && ($letter == $p)) {
+                $levels[$p] = 0;
+                $levels[$m] = 0;
+                $levels[$d] = 0;
             }
             /* if you don't get an M you cannot get anything higher */
-            if (( $score == 0) && ($letter == "M")) {
-                $levels["M"] = 0;
-                $levels["D"] = 0;
+            if (( $score == 0) && ($letter == $m)) {
+                $levels[$m] = 0;
+                $levels[$d] = 0;
             }
-            if (( $score == 0) && ($letter == "D")) {
-                $levels["D"] = 0;
+            if (( $score == 0) && ($letter == $d)) {
+                $levels[$d] = 0;
             }
             /* There is nothing higher than D so no third if block */
         }
@@ -839,114 +842,29 @@ class gradingform_btec_instance extends gradingform_instance {
          * for Pass (all met), Merit
          * */
         $levelmet = gradingform_btec_controller::REFER;
-        if ($levels["P"] == 1) {
+        if ($levels[$p] == 1) {
             $levelmet = gradingform_btec_controller::PASS;
         }
-        if (($levels["P"] == 1) && ($levels["M"] == 1)) {
+        if (($levels[$p] == 1) && ($levels[$m] == 1)) {
             $levelmet = gradingform_btec_controller::MERIT;
         }
-        if (($levels["P"] == "X") && ($levels["M"] == 1)) {
+        if (($levels[$p] == "X") && ($levels[$m] == 1)) {
             $levelmet = gradingform_btec_controller::MERIT;
         }
-        if (($levels["P"] == 1) && ($levels["M"] == 1) && $levels["D"] == 1) {
+        if (($levels[$p] == 1) && ($levels[$m] == 1) && $levels[$d] == 1) {
             $levelmet = gradingform_btec_controller::DISTINCTION;
         }
-        if (($levels["P"] == "X") && ($levels["M"] == 1) && $levels["D"] == 1) {
+        if (($levels[$p] == "X") && ($levels[$m] == 1) && $levels[$d] == 1) {
             $levelmet = gradingform_btec_controller::DISTINCTION;
         }
-        if (($levels["P"] == 1) && ($levels["M"] == "X") && $levels["D"] == 1) {
+        if (($levels[$p] == 1) && ($levels[$m] == "X") && $levels[$d] == 1) {
             $levelmet = gradingform_btec_controller::DISTINCTION;
         }
-        if (($levels["P"] == "X") && ($levels["M"] == "X") && $levels["D"] == 1) {
+        if (($levels[$p] == "X") && ($levels[$m] == "X") && $levels[$d] == 1) {
             $levelmet = gradingform_btec_controller::DISTINCTION;
         }
         return $levelmet;
     }
-
-    /* @deprecated
-     * The x was added to allow it to exist along side get_grade
-     * This "grades up" to distinction as a proxy for all criteria met
-     * See this conversation
-     * https://moodle.org/mod/forum/discuss.php?d=218666
-     */
-
-    public function xget_grade() {
-        global $DB, $USER;
-        $grade = $this->get_btec_filling();
-        $level = 0;
-        $levelavailable = array();
-
-        $levels = array();
-        $levels["P"]["achieved"] = 1;
-        $levels["P"]["available"] = 0;
-        $levels["M"]["achieved"] = 1;
-        $levels["M"]["available"] = 0;
-        $levels["D"]["achieved"] = 1;
-        $levels["D"]["available"] = 0;
-
-        foreach ($grade['criteria'] as $record) {
-            $letter = (substr($record['level'], 0, 1));
-            if ($letter == "P") {
-                $levels["P"]["available"] = 1;
-            }
-            if ($letter == "M") {
-                $levels["M"]["available"] = 1;
-            }
-            if ($letter == "D") {
-                $levels["D"]["available"] = 1;
-            }
-        }
-        if ($levels["P"]["available"] == 0) {
-            $levels["P"]["achieved"] = 0;
-        }
-        if ($levels["M"]["available"] == 0) {
-            $levels["M"]["achieved"] = 0;
-        }
-        if ($levels["D"]["available"] == 0) {
-            $levels["D"]["achieved"] = 0;
-        }
-        foreach ($grade['criteria'] as $record) {
-            $letter = (substr($record['level'], 0, 1));
-            if (( $record['score'] == 0) && ($letter == "P")) {
-                $levels["P"]["achieved"] = 0;
-                $levels["M"]["achieved"] = 0;
-                $levels["D"]["achieved"] = 0;
-            }
-            if (( $record['score'] == 0) && ($letter == "M")) {
-                $levels["M"]["achieved"] = 0;
-                $levels["D"]["achieved"] = 0;
-            }
-            if (( $record['score'] == 0) && ($letter == "D")) {
-                $levels["D"]["achieved"] = 0;
-            }
-        }
-
-        $levelmet = gradingform_btec_controller::REFER;
-        if ($levels["P"]["achieved"] == 1) {
-            $levelmet = gradingform_btec_controller::PASS;
-        }
-        if (($levels["P"]["achieved"] == 1) && ($levels["M"]["achieved"] == 1)) {
-            $levelmet = gradingform_btec_controller::MERIT;
-        }
-        if (($levels["P"]["available"] == 0) && ($levels["M"]["achieved"] == 1)) {
-            $levelmet =gradingform_btec_controller::MERIT;
-        }
-        if (($levels["P"]["achieved"] == 1) && ($levels["M"]["achieved"] == 1) && $levels["D"]["achieved"] == 1) {
-            $levelmet = gradingform_btec_controller::DISTINCTION;
-        }
-
-        if (($levels["P"]["available"] == 0) && ($levels["M"]["achieved"] == 1) && $levels["D"]["achieved"] == 1) {
-            $levelmet = gradingform_btec_controller::DISTINCTION;
-        }
-        if (($levels["P"]["achieved"] == 1) && ($levels["M"]["available"] == 0) && $levels["D"]["achieved"] == 1) {
-            $levelmet = gradingform_btec_controller::DISTINCTION;
-        }
-        if (($levels["P"]["available"] == 0) && ($levels["M"]["available"] == 0) && $levels["D"]["achieved"] == 1) {
-            $levelmet = gradingform_btec_controller::DISTINCTION;
-        }
-        return $levelmet;
-    }
-
     /**
      * Returns html for form element of type 'grading'.
      *
