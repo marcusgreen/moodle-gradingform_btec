@@ -38,6 +38,7 @@ $string['commentsmovedown'] = 'Move down';
 $string['commentsmoveup'] = 'Move up';
 $string['confirmdeletecriterion'] = 'Are you sure you want to delete this item?';
 $string['confirmdeletelevel'] = 'Are you sure you want to delete this level?';
+$string['countofpasscriteria']='Count of PASS criteria';
 $string['criterion'] = 'Criterion';
 $string['criteriondelete'] = 'Delete criterion';
 $string['criterionempty'] = 'Click to edit criterion';
