@@ -98,3 +98,7 @@ $string['no'] = 'no';
 $string['startwithpmd']='{$a} must start with a  P,M or D ';
 $string['endwithadigit']='must end with a digit';
 $string['and']='and';
+$string['p']='p';
+$string['m']='m';
+$string['d']='d';
+$string['gradeheading']='BTEC grade editing';;
