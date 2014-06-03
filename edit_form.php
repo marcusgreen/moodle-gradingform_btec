@@ -48,7 +48,7 @@ class gradingform_btec_editbtec extends moodleform {
         $form->addElement('hidden', 'returnurl');
         $form->setType('returnurl', PARAM_RAW);
 
-        $form->addElement('header', 'btecheader', 'BTEC grade editing');
+        $form->addElement('header', 'btecheader', get_string('gradeheading' ,'gradingform_btec'));
 
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
