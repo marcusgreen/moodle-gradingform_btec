@@ -397,7 +397,6 @@ class gradingform_btec_controller extends gradingform_controller {
      * @return stdClass
      */
     public function get_definition_for_editing($addemptycriterion = false) {
-
         $definition = $this->get_definition();
         $properties = new stdClass();
         $properties->areaid = $this->areaid;
@@ -786,6 +785,17 @@ class gradingform_btec_instance extends gradingform_instance {
         $grade = $this->get_btec_filling();
         return $this->calculate_btec_grade($grade);
     }
+    
+    public function get_scale_letters(){
+        global $DB;
+        $scale = $DB->get_record_sql('SELECT * FROM {scale} WHERE name = ?', array('btec'));
+        $scale=explode(",", $scale->scale);
+        $scaleletters=array("p","m","d");
+        $scaleletters['p']=substr($scalearray[1], 0, 1);
+        $scaleletters['m']=substr($scalearray[2], 0, 1);
+        $scaleletters['d']=substr($scalearray[3], 0, 1);
+        return $scaleletters;
+    }
 
     /* works out the overal grade */
     public function calculate_btec_grade(array $grade) {
@@ -794,12 +804,11 @@ class gradingform_btec_instance extends gradingform_instance {
          * ignored for not existing. Then the letters are
          * walked through to be set to P M or D if they do exist
          */
-        global $DB;
-        $scale = $DB->get_record_sql('SELECT * FROM {scale} WHERE name = ?', array('btec'));
-        $scalearray=explode(",", $scale->scale);
-        $p=substr($scalearray[1], 0, 1);
-        $m=substr($scalearray[2], 0, 1);
-        $d=substr($scalearray[3], 0, 1);
+     $scaleletters=get_scale_letters();
+     $p=$scaleletters['p'];
+     $m=$scaleletters['m'];
+     $d=$scaleletters['d'];
+    
         $levels = array($p => "X", $m => "X", $d => "X");
         /* mark levels with an 1 if they are available */
         foreach ($grade['criteria'] as $record) {
