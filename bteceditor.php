@@ -25,13 +25,6 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once("HTML/QuickForm/input.php");
 
-/**
- * The editor for the marking btec advanced grading plugin.
- *
- * @package    gradingform_btec
- * @copyright  2013 Marcus Green
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class moodlequickform_bteceditor extends HTML_QuickForm_input {
 
     /** @var string help message */
