@@ -23,13 +23,6 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * Grading method plugin renderer
- *
- * @package    gradingform_btec
- * @copyright  2013 Marcus Green
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class gradingform_btec_renderer extends plugin_renderer_base {
 
     /**
