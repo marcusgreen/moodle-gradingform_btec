@@ -21,7 +21,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die;
-/* sadly this file entirely ignored by moodle  
+/* sadly this file entirely ignored by moodle
 If it ever gets read it should also include counts
  * of M and D criteria etc etc
  **/
