@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once("HTML/QuickForm/input.php");
-require_once(dirname(__FILE__).'/lib.php');
+require_once($CFG->dirroot.'/grade/grading/form/btec/lib.php');
 class moodlequickform_bteceditor extends HTML_QuickForm_input {
 
     /** @var string help message */
@@ -316,17 +316,18 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      * @return string|false error text or false if no errors found
      */
     public function validate($value) {
-        $scaleletters=get_scale_letters();
-        $p=$scaleletters['p'];
+        $scaleletters=gradingform_btec_controller::get_scale_letters();
+	    $p=$scaleletters['p'];
         $m=$scaleletters['m'];
         $d=$scaleletters['d'];
-        $criteria = $value['criteria'];
+	    $criteria = $value['criteria'];
+		
         $shortnamerror = false;
         $shortnames = array();
         foreach ($criteria as $key => $element) {
             $level = substr($element['shortname'], 0, 1);
-            $level = strtolower($level);
-            if ($level != $p && $level != $m && $level != $d) {
+            $level = trim(strtolower($level));
+		    if ($level != $p && $level != $m && $level != $d) {
                 $this->validationerrors.=' '.get_string('startwithpmd', 'gradingform_btec', $element['shortname']);
                 $shortnamerror = true;
             }
@@ -334,7 +335,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $number = substr($element['shortname'], 1, 99);
             if (!is_numeric($number)) {
                 if ($shortnamerror == true) {
-                    $this->validationerrors.=$element['shortname'] . get_string('and', 'gradingform_btec').' ';
+                    $this->validationerrors.=$element['shortname'] .' '. get_string('and', 'gradingform_btec').' ';
                 }
                 $this->validationerrors.=$element['shortname'] .' '. get_string('endwithadigit', 'gradingform_btec').' ';
                 $shortnamerror = true;
