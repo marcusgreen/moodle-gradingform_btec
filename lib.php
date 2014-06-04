@@ -78,6 +78,16 @@ class gradingform_btec_controller extends gradingform_controller {
      * @param settings_navigation $settingsnav {@link settings_navigation}
      * @param navigation_node $node {@link navigation_node}
      */
+	    
+    public static function get_scale_letters(){
+        global $DB;
+$scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('btec'),$strictness=IGNORE_MULTIPLE);
+        $scalearray=explode(",", $scale->scale);
+        $scaleletters['p']=strtolower(substr($scalearray[1], 0, 1));
+        $scaleletters['m']=strtolower(substr($scalearray[2], 0, 1));
+        $scaleletters['d']=strtolower(substr($scalearray[3], 0, 1));
+		return $scaleletters;
+    }
     public function extend_settings_navigation(settings_navigation $settingsnav, navigation_node $node = null) {
         $node->add(get_string('definemarkingbtec', 'gradingform_btec'), $this->get_editor_url(),
                 settings_navigation::TYPE_CUSTOM, null, null, new pix_icon('icon', '',
@@ -785,17 +795,7 @@ class gradingform_btec_instance extends gradingform_instance {
         $grade = $this->get_btec_filling();
         return $this->calculate_btec_grade($grade);
     }
-    
-    public function get_scale_letters(){
-        global $DB;
-        $scale = $DB->get_record_sql('SELECT * FROM {scale} WHERE name = ?', array('btec'));
-        $scale=explode(",", $scale->scale);
-        $scaleletters=array("p","m","d");
-        $scaleletters['p']=substr($scalearray[1], 0, 1);
-        $scaleletters['m']=substr($scalearray[2], 0, 1);
-        $scaleletters['d']=substr($scalearray[3], 0, 1);
-        return $scaleletters;
-    }
+ 
 
     /* works out the overal grade */
     public function calculate_btec_grade(array $grade) {
@@ -804,7 +804,7 @@ class gradingform_btec_instance extends gradingform_instance {
          * ignored for not existing. Then the letters are
          * walked through to be set to P M or D if they do exist
          */
-     $scaleletters=get_scale_letters();
+     $scaleletters=$this->get_scale_letters();
      $p=$scaleletters['p'];
      $m=$scaleletters['m'];
      $d=$scaleletters['d'];
