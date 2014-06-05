@@ -529,6 +529,18 @@ $scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('
         $comments = $this->definition->btec_comment;
         $options = $this->get_options();
         $btec = '';
+             if (has_capability('moodle/grade:managegradingforms', $page->context)) {
+            $showdescription = true;
+        } else {
+            if (empty($options['alwaysshowdefinition']))  {
+                // ensure we don't display unless show rubric option enabled
+                return '';
+            }
+            $showdescription = $options['showdescriptionstudent'];
+        }
+         if ($showdescription) {
+            $btec .= $output->box($this->get_formatted_description(), 'gradingform_btec-description');
+        }
         if (has_capability('moodle/grade:managegradingforms', $page->context)) {
             $btec .= $output->display_btec($criteria, $comments, $options, self::DISPLAY_PREVIEW, 'btec');
         } else {
@@ -804,7 +816,7 @@ class gradingform_btec_instance extends gradingform_instance {
          * ignored for not existing. Then the letters are
          * walked through to be set to P M or D if they do exist
          */
-     $scaleletters=$this->get_scale_letters();
+     $scaleletters=gradingform_btec_controller::get_scale_letters();
      $p=$scaleletters['p'];
      $m=$scaleletters['m'];
      $d=$scaleletters['d'];
