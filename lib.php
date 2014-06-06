@@ -826,6 +826,7 @@ class gradingform_btec_instance extends gradingform_instance {
         /* mark levels with an 1 if they are available */
         foreach ($grade['criteria'] as $record) {
             $letter = (substr($record['level'], 0, 1));
+            $letter = strtolower($letter);
             if ($letter == $p) {
                 $levels[$p] = 1;
             }
