@@ -380,6 +380,7 @@ $scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('
         $options = array(
             'alwaysshowdefinition' => 1,
             'showmarkspercriterionstudents' => 1,
+            'showdescriptionstudent' => 1,
         );
         return $options;
     }
