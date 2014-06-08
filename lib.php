@@ -81,7 +81,12 @@ class gradingform_btec_controller extends gradingform_controller {
      */
     public static function get_scale_letters() {
         global $DB;
-        $scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('btec'), $strictness = IGNORE_MULTIPLE);
+        try {
+            $scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('BTEC'), $strictness = MUST_EXIST);
+        } catch (Exception $e) {
+            debugging($e->getMessage());
+        }
+
         $scalearray = explode(",", $scale->scale);
         $scaleletters['p'] = strtolower(substr($scalearray[1], 0, 1));
         $scaleletters['m'] = strtolower(substr($scalearray[2], 0, 1));
