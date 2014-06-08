@@ -121,7 +121,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $html .= $renderer->display_regrade_confirmation($this->getName(), $this->regradeconfirmation, $data['regrade']);
         }
         if ($this->validationerrors) {
-            $html .= $renderer->notification($this->validationerrors, 'error');
+            $html .= '<div class="gradingform_btec-error">'. $renderer->notification($this->validationerrors, 'error').'</div>';
         }
         $html .= $renderer->display_btec($data['criteria'], $data['comments'], $data['options'], $mode, $this->getName());
         return $html;
@@ -317,17 +317,17 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      */
     public function validate($value) {
         $scaleletters=gradingform_btec_controller::get_scale_letters();
-	    $p=$scaleletters['p'];
+        $p=$scaleletters['p'];
         $m=$scaleletters['m'];
         $d=$scaleletters['d'];
-	    $criteria = $value['criteria'];
-		
+        $criteria = $value['criteria'];
+
         $shortnamerror = false;
         $shortnames = array();
         foreach ($criteria as $key => $element) {
             $level = substr($element['shortname'], 0, 1);
             $level = trim(strtolower($level));
-		    if ($level != $p && $level != $m && $level != $d) {
+            if ($level != $p && $level != $m && $level != $d) {
                 $this->validationerrors.=' '.get_string('startwithpmd', 'gradingform_btec', $element['shortname']);
                 $shortnamerror = true;
             }
