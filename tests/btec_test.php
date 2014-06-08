@@ -53,71 +53,71 @@ class btec_test extends basic_testcase {
         $data = '';
         $form = new gradingform_btec_instance($controller, $data);
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(REFER, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::REFER, $levelmet);
 
         /* If you only get the P criteria you get an oveall PASS */
         $criteria = array('criteria' => array(
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 0, 'level' => 'Merit'),
-                array('score' => 0, 'level' => 'Merit'),
-                array('score' => 0, 'level' => 'Distinction'),
-                array('score' => 0, 'level' => 'Distinction')
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 0, 'level' => 'merit'),
+                array('score' => 0, 'level' => 'merit'),
+                array('score' => 0, 'level' => 'distinction'),
+                array('score' => 0, 'level' => 'distinction')
         ));
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(PASS, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::PASS, $levelmet);
 
         /* if you get  everything except a Distinction you get a Merit */
         $criteria = array('criteria' => array(
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Distinction'),
-                array('score' => 0, 'level' => 'Distinction')
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'distinction'),
+                array('score' => 0, 'level' => 'distinction')
         ));
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(MERIT, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::MERIT, $levelmet);
 
         /* if you get all criteria you get an overall DISTINCTION */
         $criteria = array('criteria' => array(
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Distinction'),
-                array('score' => 1, 'level' => 'Distinction')
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'distinction'),
+                array('score' => 1, 'level' => 'distinction')
         ));
 
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(DISTINCTION, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::DISTINCTION, $levelmet);
 
         /* If there are no Merit criteria and you get all available
          * you get an overall DISTINCTION
          */
         $criteria = array('criteria' => array(
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Distinction'),
-                array('score' => 1, 'level' => 'Distinction')
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'distinction'),
+                array('score' => 1, 'level' => 'dstinction')
         ));
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(DISTINCTION, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::DISTINCTION, $levelmet);
 
         /* If you get all except one Pass criteria you
          * get an overall REFER
          */
         $criteria = array('criteria' => array(
-                array('score' => 0, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Pass'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Merit'),
-                array('score' => 1, 'level' => 'Distinction'),
-                array('score' => 1, 'level' => 'Distinction')
+                array('score' => 0, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'pass'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'merit'),
+                array('score' => 1, 'level' => 'distinction'),
+                array('score' => 1, 'level' => 'distinction')
         ));
 
         $levelmet = $form->calculate_btec_grade($criteria);
-        $this->assertEquals(REFER, $levelmet);
+        $this->assertEquals(gradingform_btec_controller::REFER, $levelmet);
     }
 
     public function test_created_renderer() {
