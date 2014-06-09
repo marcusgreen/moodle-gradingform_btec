@@ -1,4 +1,3 @@
-This is plugin is under development and broken at the moment, do not install
 BTEC Grading beta1
 Advanced marking plugin for the BTEC marking scheme based on Refer,Pass, Merit and Distinction where 
 each level is based on completing all the next lowest. 
@@ -14,6 +13,5 @@ moodle/grade/grading/form/btec
 Where moodle is the root of your moodle install
 
 Login to your moodle installation as admin and allow the plugin to install. Further documentation can be seen at 
-http://docs.moodle.org/24/en/BTEC_marking
+http://docs.moodle.org/en/BTEC_marking
 
-Based on Marking Guide grading form written by Dan Marsden <dan@danmarsden.com> and developed by Matthew Cannings  and Marcus Green
