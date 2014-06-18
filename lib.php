@@ -184,7 +184,10 @@ class gradingform_btec_controller extends gradingform_controller {
             $newcriteria = $newdefinition->btec['criteria']; // New ones to be saved.
         }
         foreach($newcriteria as $key=>$value){
+          /*strip any leading or trailing whitespace */
           $newcriteria[$key]['shortname']=trim($newcriteria[$key]['shortname']);
+          /* strip any white space from within the string */
+          $newcriteria[$key]['shortname']= str_replace(' ','',$newcriteria[$key]['shortname']);
         }
         $currentcriteria = $currentdefinition->btec_criteria;
         $criteriafields = array('sortorder', 'description', 'descriptionformat', 'descriptionmarkers',
