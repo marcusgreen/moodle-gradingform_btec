@@ -183,6 +183,9 @@ class gradingform_btec_controller extends gradingform_controller {
         } else {
             $newcriteria = $newdefinition->btec['criteria']; // New ones to be saved.
         }
+        foreach($newcriteria as $key=>$value){
+          $newcriteria[$key]['shortname']=trim($newcriteria[$key]['shortname']);
+        }
         $currentcriteria = $currentdefinition->btec_criteria;
         $criteriafields = array('sortorder', 'description', 'descriptionformat', 'descriptionmarkers',
             'descriptionmarkersformat', 'shortname'/* , 'maxscore' */);
