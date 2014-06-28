@@ -327,9 +327,11 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         foreach ($criteria as $key => $element) {
             $level=trim($element['shortname']);
             $level =strtolower($level);
+            $a= array('level'=>strtoupper($level),'p'=>strtoupper($p),'m'=>strtoupper($m),'d'=>strtoupper($d));
             $level = substr($level, 0, 1);
+
             if ($level != $p && $level != $m && $level != $d) {
-                $this->validationerrors.=' '.get_string('startwithpmd', 'gradingform_btec', $element['shortname']);
+                $this->validationerrors.=' '.get_string('startwithpmd', 'gradingform_btec', $a);
                 $shortnamerror = true;
             }
             /* 99 is arbitrary, it should probably be the length of the string */
@@ -337,6 +339,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $number = substr($number, 1, 99);
             if (!is_numeric($number)) {
                 if ($shortnamerror == true) {
+                    /* if there is already an error add the 'and' onto the error text  */
                     $this->validationerrors.=$element['shortname'] .' '. get_string('and', 'gradingform_btec').' ';
                 }
                 $this->validationerrors.=$element['shortname'] .' '. get_string('endwithadigit', 'gradingform_btec').' ';
