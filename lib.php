@@ -69,6 +69,18 @@ class gradingform_btec_controller extends gradingform_controller {
     const MERIT = 3;
     const DISTINCTION = 4;
 
+    /* This originally did a call to the database to check that
+     * the key words were Pass, Merit and Distinction and converted
+     * them to the equivalent letters by chopping of the leading letter
+     * This seems to have caused problems and has been simplified, at the
+     * potential loss of easy internationalisation.
+     */
+
+    public static function get_scale_letters() {
+        $scaleletters = array('p' => 'p', 'm' => 'm', 'd' => 'd');
+        return $scaleletters;
+    }
+
     /**
      * Extends the module settings navigation with the btec grading settings
      *
@@ -79,21 +91,6 @@ class gradingform_btec_controller extends gradingform_controller {
      * @param settings_navigation $settingsnav {@link settings_navigation}
      * @param navigation_node $node {@link navigation_node}
      */
-    public static function get_scale_letters() {
-        global $DB;
-        try {
-            $scale = $DB->get_record_sql('SELECT scale FROM {scale} WHERE name = ?', array('BTEC'), $strictness = MUST_EXIST);
-        } catch (Exception $e) {
-            debugging($e->getMessage());
-        }
-
-        $scalearray = explode(",", $scale->scale);
-        $scaleletters['p'] = strtolower(substr($scalearray[1], 0, 1));
-        $scaleletters['m'] = strtolower(substr($scalearray[2], 0, 1));
-        $scaleletters['d'] = strtolower(substr($scalearray[3], 0, 1));
-        return $scaleletters;
-    }
-
     public function extend_settings_navigation(settings_navigation $settingsnav, navigation_node $node = null) {
         $node->add(get_string('definemarkingbtec', 'gradingform_btec'), $this->get_editor_url(),
                 settings_navigation::TYPE_CUSTOM, null, null, new pix_icon('icon', '', 'gradingform_btec'));
@@ -115,9 +112,10 @@ class gradingform_btec_controller extends gradingform_controller {
             return;
         }
         if ($this->is_form_defined() && ($options = $this->get_options()) && !empty($options['alwaysshowdefinition'])) {
-            $node->add(get_string('gradingof', 'gradingform_btec', get_grading_manager($this->get_areaid())->get_area_title()),
-                    new moodle_url('/grade/grading/form/' . $this->get_method_name() . '/preview.php',
-                            array('areaid' => $this->get_areaid())), settings_navigation::TYPE_CUSTOM);
+            $node->add(get_string('gradingof', 'gradingform_btec',
+                    get_grading_manager($this->get_areaid())->get_area_title()),
+                    new moodle_url('/grade/grading/form/' . $this->get_method_name() .
+                            '/preview.php', array('areaid' => $this->get_areaid())), settings_navigation::TYPE_CUSTOM);
         }
     }
 
@@ -183,11 +181,11 @@ class gradingform_btec_controller extends gradingform_controller {
         } else {
             $newcriteria = $newdefinition->btec['criteria']; // New ones to be saved.
         }
-        foreach($newcriteria as $key=>$value){
-          /*strip any leading or trailing whitespace */
-          $newcriteria[$key]['shortname']=trim($newcriteria[$key]['shortname']);
-          /* strip any white space from within the string */
-          $newcriteria[$key]['shortname']= str_replace(' ','',$newcriteria[$key]['shortname']);
+        foreach ($newcriteria as $key => $value) {
+            /* strip any leading or trailing whitespace */
+            $newcriteria[$key]['shortname'] = trim($newcriteria[$key]['shortname']);
+            /* strip any white space from within the string */
+            $newcriteria[$key]['shortname'] = str_replace(' ', '', $newcriteria[$key]['shortname']);
         }
         $currentcriteria = $currentdefinition->btec_criteria;
         $criteriafields = array('sortorder', 'description', 'descriptionformat', 'descriptionmarkers',
@@ -597,7 +595,7 @@ class gradingform_btec_controller extends gradingform_controller {
         global $DB;
         if ($instanceid &&
                 $instance = $DB->get_record('grading_instances', array('id' => $instanceid, 'raterid' => $raterid,
-                    'itemid' => $itemid), '*', IGNORE_MISSING)) {
+            'itemid' => $itemid), '*', IGNORE_MISSING)) {
             return $this->get_instance($instance);
         }
         if ($itemid && $raterid) {
@@ -733,8 +731,8 @@ class gradingform_btec_instance extends gradingform_instance {
         $this->validationerrors = null;
         foreach ($criteria as $id => $criterion) {
             if (!isset($elementvalue['criteria'][$id]['score'])
-                    /* || $criterion['maxscore'] < $elementvalue['criteria'][$id]['score'] */
-                    || !is_numeric($elementvalue['criteria'][$id]['score']) ||
+                    /* || $criterion['maxscore'] < $elementvalue['criteria'][$id]['score'] */ ||
+                    !is_numeric($elementvalue['criteria'][$id]['score']) ||
                     $elementvalue['criteria'][$id]['score'] < 0) {
                 $this->validationerrors[$id]['score'] = $elementvalue['criteria'][$id]['score'];
             }
@@ -928,22 +926,22 @@ class gradingform_btec_instance extends gradingform_instance {
         if ($value === null) {
             $value = $this->get_btec_filling();
         } else if (!$this->validate_grading_element($value)) {
-            $html .= html_writer::tag('div', get_string('btecnotcompleted',
-                    'gradingform_btec'), array('class' => 'gradingform_btec-error'));
+            $html .= html_writer::tag('div', get_string('btecnotcompleted', 'gradingform_btec'),
+                    array('class' => 'gradingform_btec-error'));
             if (!empty($this->validationerrors)) {
                 foreach ($this->validationerrors as $id => $err) {
                     $a = new stdClass();
                     $a->criterianame = $criteria[$id]['shortname'];
                     $a->maxscore = $criteria[$id]['maxscore'];
-                    $html .= html_writer::tag('div', get_string('err_scoreinvalid',
-                            'gradingform_btec', $a), array('class' => 'gradingform_btec-error'));
+                    $html .= html_writer::tag('div', get_string('err_scoreinvalid', 'gradingform_btec', $a),
+                            array('class' => 'gradingform_btec-error'));
                 }
             }
         }
         $currentinstance = $this->get_current_instance();
         if ($currentinstance && $currentinstance->get_status() == gradingform_instance::INSTANCE_STATUS_NEEDUPDATE) {
-            $html .= html_writer::tag('div', get_string('needregrademessage',
-                    'gradingform_btec'), array('class' => 'gradingform_btec-regrade'));
+            $html .= html_writer::tag('div', get_string('needregrademessage', 'gradingform_btec'),
+                    array('class' => 'gradingform_btec-regrade'));
         }
         $haschanges = false;
         if ($currentinstance) {
@@ -964,8 +962,8 @@ class gradingform_btec_instance extends gradingform_instance {
             }
         }
         if ($this->get_data('isrestored') && $haschanges) {
-            $html .= html_writer::tag('div', get_string('restoredfromdraft',
-                    'gradingform_btec'), array('class' => 'gradingform_btec-restored'));
+            $html .= html_writer::tag('div', get_string('restoredfromdraft', 'gradingform_btec'),
+                    array('class' => 'gradingform_btec-restored'));
         }
         $html .= html_writer::tag('div', $this->get_controller()->get_formatted_description(),
                 array('class' => 'gradingform_btec-description'));
