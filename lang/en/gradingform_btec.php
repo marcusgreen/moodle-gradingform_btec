@@ -101,4 +101,5 @@ $string['and']='and';
 $string['p']='p';
 $string['m']='m';
 $string['d']='d';
-$string['gradeheading']='BTEC grade editing';;
+$string['gradeheading']='BTEC grade editing';
+$string['level']='Level';
