@@ -42,6 +42,7 @@ class gradingform_btec_editbtec extends moodleform {
      * Form element definition
      */
     public function definition() {
+        global $DB;
         $form = $this->_form;
         $form->addElement('hidden', 'areaid');
         $form->setType('areaid', PARAM_INT);
@@ -54,6 +55,13 @@ class gradingform_btec_editbtec extends moodleform {
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
         $form->addHelpButton('name', 'btecgrading', 'gradingform_btec');
 
+        /*check that the scale has been set to BTEC and if not present a warning */
+        $areaid = optional_param('areaid', 0, PARAM_INT);
+        $scale=$DB->get_record('grade_items',array('iteminstance'=>$areaid),'scaleid',false);
+        if($scale->scaleid <> 2){
+            $form->addElement('static', 'errorwarning',get_string('warning','gradingform_btec'),get_string('scalewarning','gradingform_btec'));
+        }
+        
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
         // Description.
