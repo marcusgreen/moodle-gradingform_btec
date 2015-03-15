@@ -57,10 +57,12 @@ class gradingform_btec_editbtec extends moodleform {
 
         /*check that the scale has been set to BTEC and if not present a warning */
         $areaid = optional_param('areaid', 0, PARAM_INT);
+        /*find the scale to check it is BTEC */
         $scale=$DB->get_record('grade_items',array('iteminstance'=>$areaid),'scaleid',false);
+        /* lookup the values of the BTEC scle */
         $btecscale=$DB->get_record('scale',array('name'=>'BTEC'),'id',false);
-        if($scale->scaleid <> $btecscale->id){
-            $form->addElement('static', 'errorwarning',get_string('warning','gradingform_btec'),get_string('scalewarning','gradingform_btec'));
+        if((!$scale) || $scale->scaleid <> $btecscale->id){
+            $form->addElement('static', 'error',get_string('gradewarning','gradingform_btec'),'<span class="error">'.get_string('gradewarning_text','gradingform_btec').'</span>');
         }
         
         $form->addRule('name', get_string('required'), 'required');
