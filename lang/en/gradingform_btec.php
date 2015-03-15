@@ -70,7 +70,7 @@ $string['gradelevels']='Grade Levels';
 $string['gradelevels_help']='Criteron names must start with the letters P, M or D (Pass, Merit or Distinction) and be followed by a number, e.g. P1 or M2 or D3 etc';
 
 $string['btecgrading']='How BTEC grading works';
-$string['btecgrading_help']='BTEC grading is binary and accumulative. Students can either get or not get a level, there are no numbers or percentages. They can only get a level
+$string['btecgrading_help']='With BTEC grading students can either get or not get a level, there are no numbers or percentages. They can only get a level
 		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit
 		criteria, you only get a Distinction if you get all Pass, all Merit and all Distinction. If a student does not get all Pass criteria they get a Refer';
 $string['btecgrading_link']='BTEC_marking';
@@ -103,6 +103,6 @@ $string['m']='m';
 $string['d']='d';
 $string['gradeheading']='BTEC grade editing';
 $string['level']='Level';
-$string['warning']='Warning';
-$string['scalewarning']='The BTEC scale must be set in the assignment definition, return to edit form';
+$string['gradewarning']='Warning';
+$string['gradewarning_text']='The BTEC grading method  must be set in the assignment definition, return to edit form';
 
