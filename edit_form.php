@@ -54,22 +54,27 @@ class gradingform_btec_editbtec extends moodleform {
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
         $form->addHelpButton('name', 'btecgrading', 'gradingform_btec');
-
+        
         /*check that the scale has been set to BTEC and if not present a warning */
         $areaid = optional_param('areaid', 0, PARAM_INT);
+        $returnurl = optional_param('returnurl', 0, PARAM_TEXT);
         /*find the scale to check it is BTEC */
-        $scale=$DB->get_record('grade_items',array('iteminstance'=>$areaid),'scaleid',false);
+        $itemscale=$DB->get_record('grade_items',array('iteminstance'=>$areaid,'itemmodule'=>'assign','itemtype'=>'mod'),'scaleid',false);
         /* lookup the values of the BTEC scle */
-        $btecscale=$DB->get_record('scale',array('name'=>'BTEC'),'id',false);
-        if((!$scale) || $scale->scaleid <> $btecscale->id){
-            $form->addElement('static', 'error',get_string('gradewarning','gradingform_btec'),'<span class="error">'.get_string('gradewarning_text','gradingform_btec').'</span>');
+         $btecscale=$DB->get_record('scale',array('name'=>'BTEC'),'id',false);
+         /* is marking set to use scale and is the scale the BTEC scale */
+        if((!$itemscale) || $itemscale->scaleid <> $btecscale->id){
+            /*Get the id for assign, probably always 1 */
+            $assignmodule=$DB->get_record('modules',array('name'=>'assign'),'id');
+            $cm=$DB->get_record('course_modules',array('instance'=>$areaid,'module'=>$assignmodule->id),'id');
+            $form->addElement('static', 'error',get_string('gradewarning','gradingform_btec'),'<span class="error">'.get_string('gradewarning_text','gradingform_btec',$cm->id).'</span>');
         }
         
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
         // Description.
         $options = gradingform_btec_controller::description_form_field_options($this->_customdata['context']);
-        $form->addElement('editor', 'description_editor', get_string('description'), array('rows' => 3), $options);
+        $form->addElement('editor', 'description_editor', get_string('description'), null, $options);
         $form->setType('description_editor', PARAM_RAW);
         /* btec completion status. */
         $choices = array();
