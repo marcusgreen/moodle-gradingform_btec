@@ -80,7 +80,7 @@ class gradingform_btec_editbtec extends moodleform {
     
         // Description.
         $options = gradingform_btec_controller::description_form_field_options($this->_customdata['context']);
-        $form->addElement('editor', 'description_editor', get_string('description'), null, $options);
+        $form->addElement('editor', 'description_editor', get_string('description'), array('rows' => 6), $options);
         $form->setType('description_editor', PARAM_RAW);
         /* btec completion status. */
         $choices = array();
