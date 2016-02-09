@@ -43,7 +43,7 @@
 .gradingform_btec.editor .addcriterion input,
 .gradingform_btec.editor .addcomment input {background: transparent url("[[pix:t/addgreen]]") no-repeat;display:block;color:#555555;font-weight:bold;text-decoration:none;}
 .gradingform_btec.editor .addcriterion input,
-.gradingform_btec.editor .addcomment input {background-position: 5px 8px;height:30px;line-height:29px;margin-bottom:14px;padding-left:20px;padding-right:10px;}
+.gradingform_btec.editor .addcomment input {background-position: 5px 8px;height:30px;line-height:29px;margin-top:2px;margin-left:0px;margin-bottom:14px;padding-left:20px;padding-right:10px;}
 
 .gradingform_btec .options .optionsheading {font-weight:bold;font-size:1.1em;padding-bottom:5px;}
 .gradingform_btec .options .option {padding-bottom:2px;}
