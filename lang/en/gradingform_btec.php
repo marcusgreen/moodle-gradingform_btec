@@ -103,6 +103,6 @@ $string['m']='m';
 $string['d']='d';
 $string['gradeheading']='BTEC grade editing';
 $string['level']='Level';
-$string['gradewarning']='Warning';
-$string['gradewarning_text']='The BTEC grading method  must be set in the assignment definition, return to edit form';
+$string['warning']='Warning';
+$string['scaletypewarning_text']='The BTEC grading method  must be set in the assignment definition, return to edit form';
 
