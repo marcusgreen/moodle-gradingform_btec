@@ -50,6 +50,14 @@
 .gradingform_btec .options .option label {margin-left: 5px;}
 .gradingform_btec .options .option .value {margin-left: 5px;font-weight:bold;}
 
+.gradingform_btec .optionsheader a:link {
+    color:black;
+    font-size:1.4em;
+    cursor: pointer;
+}
+.gradingform_btec .collapsibleregioncaption{
+    padding-bottom:3px;
+}
 .gradingform_btec .criterion .description.error {background:#FFDDDD;}
 
 /* special classes for elements created by bteceditor.js */
