@@ -59,7 +59,7 @@ $string['gradingof'] = '{$a} grading';
 $string['btecmappingexplained'] = 'WARNING: Your BTEC marking has a maximum grade of <b>{$a->maxscore} points</b> but the maximum grade set in your activity is {$a->modulegrade}  The maximum score set in your BTEC marking will be scaled to the maximum grade in the module.<br />
     Intermediate scores will be converted respectively and rounded to the nearest available grade.';
 $string['btecnotcompleted'] = 'Please provide a valid grade for each criterion';
-$string['btecoptions'] = 'BTEC marking options';
+$string['btecoptions'] = 'Marking options';
 $string['btecstatus'] = 'Current BTEC marking status';
 $string['hidemarkerdesc'] = 'Hide marker criterion descriptions';
 $string['hidestudentdesc'] = 'Hide student criterion descriptions';
