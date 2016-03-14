@@ -415,6 +415,8 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             return;
         }
         $html = html_writer::start_tag('div', array('class' => 'options'));
+        $html .= print_collapsible_region_start('btecoptions', uniqid('btecoptions'),
+                    get_string('btecoptions', 'gradingform_btec'), '', true, true);
         $html .= html_writer::tag('div', get_string('btecoptions', 'gradingform_btec'),
                 array('class' => 'optionsheading'));
         $attrs = array('type' => 'hidden', 'name' => '{NAME}[options][optionsset]',
@@ -469,6 +471,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         }
 
         $html .= html_writer::end_tag('div'); // Options.
+        $html .=print_collapsible_region_end(true);
 
         return $html;
     }
