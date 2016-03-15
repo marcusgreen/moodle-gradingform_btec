@@ -1,6 +1,0 @@
-Changes for BTEC grading method for moodle for beta1. Marcus Green May 2014
-Changed drop down with criteria level for a text box. This was because previously it was
-limited to 6 levels, i.e. P1 to P6, M1 to M6 etc and some places have more levels than that
-Added validation on save to check for duplicate level criteria. Changed CSS to reveal the X
-that indicates you can delete a level during editing. Changed CSS for layout at marking
-time as previously the labels on the Yes No radio buttons could be mistaken for each other.
