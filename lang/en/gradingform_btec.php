@@ -104,5 +104,6 @@ $string['d']='d';
 $string['gradeheading']='BTEC grade editing';
 $string['level']='Level';
 $string['warning']='Warning';
-$string['scaletypewarning_text']='The BTEC grading method  must be set in the assignment definition, return to edit form';
+global $CFG;
+$string['scaletypewarning_text']='The BTEC scale must be set in the assignment definition,  return to edit form <a href='.$CFG->wwwroot.'/course/modedit.php?update={$a}#id_modstandardgrade>here</a>';
 
