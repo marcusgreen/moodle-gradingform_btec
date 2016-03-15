@@ -127,7 +127,7 @@ class gradingform_btec_editbtec extends moodleform {
     }
 
     /**
-     * Form vlidation.
+     * Form validation.
      * If there are errors return array of errors ("fieldname"=>"error message"),
      * otherwise true if ok.
      *
