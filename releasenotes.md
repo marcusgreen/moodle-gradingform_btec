@@ -1,6 +1,6 @@
 ###Release notes  for BTEC grading method for Moodle by Marcus Green
 
-####Version 1.1. Marcus Green March 2016
+####Version 1.1. March 2016
 This is the Gloucester college release in honour of the feedback given on my visit there.
 * Reduced the size of the description field as it was occupying a disproportional amount of space
 * Added a check to ensure that the assignment has the BTEC scale set
