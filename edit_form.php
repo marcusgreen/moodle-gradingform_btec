@@ -63,12 +63,7 @@ class gradingform_btec_editbtec extends moodleform {
         $gradeitem=$DB->get_record('grade_items',array('iteminstance'=>$areaid,'itemmodule'=>'assign','itemtype'=>'mod'),'gradetype,scaleid',false);
         /* lookup the id of the BTEC scale */
         $btecscale=$DB->get_record('scale',array('name'=>'BTEC'),'id',false);
-        if(($gradeitem->gradetype!=GRADE_TYPE_SCALE) ){
-            /*Get the id for assign, probably always 1 */
-            $assignmodule=$DB->get_record('modules',array('name'=>'assign'),'id');
-            $cm=$DB->get_record('course_modules',array('instance'=>$areaid,'module'=>$assignmodule->id),'id');
-            $form->addElement('static', 'error',get_string('warning','gradingform_btec'),'<span class="error">'.get_string('gradetypewarning_text','gradingform_btec',$cm->id).'</span>');
-        } else if(($gradeitem->scaleid !=$btecscale->id) ){
+       if(($gradeitem->scaleid !=$btecscale->id) ){
             /*Get the id for assign, probably always 1 */
             $assignmodule=$DB->get_record('modules',array('name'=>'assign'),'id');
             $cm=$DB->get_record('course_modules',array('instance'=>$areaid,'module'=>$assignmodule->id),'id');
