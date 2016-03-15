@@ -8,7 +8,7 @@ This is the Gloucester college release in honour of the feedback given on my vis
 * Changed Marking Options so it is hidden by default as it is not frequently used
 
 
-####beta1 May 2014
+####beta1 Oct 2014
 * Changed drop down with criteria level for a text box. This was because previously it was
 * limited to 6 levels, i.e. P1 to P6, M1 to M6 etc and some places have more levels than that
 * Added validation on save to check for duplicate level criteria. Changed CSS to reveal the X
