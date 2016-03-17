@@ -53,6 +53,8 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      */
     public function moodlequickform_bteceditor($elementname = null, $elementlabel = null, $attributes = null) {
         parent::__construct($elementname, $elementlabel, $attributes);
+                parent::__construct($elementname, $elementlabel, $attributes);
+
     }
 
     /**
