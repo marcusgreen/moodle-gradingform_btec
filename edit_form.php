@@ -53,26 +53,26 @@ class gradingform_btec_editbtec extends moodleform {
         $form->addElement('header', 'btecheader', get_string('gradeheading' , 'gradingform_btec'));
 
         // Name.
-        $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size'=>52));
+        $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size' => 52));
         $form->addHelpButton('name', 'btecgrading', 'gradingform_btec');
-        
         /*check grade type is scale and the scale is BTEC, if not present a warning */
         $areaid = optional_param('areaid', 0, PARAM_INT);
         $returnurl = optional_param('returnurl', 0, PARAM_TEXT);
         /*find the scale to check it is BTEC */
-        $gradeitem=$DB->get_record('grade_items',array('iteminstance'=>$areaid,'itemmodule'=>'assign','itemtype'=>'mod'),'gradetype,scaleid',false);
+        $gradeitem = $DB->get_record('grade_items', array('iteminstance' => $areaid,
+            'itemmodule' => 'assign', 'itemtype' => 'mod'), 'gradetype,scaleid', false);
         /* lookup the id of the BTEC scale */
-        $btecscale=$DB->get_record('scale',array('name'=>'BTEC'),'id',false);
-       if(($gradeitem->scaleid !=$btecscale->id) ){
-            /*Get the id for assign, probably always 1 */
-            $assignmodule=$DB->get_record('modules',array('name'=>'assign'),'id');
-            $cm=$DB->get_record('course_modules',array('instance'=>$areaid,'module'=>$assignmodule->id),'id');
-            $form->addElement('static', 'error',get_string('warning','gradingform_btec'),'<span class="error">'.get_string('scaletypewarning_text','gradingform_btec',$cm->id).'</span>');
+        $btecscale = $DB->get_record('scale', array('name' => 'BTEC'), 'id', false);
+        if (($gradeitem->scaleid != $btecscale->id)) {
+            /* Get the id for assign, probably always 1 */
+            $assignmodule = $DB->get_record('modules', array('name' => 'assign'), 'id');
+            $cm = $DB->get_record('course_modules', array('instance' => $areaid, 'module' => $assignmodule->id), 'id');
+            $form->addElement('static', 'error', get_string('warning', 'gradingform_btec'),
+                    '<span class="error">' . get_string('scaletypewarning_text', 'gradingform_btec', $cm->id) . '</span>');
         }
-        
+
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
-    
         // Description.
         $options = gradingform_btec_controller::description_form_field_options($this->_customdata['context']);
         $form->addElement('editor', 'description_editor', get_string('description'), array('rows' => 6), $options);
