@@ -329,10 +329,10 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $a = array('level' => strtoupper($level), 'p' => strtoupper($p), 'm' => strtoupper($m), 'd' => strtoupper($d));
             $level = substr($level, 0, 1);
             if ($element['shortname'] == "") {
-                $this->validationerrors.= get_string('level', 'gradingform_btec');
+                $this->validationerrors .= get_string('level', 'gradingform_btec');
             }
             if ($level != $p && $level != $m && $level != $d) {
-                $this->validationerrors.=' ' . get_string('startwithpmd', 'gradingform_btec', $a);
+                $this->validationerrors .= ' ' . get_string('startwithpmd', 'gradingform_btec', $a);
                 $shortnamerror = true;
             }
 
@@ -343,9 +343,9 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             if (!is_numeric($number)) {
                 if ($shortnamerror == true) {
                     /* if there is already an error add the 'and' onto the error text  */
-                    $this->validationerrors.=$element['shortname'] . ' ' . get_string('and', 'gradingform_btec') . ' ';
+                    $this->validationerrors .= $element['shortname'] . ' ' . get_string('and', 'gradingform_btec') . ' ';
                 }
-                $this->validationerrors.=$element['shortname'] . ' ' . get_string('endwithadigit', 'gradingform_btec') . ' ';
+                $this->validationerrors .= $element['shortname'] . ' ' . get_string('endwithadigit', 'gradingform_btec') . ' ';
                 $shortnamerror = true;
             }
             $shortnames[$key] = $element['shortname'];
@@ -353,7 +353,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         /* extract any duplicate shortnames */
         $dupes = array_unique(array_diff_assoc($shortnames, array_unique($shortnames)));
         if (count($dupes) > 0) {
-            $this->validationerrors.=get_string('duplicateelements', 'gradingform_btec') . implode(' ', $dupes);
+            $this->validationerrors .= get_string('duplicateelements', 'gradingform_btec') . implode(' ', $dupes);
             $shortnamerror = true;
         }
         if (($shortnamerror != true) && (!$this->wasvalidated)) {
