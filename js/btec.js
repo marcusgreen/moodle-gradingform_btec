@@ -15,7 +15,7 @@ M.gradingform_btec.init = function(Y, options) {
     });
 
     Y.all('.showmarkerdesc input[type=radio]').on('click', function(e) {
-        if (e.currentTarget.get('value')=='false') {
+        if (e.currentTarget.get('value') == 'false') {
             Y.all('.criteriondescriptionmarkers').addClass('hide');
         } else {
             Y.all('.criteriondescriptionmarkers').removeClass('hide');
@@ -23,7 +23,7 @@ M.gradingform_btec.init = function(Y, options) {
     });
 
     Y.all('.showstudentdesc input[type=radio]').on('click', function(e) {
-        if (e.currentTarget.get('value')=='false') {
+        if (e.currentTarget.get('value') == 'false') {
             Y.all('.criteriondescription').addClass('hide');
         } else {
             Y.all('.criteriondescription').removeClass('hide');
