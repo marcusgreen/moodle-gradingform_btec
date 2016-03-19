@@ -6,6 +6,7 @@ I call this the  Gloucester college release in honour of the help and feedback g
 * Added a check to ensure that the assignment has the BTEC scale set
 * Changed CSS so the Add Criterion button lined up properly
 * Changed Marking Options so it is hidden by default as it is not frequently used
+* tweaked code (a constructor) to ensure it would work with PHP7
 
 
 ####beta1 Oct 2014
@@ -14,3 +15,4 @@ I call this the  Gloucester college release in honour of the help and feedback g
 * Added validation on save to check for duplicate level criteria. Changed CSS to reveal the X
 * that indicates you can delete a level during editing. Changed CSS for layout at marking
 * time as previously the labels on the Yes No radio buttons could be mistaken for each other.
+
