@@ -26,6 +26,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component  = 'gradingform_btec';
 $plugin->version    = 2012081709;
-$plugin->requires   = 2012110900;
+$plugin->requires   = 2014051208;
 $plugin->release    = '1.1';
 $plugin->maturity   = MATURITY_STABLE;
