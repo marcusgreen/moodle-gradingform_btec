@@ -177,28 +177,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         } else {
             $title .= $description . $descriptionmarkers;
         }
-        $criteriontemplate .= html_writer::tag('td', $title, array('class' => $descriptionclass,
-                    'id' => '{NAME}-criteria-{CRITERION-id}-shortname'));
-
-        $currentremark = '';
-        $currentscore = '';
-        if (isset($value['remark'])) {
-            $currentremark = $value['remark'];
-        }
-        if (isset($value['score'])) {
-            $currentscore = $value['score'];
-        }
-        if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
-            $scoreclass = '';
-            if (!empty($validationerrors[$criterion['id']]['score'])) {
-                $scoreclass = 'error';
-                $currentscore = $validationerrors[$criterion['id']]['score']; // Show invalid score in form.
-            }
-            $input = html_writer::tag('textarea', htmlspecialchars($currentremark),
-                    array('name' => '{NAME}[criteria][{CRITERION-id}][remark]', 'cols' => '65', 'rows' => '5',
-                        'class' => 'markingbtecremark'));
-            $criteriontemplate .= html_writer::tag('td', $input, array('class' => 'remark'));
-            /*Insert yes/no achieved marking options*/
+             /*Insert yes/no achieved marking options*/
             if ($currentscore) {/*this could be neater, not sure better way to preload checked value though*/
                  $radio = html_writer::tag('input', get_string('no', 'gradingform_btec')." ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
@@ -217,6 +196,31 @@ class gradingform_btec_renderer extends plugin_renderer_base {
 
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             }
+            
+        $criteriontemplate .= html_writer::tag('td', $title, array('class' => $descriptionclass,
+                    'id' => '{NAME}-criteria-{CRITERION-id}-shortname'));
+
+        $currentremark = '';
+        $currentscore = '';
+        if (isset($value['remark'])) {
+            $currentremark = $value['remark'];
+        }
+        if (isset($value['score'])) {
+            $currentscore = $value['score'];
+        }
+        if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
+            $scoreclass = '';
+            
+       
+            if (!empty($validationerrors[$criterion['id']]['score'])) {
+                $scoreclass = 'error';
+                $currentscore = $validationerrors[$criterion['id']]['score']; // Show invalid score in form.
+            }
+            $input = html_writer::tag('textarea', htmlspecialchars($currentremark),
+                    array('name' => '{NAME}[criteria][{CRITERION-id}][remark]', 'cols' => '65', 'rows' => '5',
+                        'class' => 'markingbtecremark'));
+            $criteriontemplate .= html_writer::tag('td', $input, array('class' => 'remark'));
+            
         } else if ($mode == gradingform_btec_controller::DISPLAY_EVAL_FROZEN) {
             $criteriontemplate .= html_writer::empty_tag('input', array('type' => 'hidden',
                         'name' => '{NAME}[criteria][{CRITERION-id}][remark]', 'value' => $currentremark));
