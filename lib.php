@@ -189,7 +189,7 @@ class gradingform_btec_controller extends gradingform_controller {
         }
         $currentcriteria = $currentdefinition->btec_criteria;
         $criteriafields = array('sortorder', 'description', 'descriptionformat', 'descriptionmarkers',
-            'descriptionmarkersformat', 'shortname'/* , 'maxscore' */);
+            'descriptionmarkersformat', 'shortname');
         foreach ($newcriteria as $id => $criterion) {
             if (preg_match('/^NEWID\d+$/', $id)) {
                 // Insert criterion into DB.
@@ -345,7 +345,7 @@ class gradingform_btec_controller extends gradingform_controller {
         $criteria = $DB->get_recordset('gradingform_btec_criteria', array('definitionid' => $this->definition->id), 'sortorder');
         foreach ($criteria as $criterion) {
             foreach (array('id', 'sortorder', 'description', 'descriptionformat',
-        'descriptionmarkers', 'descriptionmarkersformat', 'shortname') as $fieldname) {
+            'descriptionmarkers', 'descriptionmarkersformat', 'shortname') as $fieldname) {
                 if ($fieldname == 'maxscore') {  // Strip any trailing 0.
                     $this->definition->btec_criteria[$criterion->id][$fieldname] = (float) $criterion->{$fieldname};
                 } else {
@@ -731,7 +731,6 @@ class gradingform_btec_instance extends gradingform_instance {
         $this->validationerrors = null;
         foreach ($criteria as $id => $criterion) {
             if (!isset($elementvalue['criteria'][$id]['score'])
-                    /* || $criterion['maxscore'] < $elementvalue['criteria'][$id]['score'] */ ||
                     !is_numeric($elementvalue['criteria'][$id]['score']) ||
                     $elementvalue['criteria'][$id]['score'] < 0) {
                 $this->validationerrors[$id]['score'] = $elementvalue['criteria'][$id]['score'];

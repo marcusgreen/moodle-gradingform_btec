@@ -63,7 +63,7 @@ class gradingform_btec_editbtec extends moodleform {
             'itemmodule' => 'assign', 'itemtype' => 'mod'), 'gradetype,scaleid', false);
         /* lookup the id of the BTEC scale */
         $btecscale = $DB->get_record('scale', array('name' => 'BTEC'), 'id', false);
-        if (($gradeitem !==false) && ($gradeitem->scaleid != $btecscale->id)) {
+        if (($gradeitem !== false) && ($gradeitem->scaleid != $btecscale->id)) {
             /* Get the id for assign, probably always 1 */
             $assignmodule = $DB->get_record('modules', array('name' => 'assign'), 'id');
             $cm = $DB->get_record('course_modules', array('instance' => $areaid, 'module' => $assignmodule->id), 'id');
@@ -203,7 +203,7 @@ class gradingform_btec_editbtec extends moodleform {
         // Freeze form elements and pass the values in hidden fields.
         // TODO description_editor does not freeze the normal way!
         $form = $this->_form;
-        foreach (array('btec', 'name'/*, 'description_editor'*/) as $fieldname) {
+        foreach (array('btec', 'name') as $fieldname) {
             $el =& $form->getElement($fieldname);
             $el->freeze();
             $el->setPersistantFreeze(true);
