@@ -505,17 +505,19 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @return string
      */
     public function display_btec($criteria, $comments, $options, $mode, $elementname = null, $values = null, $validationerrors = null) {
-        //$criteriastr = '';
+       $criteriastr = "";
        /*$criteriastr="<tr><td colspan=5>";
        $criteriastr.="<select class='setyesno'>";
        $criteriastr.="<option value=no>Set all to no</option>";
        $criteriastr.="<option value=yes>Set all to yes</option>";
        $criteriastr.="</select></td></tr>";*/
-       $criteriastr="<tr><td colspan=5>";
-       $criteriastr.="<input type='radio' name=yesno class ='setyesno' value='no'>No ";
-       $criteriastr.="<input type='radio' name=yesno class ='setyesno' value='yes'>Yes";
-       $criteriastr.="</td></tr>";
- 
+       if ($mode==gradingform_btec_controller::DISPLAY_EVAL) {
+       $criteriastr="<tr><td class='markingbtecyesno'>";
+       $criteriastr.="<input type='radio' title='toggle all to no' name=yesno class ='setyesno' value='no'>".get_string('no', 'gradingform_btec');
+       $criteriastr.="<td class='markingbtecyesno'>";
+       $criteriastr.="<input type='radio' title='toggle all to yes' name=yesno class ='setyesno' value='yes'>".get_string('yes', 'gradingform_btec');
+       $criteriastr.="</td><td colspan=4></td></tr>";
+       }
  
         $cnt = 0;
         foreach ($criteria as $id => $criterion) {

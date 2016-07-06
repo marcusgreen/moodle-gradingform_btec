@@ -83,5 +83,5 @@
 /*mavg */
 .gradingform_btec .markingbtecyesno {width: 6%; text-align:center; padding:0px;}
 .gradingform_btec .criteriondescriptionscore {display: inline;}
-.gradingform_btec .descriptionreadonly {border:solid left black;width: 30%;}
+.gradingform_btec .descriptionreadonly {border-left:solid thin #c0c0c0;width: 30%;}
 

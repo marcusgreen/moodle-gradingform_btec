@@ -22,21 +22,16 @@ M.gradingform_btec.init = function (Y, options) {
         }
     });
     Y.all('.setyesno').on('change', function (e) {
-        //var selected = Y.one('.setyesno').get('value');
         var selected = e.target.get('value');
         var markyes = Y.all(".markyes");
         var markno = Y.all(".markno");
         if (selected == 'yes') {
             markyes.setAttribute('checked', 'checked');
             markno.removeAttribute('checked');
-
-
         } 
         if(selected =='no'){
            markno.setAttribute('checked', 'checked');
            markyes.removeAttribute('checked');
-
-
         }
 
     });
