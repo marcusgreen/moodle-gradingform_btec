@@ -36,10 +36,7 @@ Feature: BTEC advanced grading forms can be created and edited
     And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
     And I set the field "btec[criteria][NEWID1][description]" to "P2 Description"
 
-    And I click on "Click" "text"
-#And I set the field "name="btec[comments][1][description]" to "Frequent comment 1"
-And I wait "20" seconds
-
+    
 
   
   And I click on "Add criterion" "button"
@@ -75,15 +72,10 @@ And I click on "Add criterion" "button"
     And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
     And I set the field "btec[criteria][NEWID6][description]" to "D2 description"
 
- And I click on "Save BTEC marking and make it ready" "button"
+And I wait "20" seconds
+
+And I click on "Save BTEC marking and make it ready" "button"
 
    
 
-    #Then I should see "Ready for use"
-    #And I should see "Guide criterion A"
-    #And I should see "Guide criterion B"
-    #And I should see "Guide criterion C"
-    #And I should see "Comment 1"
-    #And I should see "Comment 2"
-    #And I should see "Comment 3"
-    #And I should see "Comment 4"
+    
