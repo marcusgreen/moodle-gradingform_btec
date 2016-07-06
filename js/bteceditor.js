@@ -56,6 +56,10 @@ M.gradingform_bteceditor.clickanywhere = function(e) {
         el = container.one('input[type=text]')
     } else if ((container = el.ancestor('.criteriondesc')) || (container = el.ancestor('.criteriondescmarkers'))) {
         el = container.one('textarea')
+        /* event for click on description label */
+        
+
+        
     } else {
         el = null
     }
