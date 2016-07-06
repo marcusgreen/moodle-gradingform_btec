@@ -1,4 +1,13 @@
+
 ###Release notes  for BTEC grading method for Moodle by Marcus Green
+
+####Version 1.2. Summer 2016
+Moved the Yes/No boxes to the right hand side for marking 
+Updates to take account of the Moodle 3.1 grading interface, while
+still working with earlier versions.
+* Moved yes no boxes to the right hand side of grading page
+* Added radio buttons at the top to toggle all to yes or no
+* Added behat tests (benefits to developers mainly)
 
 ####Version 1.1. March 2016
 I call this the  Gloucestershire college release in honour of the help and feedback given on my visit there.
