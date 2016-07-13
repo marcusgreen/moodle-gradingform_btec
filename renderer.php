@@ -200,16 +200,16 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                               $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             } else {
                 $radio = '<td class="markingbtecyesno">';
-                $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
+                $radio .= html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markno',
                             'value' => 0, 'checked' => 'checked')); /* note checked */
-                $radio  = '</td><td class = "markingbtecyesno">';
+                $radio  .= '</td><td class = "markingbtecyesno">';
                 $radio .= html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markyes',
                             'value' => 1));
-                $radio = '</td>';
+                $radio .= '</td>';
                 /* add the radio buttons */
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             }
@@ -229,7 +229,6 @@ class gradingform_btec_renderer extends plugin_renderer_base {
 
         if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
             $scoreclass = '';
-
             if (!empty($validationerrors[$criterion['id']]['score'])) {
                 $scoreclass = 'error';
                 $currentscore = $validationerrors[$criterion['id']]['score']; // Show invalid score in form.
@@ -246,7 +245,6 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 $mode == gradingform_btec_controller::DISPLAY_VIEW) {
             $criteriontemplate .= html_writer::tag('td', $currentremark, array('class' => 'remark'));
             if (!empty($options['showmarkspercriterionstudents'])) {
-
                 /* replace score out of with in/complete */
                 if ($currentscore) {
                     $criteriontemplate .= html_writer::tag('td', 'Completed', array('class' => 'score'));
