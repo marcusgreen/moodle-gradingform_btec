@@ -199,19 +199,16 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                              /* add radio buttons */
                               $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             } else {
-                $radio = '<td class="markingbtecyesno">';
-                $radio .= html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
+                $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markno',
-                            'value' => 0, 'checked' => 'checked')); /* note checked */
-                $radio  .= '</td><td class = "markingbtecyesno">';
-                $radio .= html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
+                            'value' => 0, 'checked' => 'checked')); 
+                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
+                $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markyes',
                             'value' => 1));
-                $radio .= '</td>';
-                /* add the radio buttons */
-                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
+                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             }
         }
 
