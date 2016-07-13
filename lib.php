@@ -730,7 +730,7 @@ class gradingform_btec_instance extends gradingform_instance {
         // Reset validation errors.
         $this->validationerrors = null;
         foreach ($criteria as $id => $criterion) {
-            if (!isset($elementvalue['criteria'][$id]['score'])
+            if (!isset($elementvalue['criteria'][$id]['score']) ||
                     !is_numeric($elementvalue['criteria'][$id]['score']) ||
                     $elementvalue['criteria'][$id]['score'] < 0) {
                 $this->validationerrors[$id]['score'] = $elementvalue['criteria'][$id]['score'];
