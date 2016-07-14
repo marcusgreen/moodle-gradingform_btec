@@ -193,39 +193,39 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         }
         if (isset($value['score'])) {
             $currentscore = $value['score'];
-          }
+        }
         if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
             /* Insert yes/no achieved marking options */
-            if (isset($currentscore)) {    
+            if (isset($currentscore)) {
                 /* the No column */
-                $prefix='';
-                $checked='';
-                if($currentscore==0){
-                    $prefix='checked';
-                    $checked='checked';
+                $prefix = '';
+                $checked = '';
+                if ($currentscore == 0) {
+                    $prefix = 'checked';
+                    $checked = 'checked';
                 }
                 $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                            'class'=> 'markno',
-                            'value' => 0, $prefix=>$checked )); 
-                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno')); 
+                            'class' => 'markno',
+                            'value' => 0, $prefix => $checked));
+                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
                 /* the Yes column */
-                $prefix='';
-                $checked='';
-                if($currentscore==1){
-                    $prefix='checked';
-                    $checked='checked';
+                $prefix = '';
+                $checked = '';
+                if ($currentscore == 1) {
+                    $prefix = 'checked';
+                    $checked = 'checked';
                 }
                 $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                            'class'=> 'markyes',
-                            'value' => 1,$prefix => $checked ));
-                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
+                            'class' => 'markyes',
+                            'value' => 1, $prefix => $checked));
+                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             } else {
                 $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markno',
-                            'value' => 0, 'checked'=>'checked'));
+                            'value' => 0, 'checked' => 'checked'));
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
                 $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
