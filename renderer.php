@@ -186,29 +186,52 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             $title .= $description . $descriptionmarkers;
         }
 
+        $currentremark = '';
+        $currentscore = '';
+        if (isset($value['remark'])) {
+            $currentremark = $value['remark'];
+        }
+        if (isset($value['score'])) {
+            $currentscore = $value['score'];
+          }
         if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
-                   /* Insert yes/no achieved marking options */
-            if(isset($currentscore)) {
-                             /* this could be neater, not sure better way to preload checked value though */
-                             $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
+            /* Insert yes/no achieved marking options */
+            if (isset($currentscore)) {    
+                /* the No column */
+                $prefix='';
+                $checked='';
+                if($currentscore==0){
+                    $prefix='checked';
+                    $checked='checked';
+                }
+                $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                            'value' => 0)); /* no checked */
-                             $radio .= html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
-                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
-                             'value' => 1, 'checked' => 'checked'));
-                             /* add radio buttons */
-                              $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
+                            'class'=> 'markno',
+                            'value' => 0, $prefix=>$checked )); 
+                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno')); 
+                /* the Yes column */
+                $prefix='';
+                $checked='';
+                if($currentscore==1){
+                    $prefix='checked';
+                    $checked='checked';
+                }
+                $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
+                            'name' => '{NAME}[criteria][{CRITERION-id}][score]',
+                            'class'=> 'markyes',
+                            'value' => 1,$prefix => $checked ));
+                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             } else {
                 $radio = html_writer::tag('input', get_string('no', 'gradingform_btec') . " ", array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markno',
-                            'value' => 0, 'checked' => 'checked')); 
+                            'value' => 0, 'checked'=>'checked'));
                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
                 $radio = html_writer::tag('input', get_string('yes', 'gradingform_btec'), array('type' => 'radio',
                             'name' => '{NAME}[criteria][{CRITERION-id}][score]',
                             'class' => 'markyes',
                             'value' => 1));
-                 $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
+                $criteriontemplate .= html_writer::tag('td', $radio, array('class' => 'markingbtecyesno'));
             }
         }
 
@@ -293,7 +316,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         $criteriontemplate = html_writer::start_tag('tr', array('class' => 'criterion' . $comment['class'],
                     'id' => '{NAME}-comments-{COMMENT-id}'));
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
-            $criteriontemplate .= html_writer::start_tag('td', array('class' => 'controls'));
+            $criteriontemplate .= html_writer::start_tag('td', array('class' => 'frequent controls'));
             foreach (array('moveup', 'delete', 'movedown') as $key) {
                 $value = get_string('comments' . $key, 'gradingform_btec');
                 $button = html_writer::empty_tag('input', array('type' => 'submit',
@@ -512,13 +535,13 @@ class gradingform_btec_renderer extends plugin_renderer_base {
     public function display_btec($criteria, $comments, $options, $mode,
             $elementname = null, $values = null, $validationerrors = null) {
         $criteriastr = "";
-        if($mode == gradingform_btec_controller::DISPLAY_EVAL) {
-            $criteriastr  = "<tr><td class = 'markingbtecyesno'>";
+        if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
+            $criteriastr = "<tr><td class = 'markingbtecyesno'>";
             $criteriastr .= "<input type = 'radio' title='toggle all to no'"
-                    . " name=yesno class = 'setyesno' value='no'>".get_string('no', 'gradingform_btec');
+                    . " name=yesno class = 'setyesno' value='no'>" . get_string('no', 'gradingform_btec');
             $criteriastr .= "<td class = 'markingbtecyesno'>";
             $criteriastr .= "<input type = 'radio' title = 'toggle all to yes'"
-                    . " name=yesno class = 'setyesno' value='yes'>".get_string('yes', 'gradingform_btec');
+                    . " name=yesno class = 'setyesno' value='yes'>" . get_string('yes', 'gradingform_btec');
             $criteriastr .= "</td><td colspan = 4></td></tr>";
         }
 
