@@ -26,12 +26,10 @@ M.gradingform_btec.init = function (Y, options) {
         var markyes = Y.all(".markyes");
         var markno = Y.all(".markno");
         if (selected == 'yes') {
-            markyes.setAttribute('checked', 'checked');
-            markno.removeAttribute('checked');
+           markyes.set('checked', 'checked');
         } 
         if(selected =='no'){
-           markno.setAttribute('checked', 'checked');
-           markyes.removeAttribute('checked');
+           markno.set('checked', 'checked');          
         }
 
     });
