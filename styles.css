@@ -14,7 +14,11 @@
 
 /*.gradingform_btec.editor .criterion .controls,
 .gradingform_btec .criterion .description,
-.gradingform_btec .criterion .remark {padding:0px;width:9%;}*/
+.gradingform_btec .criterion .remark {padding:0px;width:4%;}*/
+
+.gradingform_btec .frequent {width:6%;}
+.gradingform_btec .controls {width:6%;}
+
 
  .gradingform_btec .criteria {height:100%;}
 

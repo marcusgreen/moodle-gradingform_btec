@@ -51,10 +51,8 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      * @param string $elementlabel
      * @param array $attributes
      */
-    public function moodlequickform_bteceditor($elementname = null, $elementlabel = null, $attributes = null) {
+    public function __construct($elementname=null, $elementlabel=null, $attributes=null) {
         parent::__construct($elementname, $elementlabel, $attributes);
-                parent::__construct($elementname, $elementlabel, $attributes);
-
     }
 
     /**
