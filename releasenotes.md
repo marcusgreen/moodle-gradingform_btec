@@ -2,7 +2,7 @@
 ###Release notes  for BTEC grading method for Moodle by Marcus Green
 
 ####Version 1.2. Summer 2016
-Moved the Yes/No radio buttons to the left hand side for marking 
+Moved the Yes/No radio buttons to the left hand side for marking. 
 Updates to take account of the Moodle 3.1 grading interface, while
 still working with earlier versions.
 * Moved yes no radio buttons to the left hand side of grading page
