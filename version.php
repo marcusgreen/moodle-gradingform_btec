@@ -28,4 +28,4 @@ $plugin->component  = 'gradingform_btec';
 $plugin->version    = 2016083116;
 $plugin->requires   = 2014051208;
 $plugin->release    = '1.2';
-$plugin->maturity   = MATURITY_BETA;
+$plugin->maturity   = MATURITY_STABLE;
