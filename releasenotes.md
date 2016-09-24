@@ -3,7 +3,6 @@
 
 ####Version 1.2. Summer 2016
 I call this the Sue Moss release, in honour of the help she gave me with some of the ideas.
-Moved the Yes/No radio buttons to the left hand side for marking. 
 Updates to take account of the Moodle 3.1 grading interface, while
 still working with earlier versions.
 * Moved yes no radio buttons to the left hand side of grading page
