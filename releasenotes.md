@@ -5,7 +5,7 @@
 I call this the Sue Moss release, in honour of the help she gave me with some of the ideas.
 Updates to take account of the Moodle 3.1 grading interface, while
 still working with earlier versions.
-* Moved yes no radio buttons to the left hand side of grading page
+* Moved yes/no radio buttons to the left hand side of grading page
 * Added radio buttons at the top to toggle all to yes or no
 * Added behat tests (benefits to developers mainly)
 
