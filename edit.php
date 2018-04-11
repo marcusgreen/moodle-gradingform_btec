@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Rubric editor page
+ * BTEC Grading editor page
  *
  * @package    gradingform_btec
  * @copyright  2013 Marcus Green

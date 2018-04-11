@@ -18,19 +18,18 @@
  * Strings for the marking btec advanced grading plugin
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
-$string['definebtecmarking']='Btec Marking';
+$string['definebtecmarking'] = 'Btec Marking';
 $string['addcomment'] = 'Add frequently used comment';
 $string['addcriterion'] = 'Add criterion';
 $string['alwaysshowdefinition'] = 'Show BTEC definition to students';
 $string['backtoediting'] = 'Back to editing';
 $string['clicktocopy'] = 'Click to copy this text into the criteria feedback';
 $string['clicktoedit'] = 'Click to edit';
-$string['clicktoeditname'] = 'Click to edit criterion name';
+$string['clicktoeditname'] = 'Click to edit level (e.g. P1, D2 etc)';
 $string['comments'] = 'Frequently used comments';
 $string['commentsdelete'] = 'Delete comment';
 $string['commentsempty'] = 'Click to edit comment';
@@ -38,6 +37,7 @@ $string['commentsmovedown'] = 'Move down';
 $string['commentsmoveup'] = 'Move up';
 $string['confirmdeletecriterion'] = 'Are you sure you want to delete this item?';
 $string['confirmdeletelevel'] = 'Are you sure you want to delete this level?';
+$string['countofpasscriteria'] = 'Count of PASS criteria';
 $string['criterion'] = 'Criterion';
 $string['criteriondelete'] = 'Delete criterion';
 $string['criterionempty'] = 'Click to edit criterion';
@@ -58,49 +58,22 @@ $string['gradingof'] = '{$a} grading';
 $string['btecmappingexplained'] = 'WARNING: Your BTEC marking has a maximum grade of <b>{$a->maxscore} points</b> but the maximum grade set in your activity is {$a->modulegrade}  The maximum score set in your BTEC marking will be scaled to the maximum grade in the module.<br />
     Intermediate scores will be converted respectively and rounded to the nearest available grade.';
 $string['btecnotcompleted'] = 'Please provide a valid grade for each criterion';
-$string['btecoptions'] = 'BTEC marking options';
+$string['btecoptions'] = 'Marking options';
 $string['btecstatus'] = 'Current BTEC marking status';
 $string['hidemarkerdesc'] = 'Hide marker criterion descriptions';
 $string['hidestudentdesc'] = 'Hide student criterion descriptions';
 $string['maxscore'] = 'Maximum mark';
 $string['name'] = 'Name';
 $string['needregrademessage'] = 'The BTEC marking definition was changed after this student had been graded. The student can not see this BTEC marking until you check the BTEC marking and update the grade.';
+$string['gradelevels'] = 'Grade Levels';
+$string['gradelevels_help'] = 'Criteron names must start with the letters P, M or D (Pass, Merit or Distinction) and be followed by a number, e.g. P1 or M2 or D3 etc';
 
-$string['P1']="P1";
-$string['P2']="P2";
-$string['P3']="P3";
-$string['P4']="P4";
-$string['P5']="P5";
-$string['P6']="P6";
-$string['P7']="P7";
-$string['P8']="P8";
-$string['P9']="P9";
-$string['M1']="M1";
-$string['M2']="M2";
-$string['M3']="M3";
-$string['M4']="M4";
-$string['M5']="M5";
-$string['D1']="D1";
-$string['D2']="D2";
-$string['D3']="D3";
-$string['D4']="D4";
-$string['D5']="D5";
-
-$string['gradelevels']='Grade Levels';
-$string['gradelevels_help']='P, M and D stand for Pass Merit and Distinction';
-
-$string['btecgrading']='How BTEC grading works';
-$string['btecgrading_help']='BTEC grading is binary and accumulative. Students can either get or not get a level, there are no numbers or percentages. They can only get a level
-		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit 
+$string['btecgrading'] = 'How BTEC grading works';
+$string['btecgrading_help'] = 'With BTEC grading students can either get or not get a level, there are no numbers or percentages. They can only get a level
+		if they have every item at that level and the one below. <br />So you only get an overall Pass if you get all Pass criteria. You only get a Merit if you have all Pass and all Merit
 		criteria, you only get a Distinction if you get all Pass, all Merit and all Distinction. If a student does not get all Pass criteria they get a Refer';
-
-
-$string['duplicateelements']='Duplicate criteria element, see ';
-
-
-
-
-
+$string['btecgrading_link'] = 'BTEC_marking';
+$string['duplicateelements'] = 'Duplicate criteria element, see ';
 $string['pluginname'] = 'BTEC marking';
 $string['previewbtecmarking'] = 'Preview BTEC marking';
 $string['regrademessage1'] = 'You are about to save changes to a BTEC marking that has already been used for grading. Please indicate if existing grades need to be reviewed. If you set this then the BTEC marking will be hidden from students until their item is regraded.';
@@ -111,15 +84,25 @@ $string['restoredfromdraft'] = 'NOTE: The last attempt to grade this person was 
 $string['save'] = 'Save';
 $string['savebtec'] = 'Save BTEC marking and make it ready';
 $string['savebtecdraft'] = 'Save as draft';
+$string['btecscale'] = 'Refer,Pass,Merit,Distinction';
+$string['btecscale_description'] = 'No numbers or percentages, a level is only gained if every item at that level and below is gained';
 $string['score'] = 'score';
 $string['showdescriptionstudent'] = 'Display description to those being graded';
 $string['showmarkerdesc'] = 'Show marker criterion descriptions';
 $string['showmarkspercriterionstudents'] = 'Show marks per criterion to students';
 $string['showstudentdesc'] = 'Show student criterion descriptions';
-
-
-
-$string['criteriarequiremen'] = 'Requirements for completing criteria';
+$string['criteriarequirements'] = 'Requirements for completing criteria';
 $string['yes'] = 'yes';
 $string['no'] = 'no';
+$string['startwithpmd'] = '{$a->level} must start with letters  {$a->p},{$a->m} or {$a->d};';
+$string['endwithadigit'] = 'must end with a digit;';
+$string['and'] = 'and';
+$string['p'] = 'p';
+$string['m'] = 'm';
+$string['d'] = 'd';
+$string['gradeheading'] = 'BTEC grade editing';
+$string['level'] = 'Level';
+$string['warning'] = 'Warning';
+global $CFG;
+$string['scaletypewarning_text'] = 'The BTEC scale must be set in the assignment definition,  return to edit form <a href=' . $CFG->wwwroot . '/course/modedit.php?update={$a}#id_modstandardgrade>here</a>';
 

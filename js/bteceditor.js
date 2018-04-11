@@ -56,6 +56,10 @@ M.gradingform_bteceditor.clickanywhere = function(e) {
         el = container.one('input[type=text]')
     } else if ((container = el.ancestor('.criteriondesc')) || (container = el.ancestor('.criteriondescmarkers'))) {
         el = container.one('textarea')
+        /* event for click on description label */
+        
+
+        
     } else {
         el = null
     }
@@ -131,7 +135,7 @@ M.gradingform_bteceditor.editmode = function(el, editmode) {
                 var width = parseFloat(ta.get('parentNode').getComputedStyle('width'))-10,
                     height = parseFloat(ta.get('parentNode').getComputedStyle('height'))
                 ta.setStyle('width', Math.max(width,50)+'px')
-                ta.setStyle('height', Math.max(height,30)+'px')
+               // ta.setStyle('height', Math.max(height,30)+'px')
             }
         }
         catch (err) {

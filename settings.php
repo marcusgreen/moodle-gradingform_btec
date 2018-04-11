@@ -14,27 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+
 /**
- * Contains the helper class for the select missing words question type tests.
+ * Not sure this file does anything at all
  *
  * @package    gradingform_btec
  * @copyright  2018 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-/**
- * Helper class for testing the BTEC grading plugin
- * @package    gradingform_btec
- * @copyright  2018 Marcus Green
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class moodlequickform_bteceditor_helper {
-    /**
-     * Seems excessive to  have a whole class for this
-     *
-     * @return \moodlequickform_bteceditor
-     */
-    public function get_btec_editor() {
-        return new moodlequickform_bteceditor('testbteceditor', 'elementlabel', null);
-    }
-}
+
+defined('MOODLE_INTERNAL') || die;
+/* sadly this file entirely ignored by moodle
+If it ever gets read it should also include counts
+ * of M and D criteria etc etc
+ **/
+$settings->add(new admin_setting_configtext(
+'gradingform_btec/passcount',
+        get_string('countofpasscriteria', 'gradingform_btec'), 6
+        ));

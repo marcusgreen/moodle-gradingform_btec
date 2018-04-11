@@ -18,17 +18,15 @@
  * Support for restore API
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
-
 /**
- * Restores the marking btec specific data from grading.xml file
- *
+ * Used when restoring a course backup
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2018 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_gradingform_btec_plugin extends restore_gradingform_plugin {

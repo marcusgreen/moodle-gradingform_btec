@@ -18,7 +18,7 @@
  * Support for backup API
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
  * Defines marking btec backup structures
  *
  * @package    gradingform_btec
- * @copyright  2012 Dan Marsden <dan@danmarsden.com>
+ * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_gradingform_btec_plugin extends backup_gradingform_plugin {

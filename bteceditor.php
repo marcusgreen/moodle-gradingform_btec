@@ -18,30 +18,35 @@
  * This file contains the marking btec editor element
  *
  * @package    gradingform_btec
- * @copyright  2013 Marcus Green
+ * @copyright  2018 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
 require_once("HTML/QuickForm/input.php");
+require_once($CFG->dirroot . '/grade/grading/form/btec/lib.php');
+
 /**
- * The editor for the marking btec advanced grading plugin.
- *
+ * The heavily YUI javascript powered editing form
  * @package    gradingform_btec
- * @copyright  2013 Marcus Green
+ * @copyright  2018 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class moodlequickform_bteceditor extends HTML_QuickForm_input {
+
     /** @var string help message */
     public $_helpbutton = '';
+
     /** @var null|false|string stores the result of the last validation: null - undefined, false - no errors,
      * string - error(s) text */
     protected $validationerrors = null;
-    /** @var bool if element has already been validated **/
+
+    /** @var bool if element has already been validated * */
     protected $wasvalidated = false;
+
     /** @var null|bool If non-submit (JS) button was pressed: null - unknown, true/false - button was/wasn't pressed */
     protected $nonjsbuttonpressed = false;
+
     /** @var string|false Message to display in front of the editor (that there exist grades on this btec being edited) */
     protected $regradeconfirmation = false;
 
@@ -52,16 +57,15 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      * @param string $elementlabel
      * @param array $attributes
      */
-    public function moodlequickform_bteceditor($elementname=null, $elementlabel=null, $attributes=null) {
-        parent::HTML_QuickForm_input($elementname, $elementlabel, $attributes);
+    public function __construct($elementname=null, $elementlabel=null, $attributes=null) {
+        parent::__construct($elementname, $elementlabel, $attributes);
     }
-    
+
     /**
      * get html for help button
-     *
      * @return  string html for help button
      */
-    public function getHelpButton() {
+    public function gethelpbutton() {
         return $this->_helpbutton;
     }
 
@@ -70,7 +74,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      *
      * @return string
      */
-    public function getElementTemplateType() {
+    public function getelementtemplatetype() {
         return 'default';
     }
 
@@ -90,15 +94,15 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      *
      * @return string
      */
-    public function toHtml() {
+    public function tohtml() {
         global $PAGE;
         $html = $this->_getTabs();
         $renderer = $PAGE->get_renderer('gradingform_btec');
         $data = $this->prepare_data(null, $this->wasvalidated);
         if (!$this->_flagFrozen) {
             $mode = gradingform_btec_controller::DISPLAY_EDIT_FULL;
-            $module = array('name'=>'gradingform_bteceditor',
-                'fullpath'=>'/grade/grading/form/btec/js/bteceditor.js',
+            $module = array('name' => 'gradingform_bteceditor',
+                'fullpath' => '/grade/grading/form/btec/js/bteceditor.js',
                 'strings' => array(
                     array('confirmdeletecriterion', 'gradingform_btec'),
                     array('clicktoedit', 'gradingform_btec'),
@@ -108,10 +112,9 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
                 array('name' => $this->getName(),
                     'criteriontemplate' => $renderer->criterion_template($mode, $data['options'], $this->getName()),
                     'commenttemplate' => $renderer->comment_template($mode, $this->getName())
-                   )),
-                true, $module);
+                )), true, $module);
         } else {
-            // btec is frozen, no javascript needed.
+            /* btec is frozen, no javascript needed. */
             if ($this->_persistantFreeze) {
                 $mode = gradingform_btec_controller::DISPLAY_EDIT_FROZEN;
             } else {
@@ -125,11 +128,12 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $html .= $renderer->display_regrade_confirmation($this->getName(), $this->regradeconfirmation, $data['regrade']);
         }
         if ($this->validationerrors) {
-            $html .= $renderer->notification($this->validationerrors, 'error');
+            $html .= '<div class="gradingform_btec-error">' . $renderer->notification($this->validationerrors, 'error') . '</div>';
         }
         $html .= $renderer->display_btec($data['criteria'], $data['comments'], $data['options'], $mode, $this->getName());
         return $html;
     }
+
     /**
      * Prepares the data passed in $_POST:
      * - processes the pressed buttons 'addlevel', 'addcriterion', 'moveup', 'movedown', 'delete' (when JavaScript is disabled)
@@ -167,7 +171,6 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
                 } else {
                     $return['options'][$option] = null;
                 }
-
             }
         }
 
@@ -190,9 +193,6 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
                 $this->nonjsbuttonpressed = true;
             }
 
-            if ($withvalidation && !array_key_exists('delete', $criterion)) {
-
-            }
             if (array_key_exists('moveup', $criterion) || $lastaction == 'movedown') {
                 unset($criterion['moveup']);
                 if ($lastid !== null) {
@@ -235,7 +235,6 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
                     $comment = array('description' => '');
                     $this->nonjsbuttonpressed = true;
                 }
-
                 if (array_key_exists('moveup', $comment) || $lastaction == 'movedown') {
                     unset($comment['moveup']);
                     if ($lastid !== null) {
@@ -281,7 +280,6 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $this->wasvalidated = true;
         }
         return $return;
-
     }
 
     /**
@@ -293,11 +291,11 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
     protected function get_next_id($ids) {
         $maxid = 0;
         foreach ($ids as $id) {
-            if (preg_match('/^NEWID(\d+)$/', $id, $matches) && ((int)$matches[1]) > $maxid) {
-                $maxid = (int)$matches[1];
+            if (preg_match('/^NEWID(\d+)$/', $id, $matches) && ((int) $matches[1]) > $maxid) {
+                $maxid = (int) $matches[1];
             }
         }
-        return 'NEWID'.($maxid+1);
+        return 'NEWID' . ($maxid + 1);
     }
 
     /**
@@ -324,25 +322,52 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      * @return string|false error text or false if no errors found
      */
     public function validate($value) {
-    	
-    	$criteria=$value['criteria']; 
-    	$shortnames = array();
-    	foreach($criteria as $key=>$element){
-    		$shortnames[$key]=$element['shortname'];
-    	}
-    	//extract any duplicate shortnames
-    	$dupes = array_unique( array_diff_assoc( $shortnames, array_unique( $shortnames ) ) );
-    	
-      	if(sizeof($dupes)>0){
-    		$this->validationerrors.=$this->get_string($duplicateelements, 'gradingform_btec').implode(' ', $dupes);
-                        
-	} elseif (!$this->wasvalidated) {
-	           $this->prepare_data($value, true);
-         }
+        $scaleletters = gradingform_btec_controller::get_scale_letters();
+        $p = $scaleletters['p'];
+        $m = $scaleletters['m'];
+        $d = $scaleletters['d'];
+        $criteria = $value['criteria'];
+        $shortnamerror = false;
+        $shortnames = array();
+        foreach ($criteria as $key => $element) {
+            $level = trim($element['shortname']);
+            $level = strtolower($level);
+            $a = array('level' => strtoupper($level), 'p' => strtoupper($p), 'm' => strtoupper($m), 'd' => strtoupper($d));
+            $level = substr($level, 0, 1);
+            if ($element['shortname'] == "") {
+                $this->validationerrors .= get_string('level', 'gradingform_btec');
+            }
+            if ($level != $p && $level != $m && $level != $d) {
+                $this->validationerrors .= ' ' . get_string('startwithpmd', 'gradingform_btec', $a);
+                $shortnamerror = true;
+            }
+
+            $number = trim($element['shortname']);
+            $len = strlen($number);
+            /* Chop off the last character to check if it is a digit */
+            $number = substr($number, ($len - 1), $len);
+            if (!is_numeric($number)) {
+                if ($shortnamerror == true) {
+                    /* if there is already an error add the 'and' onto the error text  */
+                    $this->validationerrors .= $element['shortname'] . ' ' . get_string('and', 'gradingform_btec') . ' ';
+                }
+                $this->validationerrors .= $element['shortname'] . ' ' . get_string('endwithadigit', 'gradingform_btec') . ' ';
+                $shortnamerror = true;
+            }
+            $shortnames[$key] = $element['shortname'];
+        }
+        /* extract any duplicate shortnames */
+        $dupes = array_unique(array_diff_assoc($shortnames, array_unique($shortnames)));
+        if (count($dupes) > 0) {
+            $this->validationerrors .= get_string('duplicateelements', 'gradingform_btec') . implode(' ', $dupes);
+            $shortnamerror = true;
+        }
+        if (($shortnamerror != true) && (!$this->wasvalidated)) {
+            $this->prepare_data($value, true);
+        }
         return $this->validationerrors;
     }
-    
-   
+
     /**
      * Prepares the data for saving
      * @see prepare_data()
@@ -351,8 +376,9 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
      * @param boolean $assoc
      * @return array
      */
-    public function exportValue(&$submitvalues, $assoc = false) {
-        $value =  $this->prepare_data($this->_findValue($submitvalues));
+    public function exportvalue(&$submitvalues, $assoc = false) {
+        $value = $this->prepare_data($this->_findValue($submitvalues));
         return $this->_prepareValue($value, $assoc);
     }
+
 }
