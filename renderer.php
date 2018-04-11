@@ -23,8 +23,14 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Renderer for the BTEC advanced grading plugin
+ *
+ * @package    gradingform_btec
+ * @copyright  2018 Marcus Green
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class gradingform_btec_renderer extends plugin_renderer_base {
-
     /**
      * This function returns html code for displaying criterion. Depending on $mode it may be the
      * code to edit btec, to preview the btec, to evaluate somebody or to review the evaluation.

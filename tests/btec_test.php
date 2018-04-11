@@ -17,10 +17,13 @@
 /**
  * Contains the helper class for the select missing words question type tests.
  *
- * @package    btec
+ * @package    gradingform_btec
  * @copyright  2012 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 global $CFG;
 
 require_once($CFG->dirroot . '/grade/grading/form/btec/bteceditor.php');
@@ -29,6 +32,12 @@ require_once($CFG->dirroot . '/grade/grading/form/btec/lib.php');
 
 require_once($CFG->dirroot . '/lib/pagelib.php');
 
+/**
+ * Main class for testing the BTEC grading plugin
+ * @package    gradingform_btec
+ * @copyright  2018 Marcus Green
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class btec_test extends basic_testcase {
 
     public function test_created_form() {

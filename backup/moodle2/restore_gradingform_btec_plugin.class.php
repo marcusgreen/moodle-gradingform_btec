@@ -23,7 +23,12 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Used when restoring a course backup
+ * @package    gradingform_btec
+ * @copyright  2018 Marcus Green
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
 
     /**

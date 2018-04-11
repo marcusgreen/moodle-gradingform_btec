@@ -15,11 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ *
  * Grading method controller for the btec plugin
  *
  * @package    gradingform_btec
- * @copyright  2013 Marcus Green
+ * @copyright  2018 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ *
+ * Grading method controller for the btec plugin
+ *
+ * @package    gradingform_btec
+ * @copyright  2018 Marcus Green
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 function xmldb_gradingform_btec_install() {
     global $DB;

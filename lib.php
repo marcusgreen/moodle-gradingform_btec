@@ -64,18 +64,31 @@ class gradingform_btec_controller extends gradingform_controller {
 
     /* These constants map to BTEC scale created at install time; */
 
+    /**
+     * fail, may attempt again
+     */
     const REFER = 1;
+    /**
+     * lowest grade
+     */
     const PASS = 2;
+    /**
+     * medium grade
+     */
     const MERIT = 3;
+    /**
+     * highest grade
+     */
     const DISTINCTION = 4;
 
-    /* This originally did a call to the database to check that
+    /**
+     *
+     * This originally did a call to the database to check that
      * the key words were Pass, Merit and Distinction and converted
      * them to the equivalent letters by chopping of the leading letter
      * This seems to have caused problems and has been simplified, at the
      * potential loss of easy internationalisation.
      */
-
     public static function get_scale_letters() {
         $scaleletters = array('p' => 'p', 'm' => 'm', 'd' => 'd');
         return $scaleletters;
@@ -670,8 +683,7 @@ class gradingform_btec_controller extends gradingform_controller {
 }
 
 /**
- * Class to manage one btec grading instance. Stores information and performs actions like
- * update, copy, validate, submit, etc.
+ * Manage one btec grading instance. Performs actions like update,copy,validate, subit etc
  *
  * @package    gradingform_btec
  * @copyright  2012 Dan Marsden <dan@danmarsden.com>
@@ -805,24 +817,32 @@ class gradingform_btec_instance extends gradingform_instance {
         $this->get_btec_filling(true);
     }
 
-    /* This is called from outside btec grading so
+    /**
+     *
+     * This is called from outside btec grading so
      * it calls calculate_btec_grade to allow for the
      * creation of unit tests
+     *
+     * @return int
      */
-
     public function get_grade() {
         $grade = $this->get_btec_filling();
         return $this->calculate_btec_grade($grade);
     }
 
-    /* works out the overal grade */
-
+    /**
+     * Works out the overall grade
+     *
+     * X initialises the level to assume it is not present.
+     * X is checked later on to see if the level should be
+     * ignored for not existing. Then the letters are
+     * walked through to be set to P M or D if they do exist
+     *
+     * @param array $grade
+     * @return int
+     */
     public function calculate_btec_grade(array $grade) {
-        /* X initialises the level to assume it is not present.
-         * X is checked later on to see if the level should be
-         * ignored for not existing. Then the letters are
-         * walked through to be set to P M or D if they do exist
-         */
+
         $scaleletters = gradingform_btec_controller::get_scale_letters();
         $p = $scaleletters['p'];
         $m = $scaleletters['m'];
@@ -970,7 +990,11 @@ class gradingform_btec_instance extends gradingform_instance {
                 $options, $mode, $gradingformelement->getName(), $value, $this->validationerrors);
         return $html;
     }
-
+    /**
+     * TODO what does this function do?
+     *
+     * @return boolean
+     */
     public function has_config() {
         return true;
     }

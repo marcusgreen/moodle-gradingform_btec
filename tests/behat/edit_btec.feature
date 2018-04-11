@@ -75,7 +75,3 @@ And I click on "Add criterion" "button"
 And I wait "20" seconds
 
 And I click on "Save BTEC marking and make it ready" "button"
-
-   
-
-   r
