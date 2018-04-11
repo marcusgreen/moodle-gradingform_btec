@@ -21,15 +21,15 @@ M.gradingform_btec.init = function (Y, options) {
             Y.all('.criteriondescriptionmarkers').removeClass('hide');
         }
     });
-        Y.all('.setyesno').on('change', function (e) {
+    Y.all('.setyesno').on('change', function (e) {
         var selected = e.target.get('value');
         if (selected == 'yes') {
             Y.all(".markyes").set('checked', 'true');
-            Y.all(".markno").removeAttribute('checked');         
-        } 
-        if(selected =='no'){
-           Y.all(".markno").set('checked', 'true');
-           Y.all(".markyes").removeAttribute('checked');         
+            Y.all(".markno").removeAttribute('checked');
+        }
+        if (selected == 'no') {
+            Y.all(".markno").set('checked', 'true');
+            Y.all(".markyes").removeAttribute('checked');
         }
 
     });
