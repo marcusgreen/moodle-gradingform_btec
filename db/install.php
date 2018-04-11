@@ -37,7 +37,6 @@ defined('MOODLE_INTERNAL') || die();
  */
 function xmldb_gradingform_btec_install() {
     global $DB;
-    $dbman = $DB->get_manager();
 
     $record = new stdClass();
     $record->courseid = 0;

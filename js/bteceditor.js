@@ -5,7 +5,7 @@ M.gradingform_bteceditor = {'templates': {}, 'eventhandler': null, 'name': null,
  */
 M.gradingform_bteceditor.init = function (Y, options) {
     M.gradingform_bteceditor.name = options.name
-    M.gradingform_bteceditor.Y = Y
+    M.gradingform_bteceditor.Y = Y;
     M.gradingform_bteceditor.templates[options.name] = {
         'criterion': options.criteriontemplate,
         'comment': options.commenttemplate
@@ -44,9 +44,13 @@ M.gradingform_bteceditor.disablealleditors = function () {
     });
 }
 
-// function invoked on each click on the page. If criterion values are clicked
-// it switches the element to edit mode. If btec button is clicked it does nothing so the 'buttonclick'
-// function is invoked
+/**
+ *
+ *Function invoked on each click on the page. If criterion values are clicked
+ *it switches the element to edit mode. If btec button is clicked it does nothing so the 'buttonclick'
+ *function is invoked
+ * 
+ */
 M.gradingform_bteceditor.clickanywhere = function (e) {
     if (e.type == 'touchstart') {
         return
@@ -204,9 +208,8 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
         M.gradingform_bteceditor.addhandlers();
         M.gradingform_bteceditor.disablealleditors()
         M.gradingform_bteceditor.assignclasses(elements_str)
-        //M.gradingform_bteceditor.editmode(Y.one('#btec-'+name+' #'+name+'-'+section+'-NEWID'+newid+'-shortname'),true)
     } else if (chunks.length == 4 && action == 'moveup') {
-        // MOVE UP
+        // MOVE UP.
         el = Y.one('#' + name + '-' + section + '-' + chunks[2])
         if (el.previous()) {
             el.get('parentNode').insertBefore(el, el.previous())
