@@ -93,7 +93,7 @@
     font-weight: bold;
 }
 
-/* Make invisible the buttons 'Move up' for the first criterion and 
+/* Make invisible the buttons 'Move up' for the first criterion and
 'Move down' for the last, because those buttons will make no change */
 
 .gradingform_btec.editor .criterion.first.last .controls .delete input,
@@ -137,7 +137,7 @@
 .gradingform_btec.editor .addcomment input {
     background: transparent url("[[pix:t/addgreen]]") no-repeat;
     display: block;
-    color: #555555;
+    color: #555;
     font-weight: bold;
     text-decoration: none;
 }
