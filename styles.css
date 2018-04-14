@@ -1,13 +1,13 @@
 .gradingform_btec-regrade {
     padding: 10px;
-    background: #FFDDDD;
+    background: #ffdddd;
     border: 1px solid #F00;
     margin-bottom: 10px;
 }
 
 .gradingform_btec-restored {
     padding: 10px;
-    background: #FFFFDD;
+    background: #ffffdd;
     border: 1px solid #FF0;
     margin-bottom: 10px;
 }
@@ -22,17 +22,17 @@
     text-transform: uppercase;
     font-size: 60%;
     padding: 0.25em;
-    border: 1px solid #EEE;
+    border: 1px solid #eee;
 }
 
 .gradingform_btec_editform .status.ready {
     background-color: #e7f1c3;
-    border-color: #AAEEAA;
+    border-color: #aaeeaa;
 }
 
 .gradingform_btec_editform .status.draft {
     background-color: #f3f2aa;
-    border-color: #EEEE22;
+    border-color: #eeee22;
 }
 
 .gradingform_btec {
@@ -62,13 +62,13 @@
 }
 
 .gradingform_btec .criterion {
-    border: 1px solid #DDD;
+    border: 1px solid #ddd;
     overflow: hidden;
     width: 99%
 }
 
 .gradingform_btec .criterion.even {
-    background: #F0F0F0;
+    background: #f0f0f0;
 }
 
 .gradingform_btec .criterion .description .criterionmaxscore input {
@@ -86,7 +86,7 @@
 
 .gradingform_btec .plainvalue.empty {
     font-style: italic;
-    color: #AAA;
+    color: #aaa;
 }
 
 .gradingform_btec .plainvalue.editname {
