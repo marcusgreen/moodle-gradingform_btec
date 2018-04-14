@@ -5,7 +5,7 @@ Feature: BTEC advanced grading forms can be created and edited
   I need to edit previously used btec forms
 
   @javascript
-  Scenario: I can use rubrics to grade and edit them later updating students grades
+  Scenario: I can use BTEC grading to grade and edit them later updating students grades
     Given the following "users" exist:
       | username | firstname | lastname | email |
       | teacher1 | Teacher | 1 | teacher1@example.com |
@@ -18,8 +18,7 @@ Feature: BTEC advanced grading forms can be created and edited
       | teacher1 | C1 | editingteacher |
       | student1 | C1 | student |
     And I log in as "teacher1"
-    And I follow "Course 1"
-    And I turn editing mode on
+    And I am on "Course 1" course homepage with editing mode on
     And I add a "Assignment" to section "1" and I fill the form with:
       | Assignment name | BTEC Test assignment 1 name |
       | Description | Test assignment description |
@@ -35,18 +34,12 @@ Feature: BTEC advanced grading forms can be created and edited
     And I set the field "btec[criteria][NEWID1][shortname]" to "P1"
     And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
     And I set the field "btec[criteria][NEWID1][description]" to "P2 Description"
-
-    
-
   
   And I click on "Add criterion" "button"
     And I click on "Click to edit level" "text" 
     And I set the field "btec[criteria][NEWID2][shortname]" to "P2"
     And I click on "Requirements for completing" "text" in the "//tbody//tr[position()=last()]" "xpath_element"
     And I set the field "btec[criteria][NEWID2][description]" to "P2 description"
-
-
-
 
 And I click on "Add criterion" "button"
     And I click on "Click to edit level" "text" 
