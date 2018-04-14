@@ -1,51 +1,93 @@
-    language: php
+language: php
 
-    sudo: true
+sudo: required
 
-    cache:
-      directories:
-        - $HOME/.composer/cache
+addons:
+  firefox: "47.0.1"
+  postgresql: "9.3"
+  apt:
+    packages:
+      - oracle-java8-installer
+      - oracle-java8-set-default
+      - chromium-chromedriver
 
-    services:
-      - mysql
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.npm
 
-    addons:
-      apt:
-        packages:
-         - firefox
+php:
+ - 7.2
 
-    env:
-      global:
-        - MOODLE_START_BEHAT_SERVERS=NO
-        - DB=mysqli
-        - MOODLE_CI_VER=1
-        - MOODLE_DIR=/home/travis/build/moodle
-        - MOODLE_SELENIUM_JAR=/home/travis/build/moodle/selenium34.jar
+env:
+  global:
+    - IGNORE_PATHS=ignore
+    - IGNORE_NAMES=ignore_name.php
+    - MUSTACHE_IGNORE_NAMES=broken.mustache
+    - DB=pgsql
+    - MOODLE_BRANCH=master
+    - PROFILE=chrome
 
-    matrix:
-     include:
-      - php: 7.0
-        env: MOODLE_BRANCH=MOODLE_34_STABLE MOODLE_CI_VER=2
+install:
+  - phpenv config-rm xdebug.ini
+  - nvm install 8.9
+  - nvm use 8.9
+  - make init
 
-    before_install:
-      - phpenv config-rm xdebug.ini
-      - cd ../..
-      - composer selfupdate
-      - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^${MOODLE_CI_VER}
-      - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
-      - sleep 10
+  # Mimic how a Moodle plugin would be run.
+  - cp -R tests/Fixture/moodle-local_travis ../moodle-local_travis
+  - export PATH="$(cd bin; pwd):$(cd vendor/bin; pwd):$PATH"
+  - export TRAVIS_BUILD_DIR=$(cd ../moodle-local_travis; pwd)
 
-    install:
-      - moodle-plugin-ci install
-      - curl -L -s -o ${MOODLE_DIR}/selenium34.jar http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar
-      - curl -L -s -o /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
-      - sudo tar -C /usr/local/bin/ -xzf /tmp/geckodriver.tar.gz
-      - xvfb-run -a --server-args="-screen 0 1024x768x24" java -Dwebdriver.gecko.driver=/usr/local/bin/geckodriver -Dwebdriver.firefox.bin=/usr/bin/firefox -Dwebdriver.firefox.marionette=1 -jar ${MOODLE_SELENIUM_JAR} -log /tmp/selenium.log &
-      - php -t ${MOODLE_DIR} -S localhost:8000 > /tmp/php-access.log 2> /tmp/php-error.log &
-      - sleep 5s
+  # Finally, the standard install step.
+  - moodle-plugin-ci install
 
-    script:
-      - moodle-plugin-ci phplint
-      - moodle-plugin-ci codechecker
-      - moodle-plugin-ci phpunit
-      - moodle-plugin-ci behat --moodle=${MOODLE_DIR} --auto-rerun=0
+script:
+  - make test-phpunit
+
+  # This is basically "integration" testing.
+  - moodle-plugin-ci phplint
+  - moodle-plugin-ci phpcpd
+  - moodle-plugin-ci phpmd
+  - moodle-plugin-ci codechecker
+  - moodle-plugin-ci validate
+  - moodle-plugin-ci savepoints
+  - moodle-plugin-ci mustache
+  - moodle-plugin-ci grunt
+  - moodle-plugin-ci phpunit --coverage-text
+  - moodle-plugin-ci behat --profile $PROFILE
+
+jobs:
+  include:
+    - stage: Tests
+      addons: skip
+      install:
+        - phpenv config-rm xdebug.ini
+        - make init
+      script:
+        - make validate
+      after_script:
+        - make upload-code-coverage
+    - stage: Integration tests
+    - php: 7.1
+      env: MOODLE_BRANCH=MOODLE_34_STABLE
+    - php: 7.0
+      env: MOODLE_BRANCH=MOODLE_33_STABLE
+    - php: 5.6
+      env: MOODLE_BRANCH=MOODLE_32_STABLE DB=mysqli PROFILE=default
+    - stage: Deploy
+      addons: skip
+      install: skip
+      script: skip
+      before_deploy:
+        - make build/moodle-plugin-ci.phar
+        - php build/moodle-plugin-ci.phar list
+      deploy:
+        provider: releases
+        api_key:
+          secure: 1A6XanGYBX2fjDfQF96LK8otHz9Sh9g29eq7O+4ntAFyN5hYTVxJBdtp6LFkoeEHeQJtHpl/vmw+htavL5UXcYHqLsX+suXH8JML0Bg5sTA/HIhksetl226PtbdJabD/5AerLzqf+PiHGagzBBqscUqkVl7DdHEVkC/OQCDNcB5onFNqSRlCP50WFyXHBr4TccrUuvHK+jKcG4AFMLU7f2Bo2j5NBQW+ucY/RdNczXrRo4et9JHZJRocPFxQMpOnV7fTrQaHlt+HQe5FikNM28Vh44uVj7ZGYLWZNmtQb9K3Fq9t+atObMcYjsjBbnqypzm8BUNDx2YfsZvcpNOEtksYx6rE58EXQgJCBod7azjt4ulIrKPNOK64A9s6SX/ZQ68VEGYCYlC412kWC6SwPp77iDRLv4Z0MpmvtZfJ1LbkvMx22SRJGBSD24INvLxh4XnfUN0qQ021HUNIbTQ8cBuTGzMWf7W2nYjEGbTVV1fTMcFFy8IXOhnodM1s5kbMDRjASxkNpMBbbhfh4b3WnBhoi+Ecqjq4DFhU7YLHdjLF1pkuRHoBn1I7vNbO+JaEMtTQHokDxBGe4hIehkGxs04Q//2tI7DsWyVLhCTStoC9OqQMTZmAJCUUVV/L9HV7HS6ZqgkBlPBvpld3g8cMqRVN19p4B09WyMQcK8usJEw=
+        file: build/moodle-plugin-ci.phar
+        skip_cleanup: true
+        on:
+          repo: moodlerooms/moodle-plugin-ci
+          tags: true
