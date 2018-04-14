@@ -49,7 +49,7 @@ M.gradingform_bteceditor.disablealleditors = function () {
  *Function invoked on each click on the page. If criterion values are clicked
  *it switches the element to edit mode. If btec button is clicked it does nothing so the 'buttonclick'
  *function is invoked
- * 
+ *
  */
 M.gradingform_bteceditor.clickanywhere = function (e) {
     if (e.type == 'touchstart') {
@@ -60,7 +60,7 @@ M.gradingform_bteceditor.clickanywhere = function (e) {
     if (el.get('tagName') == 'INPUT' && el.get('type') == 'submit') {
         return
     }
-    // if clicked on description item and this item is not enabled - enable it
+    // If clicked on description item and this item is not enabled - enable it.
     var container = null
     if ((container = el.ancestor('.criterionname')) || (container = el.ancestor('.criterionmaxscore'))) {
         el = container.one('input[type=text]')
@@ -81,7 +81,7 @@ M.gradingform_bteceditor.clickanywhere = function (e) {
     M.gradingform_bteceditor.disablealleditors()
 }
 
-// switch the criterion item to edit mode or switch back
+// ...switch the criterion item to edit mode or switch back.
 M.gradingform_bteceditor.editmode = function (el, editmode) {
     var Y = M.gradingform_bteceditor.Y
     var ta = el

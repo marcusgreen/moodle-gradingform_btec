@@ -43,7 +43,7 @@ class gradingform_btec_editbtec extends moodleform {
      * Form element definition
      */
     public function definition() {
-        global $DB;
+        global $DB, $CFG, $PAGE;
         $form = $this->_form;
         $form->addElement('hidden', 'areaid');
         $form->setType('areaid', PARAM_INT);
@@ -66,11 +66,11 @@ class gradingform_btec_editbtec extends moodleform {
         if (($gradeitem !== false) && ($gradeitem->scaleid != $btecscale->id)) {
             /* Get the id for assign, probably always 1 */
             $assignmodule = $DB->get_record('modules', array('name' => 'assign'), 'id');
+            $error = get_string('scaletypewarning_text', 'gradingform_btec', $CFG->wwwroot);
             $cm = $DB->get_record('course_modules', array('instance' => $areaid, 'module' => $assignmodule->id), 'id');
-            $form->addElement('static', 'error', get_string('warning', 'gradingform_btec'),
-                    '<span class="error">' . get_string('scaletypewarning_text', 'gradingform_btec', $cm->id) . '</span>');
+            $error .= $cm->id . '#id_modstandardgrade>' . get_string('here', 'gradingform_btec');
+            \core\notification::error($error);
         }
-
         $form->addRule('name', get_string('required'), 'required');
         $form->setType('name', PARAM_TEXT);
         // Description.
