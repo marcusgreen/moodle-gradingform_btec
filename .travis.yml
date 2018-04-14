@@ -1,48 +1,47 @@
-language: php
+    language: php
 
-sudo: required
+    sudo: true
 
-cache:
-  directories:
-    - $HOME/.composer/cache
+    cache:
+      directories:
+        - $HOME/.composer/cache
 
-php: 
-# - 5.6
- - 7.0
- - 7.1
+    services:
+      - mysql
 
-addons:
-  firefox: "47.0.1"
-  postgresql: "9.3"
+    addons:
+      apt:
+        packages:
+         - chromium-chromedriver
+    env:
+      global:
+        - MOODLE_START_BEHAT_SERVERS=NO
+        - DB=mysqli
+        - MOODLE_CI_VER=1
+        - MOODLE_DIR=/home/travis/build/moodle
+        - MOODLE_SELENIUM_JAR=/home/travis/build/moodle/selenium.jar
 
-env:
- global:
-  - MOODLE_BRANCH=MOODLE_34_STABLE
-  - MOODLE_BRANCH=master
+    matrix:
+     include:
+      - php: 7.0
+        env: MOODLE_BRANCH=MOODLE_32_STABLE MOODLE_CI_VER=2
 
-  - IGNORE_NAMES=xmlrpc-utils.php
- matrix:
-  - DB=pgsql
-  - DB=mysqli
-  
-  
+    before_install:
+      - phpenv config-rm xdebug.ini
+      - cd ../..
+      - composer selfupdate
+      - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^${MOODLE_CI_VER}
+      - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+      - sleep 10
 
-before_install:
-  - phpenv config-rm xdebug.ini
-  - cd ../..
-  - composer selfupdate
-  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^1
-  - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+    install:
+      - moodle-plugin-ci install
+      - xvfb-run -a --server-args="-screen 0 1024x768x24" java -Dwebdriver.chrome.driver=/usr/lib/chromium-browser/chromedriver -jar ${MOODLE_SELENIUM_JAR} -log /tmp/selenium.log &
+      - php -t ${MOODLE_DIR} -S localhost:8000 > /tmp/php-access.log 2> /tmp/php-error.log &
+      - sleep 5s
 
-install:
-  - moodle-plugin-ci install
-script:
-  - moodle-plugin-ci phplint
-  - moodle-plugin-ci csslint
-  - moodle-plugin-ci jshint
-  - moodle-plugin-ci phpcpd
-  - moodle-plugin-ci phpmd
-  - moodle-plugin-ci codechecker
-  - moodle-plugin-ci validate
-  - moodle-plugin-ci phpunit
-  - moodle-plugin-ci behat
+    script:
+      - moodle-plugin-ci phplint
+      - moodle-plugin-ci codechecker
+      - moodle-plugin-ci phpunit
+      - moodle-plugin-ci behat --moodle=${MOODLE_DIR} --auto-rerun=0
