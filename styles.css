@@ -27,12 +27,12 @@
 
 .gradingform_btec_editform .status.ready {
     background-color: #e7f1c3;
-    border-color: #aaeeaa;
+    border-color: #aea;
 }
 
 .gradingform_btec_editform .status.draft {
     background-color: #f3f2aa;
-    border-color: #eeee22;
+    border-color: #ee2;
 }
 
 .gradingform_btec {
@@ -93,7 +93,8 @@
     font-weight: bold;
 }
 
-/* Make invisible the buttons 'Move up' for the first criterion and 'Move down' for the last, because those buttons will make no change */
+/* Make invisible the buttons 'Move up' for the first criterion and 
+'Move down' for the last, because those buttons will make no change */
 
 .gradingform_btec.editor .criterion.first.last .controls .delete input,
 .gradingform_btec.editor .criterion.first .controls .moveup input,
@@ -147,7 +148,7 @@
     height: 30px;
     line-height: 29px;
     margin-top: 2px;
-    margin-left: 0px;
+    margin-left: 0;
     margin-bottom: 14px;
     padding-left: 20px;
     padding-right: 10px;
@@ -183,7 +184,7 @@
 }
 
 .gradingform_btec .criterion .description.error {
-    background: #ffdddd;
+    background: #fdd;
 }
 
 /* special classes for elements created by bteceditor.js */
