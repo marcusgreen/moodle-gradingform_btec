@@ -1,14 +1,14 @@
 .gradingform_btec-regrade {
     padding: 10px;
-    background: #ffdddd;
-    border: 1px solid #F00;
+    background: #fdd;
+    border: 1px solid #f00;
     margin-bottom: 10px;
 }
 
 .gradingform_btec-restored {
     padding: 10px;
-    background: #ffffdd;
-    border: 1px solid #FF0;
+    background: #ffd;
+    border: 1px solid #ff0;
     margin-bottom: 10px;
 }
 
@@ -64,7 +64,7 @@
 .gradingform_btec .criterion {
     border: 1px solid #ddd;
     overflow: hidden;
-    width: 99%
+    width: 99%;
 }
 
 .gradingform_btec .criterion.even {
@@ -81,7 +81,7 @@
 
 .gradingform_btec .criterion label {
     font-weight: bold;
-    padding-right: 5px
+    padding-right: 5px;
 }
 
 .gradingform_btec .plainvalue.empty {
@@ -183,7 +183,7 @@
 }
 
 .gradingform_btec .criterion .description.error {
-    background: #FFDDDD;
+    background: #ffdddd;
 }
 
 /* special classes for elements created by bteceditor.js */
@@ -236,7 +236,7 @@
 }
 
 .gradingform_btec table {
-    width: 100%
+    width: 100%;
 }
 
 .gradingform_btec .criteriondescriptionmarkers {
@@ -258,7 +258,7 @@
 .gradingform_btec .markingbtecyesno {
     width: 6%;
     text-align: center;
-    padding: 0px;
+    padding: 0;
 }
 
 .gradingform_btec .criteriondescriptionscore {
