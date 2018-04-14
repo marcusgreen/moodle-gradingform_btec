@@ -13,7 +13,7 @@ I need to edit previously used btec forms
     And the following "courses" exist:
       | fullname | shortname | format |
       | Course 1 | C1        | topics |
-      And the following "course enrolments" exist:
+    And the following "course enrolments" exist:
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
