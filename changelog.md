@@ -1,10 +1,10 @@
 ### Release notes  for BTEC grading method for Moodle by Marcus Green
-#### Version 1.21. April 2018
+
+### Version 1.21. April 2018
 This is a maintenance release to confirm that it works with all versions of Moodle between
 3.1 and 3.4. I have also tried it with an alpha of Moodle 3.5 without error.
 
 #### Changed
-
 I have fixed the string handling that should allow it to be translated using AMOS. It now passes
 more code compliance/phpdoc tests and behat tests work. Thanks to Jean-Michel Vedrine for inspiration
 to get my .travis.yml file working so that behat test work automatically when I do a git submit.
