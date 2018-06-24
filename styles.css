@@ -5,6 +5,7 @@
     margin-bottom: 10px;
 }
 
+
 .gradingform_btec-restored {
     padding: 10px;
     background: #ffd;
@@ -38,7 +39,9 @@
 .gradingform_btec {
     overflow: auto;
 }
-
+div.btec-grade {
+background-color:red;
+}
 .gradingform_btec.editor .criterion .controls,
 .gradingform_btec .criterion .description,
 .gradingform_btec .criterion .remark {

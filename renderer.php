@@ -76,33 +76,6 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         $criteriontemplate = html_writer::start_tag('tr', array('class' => 'criterion' . $criterion['class'],
                     'id' => '{NAME}-criteria-{CRITERION-id}'));
         $descriptionclass = 'description';
-        /* Added for debugging purposes */
-          /*
-          switch ($mode) {
-          case gradingform_btec_controller::DISPLAY_EDIT_FULL:
-          echo ' editor editable';
-          break;
-          case gradingform_btec_controller::DISPLAY_EDIT_FROZEN:
-          echo ' editor frozen';
-          break;
-          case gradingform_btec_controller::DISPLAY_PREVIEW:
-          case gradingform_btec_controller::DISPLAY_PREVIEW_GRADED:
-          echo ' editor preview';
-          break;
-          case gradingform_btec_controller::DISPLAY_EVAL:
-          echo ' evaluate editable';
-          break;
-          case gradingform_btec_controller::DISPLAY_EVAL_FROZEN:
-          echo ' evaluate frozen';
-          break;
-          case gradingform_btec_controller::DISPLAY_REVIEW:
-          echo ' review';
-          break;
-          case gradingform_btec_controller::DISPLAY_VIEW:
-          echo ' view';
-          break;
-          }
-          */
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
             $criteriontemplate .= html_writer::start_tag('td', array('class' => 'controls'));
             foreach (array('moveup', 'delete', 'movedown') as $key) {
@@ -664,8 +637,8 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             }
             $return .= html_writer::end_tag('div');
         }
-        /* TODO the next few lines are inelegant */
-        return $defaultcontent . '<tr><td></td><td>' . $return . '</td></tr>';
+        /* The btec-grade controls the display of the final grade to students */
+        return "<div class='btec-grade'>".$defaultcontent . '</div><tr><td></td><td>' . $return . '</td></tr>';
     }
 
     /**

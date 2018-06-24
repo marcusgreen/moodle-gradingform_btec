@@ -105,3 +105,5 @@ $string['level'] = 'Level';
 $string['warning'] = 'Warning';
 $string['scaletypewarning_text'] = 'The BTEC scale must be set in the assignment definition,  return to edit form <a href={$a}/course/modedit.php?update=';
 $string['here'] = 'here';
+$string['privacy:metadata:preference:showmarkerdesc'] = 'Whether to show marker criterion descriptions';
+$string['privacy:metadata:preference:showstudentdesc'] = 'Whether to show student criterion descriptions';

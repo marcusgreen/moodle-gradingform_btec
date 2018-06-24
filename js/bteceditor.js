@@ -56,17 +56,17 @@ M.gradingform_bteceditor.clickanywhere = function (e) {
         return
     }
     var el = e.target
-    // if clicked on button - disablecurrenteditor, continue
+    // ...if clicked on button - disablecurrenteditor, continue.
     if (el.get('tagName') == 'INPUT' && el.get('type') == 'submit') {
         return
     }
-    // If clicked on description item and this item is not enabled - enable it.
+    // ...If clicked on description item and this item is not enabled -enable it.
     var container = null
     if ((container = el.ancestor('.criterionname')) || (container = el.ancestor('.criterionmaxscore'))) {
         el = container.one('input[type=text]')
     } else if ((container = el.ancestor('.criteriondesc')) || (container = el.ancestor('.criteriondescmarkers'))) {
         el = container.one('textarea')
-        /* event for click on description label */
+        /* ...event for click on description label. */
     } else {
         el = null
     }
@@ -77,7 +77,7 @@ M.gradingform_bteceditor.clickanywhere = function (e) {
         }
         return
     }
-    // else disablecurrenteditor
+    // ...else disablecurrenteditor.
     M.gradingform_bteceditor.disablealleditors()
 }
 
@@ -95,7 +95,7 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
             taplain = ta.next('.plainvalue'),
             tbplain = null,
             tb = el.one('.score input[type=text]')
-    // add 'plainvalue' next to textarea for description/definition and next to input text field for score (if applicable)
+    // ...add 'plainvalue' next to textarea for description/definition and next to input text field for score (if applicable).
     if (!taplain && ta.get('name') != '') {
         ta.insert('<div class="plainvalue">' + pseudotablink + '<span class="textvalue">&nbsp;</span></div>', 'after')
         taplain = ta.next('.plainvalue')
@@ -110,8 +110,8 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
         tbplain = tb.get('parentNode').one('.plainvalue')
     }
     if (!editmode) {
-        // if we need to hide the input fields, copy their contents to plainvalue(s). If description/definition
-        // is empty, display the default text ('Click to edit ...') and add/remove 'empty' CSS class to element
+        // ...if we need to hide the input fields, copy their contents to plainvalue(s). If description/definition.
+        // ...is empty, display the default text ('Click to edit ...') and add/remove 'empty' CSS class to element.
         var value = Y.Lang.trim(ta.get('value'));
         if (value.length) {
             taplain.removeClass('empty')
@@ -126,7 +126,7 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
         if (tb) {
             tbplain.one('.textvalue').set('innerHTML', tb.get('value'))
         }
-        // hide/display textarea, textbox and plaintexts
+        // ...hide/display textarea, textbox and plaintexts.
         taplain.removeClass('hiddenelement')
         ta.addClass('hiddenelement')
         if (tb) {
@@ -134,7 +134,7 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
             tb.addClass('hiddenelement')
         }
     } else {
-        // if we need to show the input fields, set the width/height for textarea so it fills the cell
+        // ...if we need to show the input fields, set the width/height for textarea so it fills the cell.
         try {
             if (ta.get('name').indexOf('[maxscore]') > 1) {
                 ta.setStyle('width', '25px');
@@ -142,12 +142,11 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
                 var width = parseFloat(ta.get('parentNode').getComputedStyle('width')) - 10,
                         height = parseFloat(ta.get('parentNode').getComputedStyle('height'))
                 ta.setStyle('width', Math.max(width, 50) + 'px')
-                // ta.setStyle('height', Math.max(height,30)+'px')
             }
         } catch (err) {
-            // this browser do not support 'computedStyle', leave the default size of the textbox
+            // ...this browser do not support 'computedStyle', leave the default size of the textbox.
         }
-        // hide/display textarea, textbox and plaintexts
+        // ...hide/display textarea, textbox and plaintexts.
         taplain.addClass('hiddenelement')
         ta.removeClass('hiddenelement')
         if (tb) {
@@ -155,13 +154,13 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
             tb.removeClass('hiddenelement')
         }
     }
-    // focus the proper input field in edit mode
+    // ...focus the proper input field in edit mode.
     if (editmode) {
         ta.focus()
     }
 }
 
-// handler for clicking on submit buttons within bteceditor element. Adds/deletes/rearranges criteria/comments on client side
+// ...handler for clicking on submit buttons within bteceditor element. Adds/deletes/rearranges criteria/comments on client side.
 M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
     var Y = M.gradingform_bteceditor.Y
     var name = M.gradingform_bteceditor.name
@@ -176,7 +175,7 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
     if (chunks[0] != name || (section != 'criteria' && section != 'comments')) {
         return;
     }
-    // prepare the id of the next inserted criterion
+    // ...prepare the id of the next inserted criterion.
 
     if (section == 'criteria') {
         elements_str = '#btec-' + name + ' .criteria .criterion'
@@ -192,7 +191,7 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
         'callback': M.gradingform_bteceditor.buttonclick
     };
     if (chunks.length == 3 && (action == 'addcriterion' || action == 'addcomment')) {
-        // ADD NEW CRITERION OR COMMENT
+        // ...ADD NEW CRITERION OR COMMENT.
         var parentel = Y.one('#' + name + '-' + section)
         if (parentel.one('>tbody')) {
             parentel = parentel.one('>tbody')
@@ -209,7 +208,7 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
         M.gradingform_bteceditor.disablealleditors()
         M.gradingform_bteceditor.assignclasses(elements_str)
     } else if (chunks.length == 4 && action == 'moveup') {
-        // MOVE UP.
+        // ...MOVE UP.
         el = Y.one('#' + name + '-' + section + '-' + chunks[2])
         if (el.previous()) {
             el.get('parentNode').insertBefore(el, el.previous())
@@ -232,13 +231,13 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
             M.util.show_confirm_dialog(e, dialog_options);
         }
     } else {
-        // unknown action
+        // ...unknown action.
         return;
     }
     e.preventDefault();
 }
 
-// properly set classes (first/last/odd/even) and/or criterion sortorder for elements Y.all(elements_str)
+// ...properly set classes (first/last/odd/even) and/or criterion sortorder for elements Y.all(elements_str).
 M.gradingform_bteceditor.assignclasses = function (elements_str) {
     var elements = M.gradingform_bteceditor.Y.all(elements_str)
     for (var i = 0; i < elements.size(); i++) {
@@ -254,7 +253,7 @@ M.gradingform_bteceditor.assignclasses = function (elements_str) {
     }
 }
 
-// returns unique id for the next added element, it should not be equal to any of Y.all(elements_str) ids
+// ...returns unique id for the next added element, it should not be equal to any of Y.all(elements_str) ids.
 M.gradingform_bteceditor.calculatenewid = function (elements_str) {
     var newid = 1
     M.gradingform_bteceditor.Y.all(elements_str).each(function (node) {
