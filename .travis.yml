@@ -36,6 +36,7 @@ install:
   - moodle-plugin-ci install
 
 script:
+  - moodle-plugin-ci csslint
   - moodle-plugin-ci phplint
   - moodle-plugin-ci codechecker
   - moodle-plugin-ci validate
