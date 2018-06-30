@@ -41,7 +41,7 @@
 }
 /*styles the final grade shown to students*/
 div.btec-grade {
-    display: default;
+    display: inherit;
 }
 
 .gradingform_btec.editor .criterion .controls,
