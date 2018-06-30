@@ -39,9 +39,11 @@
 .gradingform_btec {
     overflow: auto;
 }
+/*styles the final grade shown to students*/
 div.btec-grade {
-background-color:red;
+
 }
+
 .gradingform_btec.editor .criterion .controls,
 .gradingform_btec .criterion .description,
 .gradingform_btec .criterion .remark {
