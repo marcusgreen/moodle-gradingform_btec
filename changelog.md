@@ -1,7 +1,9 @@
 ### Release notes  for BTEC grading method for Moodle by Marcus Green
 
-### Version 1.22 May 2018
+### Version 1.22 Jul 2018
 Added privacy classes to help GDPR compliance. Confirmation it works with Moodle 3.5
+Added btec-grade div/class so the display of final grade can be styld/hidden.
+Codechecker compliance updtaes. 
 
 ### Version 1.21. April 2018
 This is a maintenance release to confirm that it works with all versions of Moodle between
