@@ -3,7 +3,7 @@ M.gradingform_bteceditor = {'templates': {}, 'eventhandler': null, 'name': null,
 /**
  * This function is called for each bteceditor on page.
  */
-M.gradingform_bteceditor.init = function (Y, options) {
+M.gradingform_bteceditor.init = function(Y, options) {
     M.gradingform_bteceditor.name = options.name;
     M.gradingform_bteceditor.Y = Y;
     M.gradingform_bteceditor.templates[options.name] = {
@@ -12,7 +12,7 @@ M.gradingform_bteceditor.init = function (Y, options) {
     };
     M.gradingform_bteceditor.disablealleditors();
     Y.on('click', M.gradingform_bteceditor.clickanywhere, 'body', null);
-    YUI().use('event-touch', function (Y) {
+    YUI().use('event-touch', function(Y) {
         Y.one('body').on('touchstart', M.gradingform_bteceditor.clickanywhere);
         Y.one('body').on('touchend', M.gradingform_bteceditor.clickanywhere);
     });
@@ -20,7 +20,7 @@ M.gradingform_bteceditor.init = function (Y, options) {
 };
 
 // Adds handlers for clicking submit button. This function must be called each time JS adds new elements to html.
-M.gradingform_bteceditor.addhandlers = function () {
+M.gradingform_bteceditor.addhandlers = function() {
     var Y = M.gradingform_bteceditor.Y;
     var name = M.gradingform_bteceditor.name;
     if (M.gradingform_bteceditor.eventhandler) {
@@ -30,28 +30,29 @@ M.gradingform_bteceditor.addhandlers = function () {
 };
 
 // Switches all input text elements to non-edit mode.
-M.gradingform_bteceditor.disablealleditors = function () {
+M.gradingform_bteceditor.disablealleditors = function() {
     var Y = M.gradingform_bteceditor.Y;
     var name = M.gradingform_bteceditor.name;
-    Y.all('#btec-' + name + ' .criteria .description input[type=text]:not(.pseudotablink)').each(function (node) {
+    Y.all('#btec-' + name + ' .criteria .description input[type=text]:not(.pseudotablink)').each(function(node) {
         M.gradingform_bteceditor.editmode(node, false);
     });
-    Y.all('#btec-' + name + ' .criteria .description textarea').each(function (node) {
+    Y.all('#btec-' + name + ' .criteria .description textarea').each(function(node) {
         M.gradingform_bteceditor.editmode(node, false);
     });
-    Y.all('#btec-' + name + ' .comments .description textarea').each(function (node) {
+    Y.all('#btec-' + name + ' .comments .description textarea').each(function(node) {
         M.gradingform_bteceditor.editmode(node, false);
     });
 };
 
 /**
  *
+ *@event e mouse click
  *Function invoked on each click on the page. If criterion values are clicked
  *it switches the element to edit mode. If btec button is clicked it does nothing so the 'buttonclick'
  *function is invoked
- *
  */
-M.gradingform_bteceditor.clickanywhere = function (e) {
+
+M.gradingform_bteceditor.clickanywhere = function(e) {
     if (e.type == 'touchstart') {
         return;
     }
@@ -82,7 +83,7 @@ M.gradingform_bteceditor.clickanywhere = function (e) {
 };
 
 // ...switch the criterion item to edit mode or switch back.
-M.gradingform_bteceditor.editmode = function (el, editmode) {
+M.gradingform_bteceditor.editmode = function(el, editmode) {
     var Y = M.gradingform_bteceditor.Y;
     var ta = el;
     if (!editmode && ta.hasClass('hiddenelement')) {
@@ -158,10 +159,10 @@ M.gradingform_bteceditor.editmode = function (el, editmode) {
     if (editmode) {
         ta.focus();
     }
-}
+};
 
 // ...handler for clicking on submit buttons within bteceditor element. Adds/deletes/rearranges criteria/comments on client side.
-M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
+M.gradingform_bteceditor.buttonclick = function(e, confirmed) {
     var Y = M.gradingform_bteceditor.Y;
     var name = M.gradingform_bteceditor.name;
     if (e.target.get('type') != 'submit') {
@@ -177,15 +178,16 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
     }
     // ...prepare the id of the next inserted criterion.
 
+    var ElementsStr = "";
     if (section == 'criteria') {
-        elements_str = '#btec-' + name + ' .criteria .criterion';
+        ElementsStr = '#btec-' + name + ' .criteria .criterion';
     } else if (section == 'comments') {
-        elements_str = '#btec-' + name + ' .comments .criterion';
+         ElementsStr = '#btec-' + name + ' .comments .criterion';
     }
     if (action == 'addcriterion' || action == 'addcomment') {
-        var newid = M.gradingform_bteceditor.calculatenewid(elements_str);
+        var newid = M.gradingform_bteceditor.calculatenewid(ElementsStr);
     }
-    var dialog_options = {
+    var DialogOptions = {
         'scope': this,
         'callbackargs': [e, true],
         'callback': M.gradingform_bteceditor.buttonclick
@@ -206,57 +208,57 @@ M.gradingform_bteceditor.buttonclick = function (e, confirmed) {
 
         M.gradingform_bteceditor.addhandlers();
         M.gradingform_bteceditor.disablealleditors();
-        M.gradingform_bteceditor.assignclasses(elements_str);
+        M.gradingform_bteceditor.assignclasses(ElementsStr);
     } else if (chunks.length == 4 && action == 'moveup') {
         // ...MOVE UP.
-        el = Y.one('#' + name + '-' + section + '-' + chunks[2]);
+        var el = Y.one('#' + name + '-' + section + '-' + chunks[2]);
         if (el.previous()) {
             el.get('parentNode').insertBefore(el, el.previous());
         }
-        M.gradingform_bteceditor.assignclasses(elements_str);
+        M.gradingform_bteceditor.assignclasses(ElementsStr);
     } else if (chunks.length == 4 && action == 'movedown') {
         // MOVE DOWN.
         el = Y.one('#' + name + '-' + section + '-' + chunks[2]);
         if (el.next()) {
             el.get('parentNode').insertBefore(el.next(), el);
         }
-        M.gradingform_bteceditor.assignclasses(elements_str);
+        M.gradingform_bteceditor.assignclasses(ElementsStr);
     } else if (chunks.length == 4 && action == 'delete') {
         // DELETE.
         if (confirmed) {
             Y.one('#' + name + '-' + section + '-' + chunks[2]).remove();
-            M.gradingform_bteceditor.assignclasses(elements_str);
+            M.gradingform_bteceditor.assignclasses(ElementsStr);
         } else {
-            dialog_options['message'] = M.str.gradingform_btec.confirmdeletecriterion;
-            M.util.show_confirm_dialog(e, dialog_options);
+            DialogOptions['message'] = M.str.gradingform_btec.confirmdeletecriterion;
+            M.util.show_confirm_dialog(e, DialogOptions);
         }
     } else {
         // ...unknown action.
         return;
     }
     e.preventDefault();
-}
+};
 
-// ...properly set classes (first/last/odd/even) and/or criterion sortorder for elements Y.all(elements_str).
-M.gradingform_bteceditor.assignclasses = function (elements_str) {
-    var elements = M.gradingform_bteceditor.Y.all(elements_str);
+// ...properly set classes (first/last/odd/even) and/or criterion sortorder for elements Y.all(ElementsStr).
+M.gradingform_bteceditor.assignclasses = function(ElementsStr) {
+    var elements = M.gradingform_bteceditor.Y.all(ElementsStr);
     for (var i = 0; i < elements.size(); i++) {
         elements.item(i).removeClass('first').removeClass('last').removeClass('even').removeClass('odd').
                 addClass(((i % 2) ? 'odd' : 'even') + ((i == 0) ? ' first' : '') + ((i == elements.size() - 1) ? ' last' : ''));
         elements.item(i).all('input[type=hidden]').each(
-                function (node) {
+                function(node) {
                     if (node.get('name').match(/sortorder/)) {
                         node.set('value', i);
                     }
                 }
         );
     }
-}
+};
 
-// ...returns unique id for the next added element, it should not be equal to any of Y.all(elements_str) ids.
-M.gradingform_bteceditor.calculatenewid = function (elements_str) {
+// ...returns unique id for the next added element, it should not be equal to any of Y.all(ElementsStr) ids.
+M.gradingform_bteceditor.calculatenewid = function(ElementsStr) {
     var newid = 1;
-    M.gradingform_bteceditor.Y.all(elements_str).each(function (node) {
+    M.gradingform_bteceditor.Y.all(ElementsStr).each(function(node) {
         var idchunks = node.get('id').split('-'), id = idchunks.pop();
         if (id.match(/^NEWID(\d+)$/)) {
             newid = Math.max(newid, parseInt(id.substring(5)) + 1);
