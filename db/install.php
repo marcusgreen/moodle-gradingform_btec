@@ -31,20 +31,20 @@ defined('MOODLE_INTERNAL') || die();
  * Grading method controller for the btec plugin
  *
  * @package    gradingform_btec
- * @copyright  2018 Marcus Green
+ * @copyright  2019 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
 function xmldb_gradingform_btec_install() {
     global $DB;
-
-    $record = new stdClass();
-    $record->courseid = 0;
-    $record->userid = 0;
-    $record->name = 'BTEC';
-    $record->scale = get_string('btecscale', 'gradingform_btec');
-    $record->description = get_string('btecscale_description', 'gradingform_btec');
-    $record->descriptionformat = 1;
-
-    $DB->insert_record('scale', $record);
+    if (!$DB->record_exists('scale', ['name' => 'BTEC'])) {
+        $record = new stdClass();
+        $record->courseid = 0;
+        $record->userid = 0;
+        $record->name = 'BTEC';
+        $record->scale = get_string('btecscale', 'gradingform_btec');
+        $record->description = get_string('btecscale_description', 'gradingform_btec');
+        $record->descriptionformat = 1;
+        $DB->insert_record('scale', $record);
+    }
 }
