@@ -388,6 +388,19 @@ class gradingform_btec_renderer extends plugin_renderer_base {
 
         $btectemplate = html_writer::start_tag('div', array('id' => 'btec-{NAME}',
                     'class' => 'clearfix gradingform_btec' . $classsuffix));
+
+//uncouple
+        //uncouple
+        $grademenu = ['0' => 'Awful', '1' => 'acceptable', '2' => 'Awesome'];//comes in as function param
+        $grade=0;//comes in as function param
+        if ($grademenu) {
+            $btectemplate .= html_writer::select($grademenu,
+                    'advancedgrading[grade]', $grade, false, array('id' => 'feedback_grade'));
+            $feedbacklabel = html_writer::label(get_string('feedbackrubric', 'gradingform_simplefeedbackrubric'),
+                    'id_advancedgrading');
+            $btectemplate .= html_writer::div($feedbacklabel, 'fitemtitle');
+        }
+
         $btectemplate .= html_writer::tag('table', $criteriastr, array('class' => 'criteria', 'id' => '{NAME}-criteria'));
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
             $value = get_string('addcriterion', 'gradingform_btec');
