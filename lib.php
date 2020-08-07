@@ -25,6 +25,20 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/grade/grading/form/lib.php');
 
+function gradingform_btec_coursemodule_standard_elements($formwrapper, $mform) {
+    $formname = get_class($formwrapper);
+    if ($formname == "mod_assign_mod_form") {
+        $add    = optional_param('add', '', PARAM_ALPHANUM);     // Module name.
+        if ($add) {
+            global $PAGE;
+            $PAGE->requires->jquery();
+            $PAGE->requires->js_call_amd("gradingform_btec/assignfields", 'init');
+        }
+    }
+}
+
+
+
 /**
  * This controller encapsulates the btec grading logic
  *
