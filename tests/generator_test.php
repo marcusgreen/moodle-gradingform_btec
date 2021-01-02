@@ -87,38 +87,24 @@ class generator_testcase extends \advanced_testcase {
         $this->setUser($user);
         $controller = $btecgenerator->create_instance($context, 'mod_assign', 'submission', $name, $description, $criteria);
 
-        $this->assertInstanceOf(gradingform_btec_controller::class, $controller);
+       // $this->assertInstanceOf(gradingform_btec_controller::class, $controller);
 
         $definition = $controller->get_definition();
         $this->assertEquals('btec', $definition->method);
-        // $this->assertNotEmpty($definition->id);
-        // $this->assertEquals($name, $definition->name);
-        // $this->assertEquals($description, $definition->description);
-        // $this->assertEquals(gradingform_controller::DEFINITION_STATUS_READY, $definition->status);
-        // $this->assertNotEmpty($definition->timecreated);
-        // $this->assertNotEmpty($definition->timemodified);
-        // $this->assertEquals($user->id, $definition->usercreated);
+        $this->assertNotEmpty($definition->id);
+        $this->assertEquals($name, $definition->name);
+        $this->assertEquals($description, $definition->description);
+        $this->assertEquals(gradingform_controller::DEFINITION_STATUS_READY, $definition->status);
+        $this->assertNotEmpty($definition->timecreated);
+        $this->assertNotEmpty($definition->timemodified);
+        $this->assertEquals($user->id, $definition->usercreated);
 
-        // $this->assertNotEmpty($definition->guide_criteria);
-        // $this->assertCount(2, $definition->guide_criteria);
+        $this->assertNotEmpty($definition->btec_criteria);
+        $this->assertCount(3, $definition->btec_criteria);
 
-        // // Check the alphabet criteria.
-        // $criteriaids = array_keys($definition->guide_criteria);
+         // Check the alphabet criteria.
+         $criteriaids = array_keys($definition->btec_criteria);
 
-        // $alphabet = $definition->guide_criteria[$criteriaids[0]];
-        // $this->assertNotEmpty($alphabet['id']);
-        // $this->assertEquals(1, $alphabet['sortorder']);
-        // $this->assertEquals('How well you know your alphabet', $alphabet['description']);
-        // $this->assertEquals('Basic literacy: Alphabet', $alphabet['descriptionmarkers']);
-        // $this->assertEquals(5, $alphabet['maxscore']);
-
-        // Check the times tables criteria.
-        // $tables = $definition->guide_criteria[$criteriaids[1]];
-        // $this->assertNotEmpty($tables['id']);
-        // $this->assertEquals(2, $tables['sortorder']);
-        // $this->assertEquals('How well you know your times-tables', $tables['description']);
-        // $this->assertEquals('Basic numeracy: Multiplication', $tables['descriptionmarkers']);
-        // $this->assertEquals(10, $tables['maxscore']);
     }
 
     /**

@@ -51,7 +51,7 @@ class btec {
     protected $options = [];
 
     /**
-     * Create a new gradingform_btec_generator_criterion.
+     *  a new gradingform_btec_generator_criterion.
      *
      * @param string $name
      * @param string $description
@@ -75,7 +75,7 @@ class btec {
                 'format' => FORMAT_HTML,
                 'itemid' => 1
             ],
-            'guide' => [
+            'btec' => [
                 'criteria' => $this->get_critiera_as_array(),
                 'options' => $this->options,
                 'comments' => [],

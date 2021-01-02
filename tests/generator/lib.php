@@ -82,14 +82,14 @@ class gradingform_btec_generator extends component_generator_base {
             ));
         }
 
-        // Update the controller wih the guide definition.
+        // Update the controller wih the btec definition.
         $controller->update_definition($btec->get_definition());
 
         return $controller;
     }
 
     /**
-     * Get a new guide for use with the guide controller.
+     * Get a new btec for use with the btec controller.
      *
      * Note: This is just a helper class used to build a new definition. It does not persist the data.
      *
@@ -128,7 +128,7 @@ class gradingform_btec_generator extends component_generator_base {
      */
     public function get_criterion_for_values(gradingform_controller $controller, string $shortname): ?stdClass {
         $definition = $controller->get_definition();
-        $criteria = $definition->guide_criteria;
+        $criteria = $definition->btec_criteria;
 
         $criterion = array_reduce($criteria, function($carry, $criterion) use ($shortname) {
             if ($criterion['shortname'] === $shortname) {
@@ -171,7 +171,7 @@ class gradingform_btec_generator extends component_generator_base {
      * @param context_module $context
      * @return gradingform_guide_controller
      */
-    public function get_test_guide(
+    public function get_test_btec(
         context_module $context,
         string $component = 'mod_assign',
         string $areaname = 'submission'
@@ -181,23 +181,23 @@ class gradingform_btec_generator extends component_generator_base {
         $controller = $gradinggenerator->create_instance($context, $component, $areaname, 'guide');
 
         $generator = \testing_util::get_data_generator();
-        $guidegenerator = $generator->get_plugin_generator('gradingform_guide');
+        $btecgenerator = $generator->get_plugin_generator('gradingform_btec');
 
-        $guide = $guidegenerator->get_guide('testguide', 'Description text');
+        $btec = $btecgenerator->get_btec('testbtec', 'Description text');
 
-        $guide->add_criteria($guidegenerator->get_criterion(
+        $btec->add_criteria($btecgenerator->get_criterion(
             'Spelling mistakes',
             'Full marks will be given for no spelling mistakes.',
             'Deduct 5 points per spelling mistake made.',
             25
         ));
-        $guide->add_criteria($guidegenerator->get_criterion(
+        $btec->add_criteria($btecgenerator->get_criterion(
             'Pictures',
             'Full marks will be given for including 3 pictures.',
             'Give 5 points for each picture present',
             15
         ));
-        $controller->update_definition($guide->get_definition());
+        $controller->update_definition($btec->get_definition());
 
         return $controller;
     }
@@ -205,7 +205,7 @@ class gradingform_btec_generator extends component_generator_base {
     /**
      * Fetch a set of sample data.
      *
-     * @param gradingform_guide_controller $controller
+     * @param gradingform_btec_controller $controller
      * @param int $itemid
      * @param float $spellingscore
      * @param string $spellingremark
@@ -214,7 +214,7 @@ class gradingform_btec_generator extends component_generator_base {
      * @return array
      */
     public function get_test_form_data(
-        gradingform_guide_controller $controller,
+        gradingform_btec_controller $controller,
         int $itemid,
         float $spellingscore,
         string $spellingremark,
@@ -222,8 +222,8 @@ class gradingform_btec_generator extends component_generator_base {
         string $pictureremark
     ): array {
         $generator = \testing_util::get_data_generator();
-        $guidegenerator = $generator->get_plugin_generator('gradingform_guide');
-        return $guidegenerator->get_submitted_form_data($controller, $itemid, [
+        $btecgenerator = $generator->get_plugin_generator('gradingform_btec');
+        return $btecgenerator->get_submitted_form_data($controller, $itemid, [
             'Spelling mistakes' => [
                 'score' => $spellingscore,
                 'remark' => $spellingremark,
