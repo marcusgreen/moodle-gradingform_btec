@@ -24,8 +24,6 @@
  *
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  *
  * Grading method controller for the btec plugin

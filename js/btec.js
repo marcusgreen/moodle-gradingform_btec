@@ -1,27 +1,30 @@
 M.gradingform_btec = {};
 
 /**
- * This function is called for each btec on page.
+ *  This function is called for each btec on page.
+ *
+ * @param {object} Y // YUI
+ * @param {object} options //TODO remove
  */
-M.gradingform_btec.init = function (Y, options) {
+M.gradingform_btec.init = function(Y, options) {
     var currentfocus = Y.one('.markingbtecremark');
 
-    Y.all('.markingbtecremark').on('blur', function (e) {
+    Y.all('.markingbtecremark').on('blur', function(e) {
         currentfocus = e.currentTarget;
     });
-    Y.all('.markingbteccomment').on('click', function (e) {
+    Y.all('.markingbteccomment').on('click', function(e) {
         currentfocus.set('value', currentfocus.get('value') + '\n' + e.currentTarget.get('innerHTML'));
         currentfocus.focus();
     });
 
-    Y.all('.showmarkerdesc input[type=radio]').on('click', function (e) {
+    Y.all('.showmarkerdesc input[type=radio]').on('click', function(e) {
         if (e.currentTarget.get('value') == 'false') {
             Y.all('.criteriondescriptionmarkers').addClass('hide');
         } else {
             Y.all('.criteriondescriptionmarkers').removeClass('hide');
         }
     });
-    Y.all('.setyesno').on('change', function (e) {
+    Y.all('.setyesno').on('change', function(e) {
         var selected = e.target.get('value');
         if (selected == 'yes') {
             Y.all(".markyes").set('checked', 'true');
@@ -33,7 +36,7 @@ M.gradingform_btec.init = function (Y, options) {
         }
 
     });
-    Y.all('.showstudentdesc input[type=radio]').on('click', function (e) {
+    Y.all('.showstudentdesc input[type=radio]').on('click', function(e) {
         if (e.currentTarget.get('value') == 'false') {
             Y.all('.criteriondescription').addClass('hide');
         } else {

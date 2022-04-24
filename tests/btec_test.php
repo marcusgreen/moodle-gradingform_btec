@@ -39,7 +39,7 @@ require_once($CFG->dirroot . '/lib/pagelib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class btec_test extends basic_testcase {
-   /**
+    /**
      * Test the behaviour moodlequickform_bteceditor::constructor method.
      *
      * @covers ::moodlequickform_bteceditor::constructor

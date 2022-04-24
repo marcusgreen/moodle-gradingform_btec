@@ -26,7 +26,8 @@ M.gradingform_bteceditor.addhandlers = function() {
     if (M.gradingform_bteceditor.eventhandler) {
         M.gradingform_bteceditor.eventhandler.detach();
     }
-    M.gradingform_bteceditor.eventhandler = Y.on('click', M.gradingform_bteceditor.buttonclick, '#btec-' + name + ' input[type=submit]', null);
+    M.gradingform_bteceditor.eventhandler = Y.on('click', M.gradingform_bteceditor.buttonclick,
+        '#btec-' + name + ' input[type=submit]', null);
 };
 
 // Switches all input text elements to non-edit mode.
@@ -102,7 +103,8 @@ M.gradingform_bteceditor.editmode = function(el, editmode) {
         taplain = ta.next('.plainvalue');
         taplain.one('.pseudotablink').on('focus', M.gradingform_bteceditor.clickanywhere);
         if (tb) {
-            tb.get('parentNode').append('<span class="plainvalue">' + pseudotablink + '<span class="textvalue">&nbsp;</span></span>');
+            tb.get('parentNode').append('<span class="plainvalue">' + pseudotablink +
+                 '<span class="textvalue">&nbsp;</span></span>');
             tbplain = tb.get('parentNode').one('.plainvalue');
             tbplain.one('.pseudotablink').on('focus', M.gradingform_bteceditor.clickanywhere);
         }
