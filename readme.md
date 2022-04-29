@@ -1,15 +1,18 @@
-### BTEC Grading method V1.21
-Advanced marking plugin for the BTEC marking scheme based on Refer,Pass, Merit and Distinction where each level is 
-based on completing all the next lowest. So to get a Merit a student must achieve all Pass and all Merit, and to get 
-a Distinction to get all Pass and all Merit and all Distinction. If they miss a Pass criteria they get a refer. 
+### BTEC Moodle advanced grading method
+Advanced marking plugin for the BTEC marking scheme based on Refer,Pass, Merit and Distinction where each level is
+based on completing all the next lowest. So to get a Merit a student must achieve all Pass and all Merit, and to get
+a Distinction to get all Pass and all Merit and all Distinction. If they miss a Pass criteria they get a refer.
 
-To install
+See change log at https://github.com/marcusgreen/moodle-qtype_gapfill/blob/master/changelog.md
 
-Place the unzipped files in a directory 
+To install from the plugins database go to
+https://moodle.org/plugins/gradingform_btec/versions
 
-moodle/grade/grading/form/btec
+To install from the command line with git
 
-Where moodle is the root of your moodle install
+from the folder moodle/grade/grading/form run
 
-Login to your moodle installation as admin and allow the plugin to install. Further documentation can be seen 
+git clone https://github.com/marcusgreen/moodle-gradingform_btec btec
+
+Login to your moodle installation as admin and allow the plugin to install. Further documentation can be seen
 at http://docs.moodle.org/en/BTEC_marking
