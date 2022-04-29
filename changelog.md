@@ -1,8 +1,9 @@
 ### BTEC advanced grading method for Moodle by Marcus Green
 ### Version 1.23 Apr 2022
 Tested for Moodle 4.0 compatibility. Coverage metadata in phpunit tests. Documentation
-updated on course totals. Switched from travis ci to github actions. Fixed some linting issues.
+updated on course totals.
 https://docs.moodle.org/en/BTEC_marking#Course_total_in_gradebook
+Switched from travis ci to github actions. Fixed some linting issues.
 ### Version 1.22 Aug 2018
 Added privacy classes to help GDPR compliance. Confirmation it works with Moodle 3.5
 Added btec-grade div/class so the display of final grade can be styld/hidden.
