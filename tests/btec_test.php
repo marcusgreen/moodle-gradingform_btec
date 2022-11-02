@@ -22,7 +22,14 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace gradingform_btec;
+
 defined('MOODLE_INTERNAL') || die();
+
+use \gradinform_moodle;
+use \moodle_page;
+use \moodlequickform_bteceditor;
+use \gradingform_btec_controller;
 
 global $CFG;
 
@@ -38,7 +45,7 @@ require_once($CFG->dirroot . '/lib/pagelib.php');
  * @copyright  2022 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class btec_test extends basic_testcase {
+class btec_test extends \basic_testcase {
     /**
      * Test the behaviour moodlequickform_bteceditor::constructor method.
      *
@@ -54,7 +61,7 @@ class btec_test extends basic_testcase {
      *
      * @covers ::calculate_btec_grade
      */
-    function test_grade_calculation() {
+    public function test_grade_calculation() {
 
         /* If you dont get any criteria you get an overal REFER */
         $criteria = array('criteria' => array(
@@ -67,7 +74,7 @@ class btec_test extends basic_testcase {
         ));
         $controller = '';
         $data = '';
-        $form = new gradingform_btec_instance($controller, $data);
+        $form = new \gradingform_btec_instance($controller, $data);
         $levelmet = $form->calculate_btec_grade($criteria);
         $this->assertEquals(gradingform_btec_controller::REFER, $levelmet);
 
@@ -140,9 +147,9 @@ class btec_test extends basic_testcase {
      *
      * @covers ::gradingform_btec_renderer
      */
-    function test_created_renderer() {
+    public function test_created_renderer() {
         $PAGE = new moodle_page();
-        $renderer = new gradingform_btec_renderer($PAGE, 1);
+        $renderer = new \gradingform_btec_renderer($PAGE, 1);
         $options = array();
         $criterion = 1;
         $value = 1;
