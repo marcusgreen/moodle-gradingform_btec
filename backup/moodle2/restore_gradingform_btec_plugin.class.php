@@ -21,7 +21,6 @@
  * @copyright  2014 Marcus Green
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 /**
  * Used when restoring a course backup
  * @package    gradingform_btec
@@ -29,11 +28,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
-
     /**
      * Declares the marking btec XML paths attached to the form definition element
      *
-     * @return array of {@link restore_path_element}
+     * @return array of restore_path_element
      */
     protected function define_definition_plugin_structure() {
 
@@ -51,7 +49,7 @@ class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
     /**
      * Declares the marking btec XML paths attached to the form instance element
      *
-     * @return array of {@link restore_path_element}
+     * @return array of restore_path_element
      */
     protected function define_instance_plugin_structure() {
 
@@ -67,7 +65,7 @@ class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
      * Processes criterion element data
      *
      * Sets the mapping 'gradingform_btec_criterion' to be used later by
-     * {@link self::process_gradinform_btec_filling()}
+     * self::process_gradinform_btec_filling()
      *
      * @param array|stdClass $data
      */

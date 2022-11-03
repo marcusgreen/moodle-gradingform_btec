@@ -101,8 +101,8 @@ class gradingform_btec_controller extends gradingform_controller {
      * FEATURE_ADVANCED_GRADING, the user has the permission moodle/grade:managegradingforms
      * and there is an area with the active grading method set to 'btec'.
      *
-     * @param settings_navigation $settingsnav {@link settings_navigation}
-     * @param navigation_node $node {@link navigation_node}
+     * @param settings_navigation $settingsnav settings_navigation
+     * @param navigation_node $node navigation_node
      */
     public function extend_settings_navigation(settings_navigation $settingsnav, navigation_node $node = null) {
         $node->add(get_string('definemarkingbtec', 'gradingform_btec'), $this->get_editor_url(),
@@ -115,8 +115,8 @@ class gradingform_btec_controller extends gradingform_controller {
      * This function is called when the context for the page is an activity module with the
      * FEATURE_ADVANCED_GRADING and there is an area with the active grading method set to the given plugin.
      *
-     * @param global_navigation $navigation {@link global_navigation}
-     * @param navigation_node $node {@link navigation_node}
+     * @param global_navigation $navigation global_navigation
+     * @param navigation_node $node navigation_node
      * @return void
      */
     public function extend_navigation(global_navigation $navigation, navigation_node $node = null) {
@@ -462,7 +462,7 @@ class gradingform_btec_controller extends gradingform_controller {
      *
      * @see parent::get_definition_copy()
      * @param gradingform_controller $target the controller of the new copy
-     * @return stdClass definition structure to pass to the target's {@link update_definition()}
+     * @return stdClass definition structure to pass to the target's update_definition()
      */
     public function get_definition_copy(gradingform_controller $target) {
 

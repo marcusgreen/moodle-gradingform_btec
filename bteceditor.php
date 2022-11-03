@@ -50,14 +50,14 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
     /** @var string|false Message to display in front of the editor (that there exist grades on this btec being edited) */
     protected $regradeconfirmation = false;
 
-    /**
-     * Constructor
-     *
-     * @param string $elementname
-     * @param string $elementlabel
-     * @param array $attributes
-     * @param string $unusedparam to supporess codechecker useless override message
-     */
+     /**
+      * Constructor
+      *
+      * @param string $elementname
+      * @param string $elementlabel
+      * @param array $attributes
+      * @param string $unusuedparam // Used to suppress codechecker useless override message.
+      */
     public function __construct($elementname=null, $elementlabel=null, $attributes=null, $unusuedparam=null) {
         parent::__construct($elementname, $elementlabel, $attributes);
     }

@@ -45,7 +45,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * Also JavaScript relies on the class names of elements and when developer changes them
      * script might stop working.
      *
-     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* {@link gradingform_btec_controller()}
+     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* gradingform_btec_controller()
      * @param array $options An array of options.
      *      showmarkspercriterionstudents (bool) If true adds the current score to the display
      * @param string $elementname the name of the form element (in editor mode) or the prefix for div ids (in view mode)
@@ -272,7 +272,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * Also JavaScript relies on the class names of elements and when developer changes them
      * script might stop working.
      *
-     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* {@link gradingform_btec_controller}
+     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* gradingform_btec_controller
      * @param string $elementname the name of the form element (in editor mode) or the prefix for div ids (in view mode)
      * @param array $comment
      * @return string
@@ -351,8 +351,8 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * Also JavaScript relies on the class names of elements and when developer changes them
      * script might stop working.
      *
-     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* {@link gradingform_btec_controller}
-     * @param array $options An array of options provided to {@link gradingform_btec_renderer::btec_edit_options()}
+     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* gradingform_btec_controller
+     * @param array $options An array of options provided to gradingform_btec_renderer::btec_edit_options()
      * @param string $elementname the name of the form element (in editor mode) or the prefix for div ids (in view mode)
      * @param string $criteriastr evaluated templates for this btec's criteria
      * @param string $commentstr
@@ -419,7 +419,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * Generates html template to view/edit the btec options. Expression {NAME} is used in
      * template for the form element name
 
-     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* {@link gradingform_btec_controller}
+     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* gradingform_btec_controller
      * @param array $options
      * @return string
      */
@@ -504,7 +504,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @param array $criteria data about the btec design
      * @param array $comments
      * @param array $options
-     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* {@link gradingform_btec_controller}
+     * @param int $mode btec display mode, one of gradingform_btec_controller::DISPLAY_* gradingform_btec_controller
      * @param string $elementname the name of the form element (in editor mode) or the prefix for div ids (in view mode)
      * @param array $values evaluation result
      * @param array $validationerrors
