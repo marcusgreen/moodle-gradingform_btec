@@ -1,4 +1,10 @@
 ### BTEC advanced grading method for Moodle by Marcus Green
+
+## Update October 2024
+Behat deprecation issue from Moodle 3.3. Bumpt ci test to run against
+Moodle 4.4 and PHP 8.2 With thanks to Julian-Tovar for this
+https://github.com/marcusgreen/moodle-gradingform_btec/issues/7
+
 ### Version 1.23 Apr 2022
 Tested for Moodle 4.0 compatibility. Coverage metadata in phpunit tests. Documentation
 updated on course totals.
