@@ -245,9 +245,9 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             if (!empty($options['showmarkspercriterionstudents'])) {
                 /* replace score out of with in/complete */
                 if ($currentscore) {
-                    $criteriontemplate .= html_writer::tag('td', 'Completed', array('class' => 'score'));
+                    $criteriontemplate .= html_writer::tag('td', html_writer::span('Completed'), array('class' => 'score score_completed'));
                 } else {
-                    $criteriontemplate .= html_writer::tag('td', 'Incomplete', array('class' => 'score'));
+                    $criteriontemplate .= html_writer::tag('td', html_writer::span('Incomplete'), array('class' => 'score score_incomplete'));
                 }
             }
         }
