@@ -72,7 +72,8 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 }
             }
         }
-        $criteriontemplate = html_writer::start_tag('tr', ['class' => 'criterion' . $criterion['class'] . ' criterion_level_' . strtolower($criterion['shortname']) . ' criterion_level_' . strtolower(substr($criterion['shortname'], 0, 1)),
+        $criteriontemplate = html_writer::start_tag('tr', ['class' => 'criterion' . $criterion['class'] . ' criterion_level_' .
+         strtolower($criterion['shortname']) . ' criterion_level_' . strtolower(substr($criterion['shortname'], 0, 1)),
                     'id' => '{NAME}-criteria-{CRITERION-id}']);
         $descriptionclass = 'description';
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
@@ -245,9 +246,11 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             if (!empty($options['showmarkspercriterionstudents'])) {
                 /* replace score out of with in/complete */
                 if ($currentscore) {
-                    $criteriontemplate .= html_writer::tag('td', html_writer::span(get_string('completed', 'gradingform_btec')), ['class' => 'score score_completed']);
+                    $criteriontemplate .= html_writer::tag('td',
+                    html_writer::span(get_string('completed', 'gradingform_btec')), ['class' => 'score score_completed']);
                 } else {
-                    $criteriontemplate .= html_writer::tag('td', html_writer::span(get_string('incomplete', 'gradingform_btec')), ['class' => 'score score_incomplete']);
+                    $criteriontemplate .= html_writer::tag('td', html_writer::span(get_string('incomplete', 'gradingform_btec')),
+                     ['class' => 'score score_incomplete']);
                 }
             }
         }
@@ -453,7 +456,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                         $valuestr = html_writer::select($selectoptions, $attrs['name'], $value,
                                 false, ['id' => $attrs['id']]);
                         $html .= html_writer::tag('span', $valuestr, ['class' => 'value']);
-                        // TODO add here button 'Sort levels'.
+                        // Note add here button 'Sort levels'.
                     } else {
                         $html .= html_writer::tag('span', get_string($option . $value, 'gradingform_btec'),
                                 ['class' => 'value']);
