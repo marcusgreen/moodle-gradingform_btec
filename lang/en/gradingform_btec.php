@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
+$string['completed'] = 'Completed';
 $string['definebtecmarking'] = 'Btec Marking';
 $string['addcomment'] = 'Add frequently used comment';
 $string['addcriterion'] = 'Add criterion';
@@ -62,6 +63,7 @@ $string['btecoptions'] = 'Marking options';
 $string['btecstatus'] = 'Current BTEC marking status';
 $string['hidemarkerdesc'] = 'Hide marker criterion descriptions';
 $string['hidestudentdesc'] = 'Hide student criterion descriptions';
+$string['incomplete'] = 'Incomplete';
 $string['maxscore'] = 'Maximum mark';
 $string['name'] = 'Name';
 $string['needregrademessage'] = 'The BTEC marking definition was changed after this student had been graded. The student can not see this BTEC marking until you check the BTEC marking and update the grade.';
