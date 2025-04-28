@@ -72,9 +72,11 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 }
             }
         }
-        $criteriontemplate = html_writer::start_tag('tr', ['class' => 'criterion' . $criterion['class'] . ' criterion_level_' .
-         strtolower($criterion['shortname']) . ' criterion_level_' . strtolower(substr($criterion['shortname'], 0, 1)),
-                    'id' => '{NAME}-criteria-{CRITERION-id}']);
+        // $criteriontemplate = html_writer::start_tag('tr', ['class' => 'criterion' . $criterion['class'] . ' criterion_level_' .
+        //  strtolower($criterion['shortname']) . ' criterion_level_' . strtolower(substr($criterion['shortname'], 0, 1)),
+        //             'id' => '{NAME}-criteria-{CRITERION-id}']);
+        $criteriontemplate = html_writer::start_tag('tr', array('class' => 'criterion' . $criterion['class'],
+        'id' => '{NAME}-criteria-{CRITERION-id}'));
         $descriptionclass = 'description';
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
             $criteriontemplate .= html_writer::start_tag('td', ['class' => 'controls']);
