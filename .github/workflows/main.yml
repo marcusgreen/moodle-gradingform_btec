@@ -4,6 +4,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: 'ubuntu-latest'
+
     services:
       postgres:
         image: postgres:13
@@ -30,10 +31,10 @@ jobs:
       matrix:
         include:
           - php: '8.3'
-            moodle-branch: 'MOODLE_405_STABLE'
+            moodle-branch: 'MOODLE_500_STABLE'
             database: 'mariadb'
-          # - php: '8.1'
-          #   moodle-branch: 'master'
+          # - php: '8.3'
+          #   moodle-branch: 'main'
           #   database: 'pgsql'
     steps:
       - name: Checkout
@@ -52,7 +53,7 @@ jobs:
 
       - name: Deploy moodle-plugin-ci
         run: |
-          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^3
+          composer create-project -n --no-dev --prefer-dist moodlehq/moodle-plugin-ci ci ^4
           # Add dirs to $PATH
           echo $(cd ci/bin; pwd) >> $GITHUB_PATH
           echo $(cd ci/vendor/bin; pwd) >> $GITHUB_PATH
