@@ -1,5 +1,10 @@
 ### BTEC advanced grading method for Moodle by Marcus Green
 
+### Version 1.25 May 2026
+Comfirmed compatibility with Moodle 5.0
+Thanks to Andrew Rowatt of Massey University NZ for code to allow finer application of
+CSS and so customise the interface
+
 ### Version 1.24 Oct 2024
 Behat deprecation issue from Moodle 3.3. Bumped ci test to run against
 Moodle 4.5 and PHP 8.2 With thanks to Julian-Tovar for this
