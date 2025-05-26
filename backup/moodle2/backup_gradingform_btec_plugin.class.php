@@ -50,14 +50,14 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
 
         $criteria = new backup_nested_element('bteccriteria');
 
-        $criterion = new backup_nested_element('bteccriterion', array('id'), array(
+        $criterion = new backup_nested_element('bteccriterion', ['id'], [
             'sortorder', 'shortname', 'description', 'descriptionformat',
-            'descriptionmarkers', 'descriptionmarkersformat', 'maxscore'));
+            'descriptionmarkers', 'descriptionmarkersformat', 'maxscore']);
 
         $comments = new backup_nested_element('bteccomments');
 
-        $comment = new backup_nested_element('bteccomment', array('id'), array(
-            'sortorder', 'description', 'descriptionformat'));
+        $comment = new backup_nested_element('bteccomment', ['id'], [
+            'sortorder', 'description', 'descriptionformat']);
 
         // Build elements hierarchy.
 
@@ -69,10 +69,10 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
         // Set sources to populate the data.
 
         $criterion->set_source_table('gradingform_btec_criteria',
-                array('definitionid' => backup::VAR_PARENTID));
+                ['definitionid' => backup::VAR_PARENTID]);
 
         $comment->set_source_table('gradingform_btec_comments',
-                array('definitionid' => backup::VAR_PARENTID));
+                ['definitionid' => backup::VAR_PARENTID]);
 
         // No need to annotate ids or files yet (one day when criterion definition supports
         // embedded files, they must be annotated here).
@@ -99,8 +99,8 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
 
         $fillings = new backup_nested_element('fillings');
 
-        $filling = new backup_nested_element('filling', array('id'), array(
-            'criterionid', 'remark', 'remarkformat', 'score'));
+        $filling = new backup_nested_element('filling', ['id'], [
+            'criterionid', 'remark', 'remarkformat', 'score']);
 
         // Build elements hierarchy.
 
@@ -110,7 +110,7 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
         // Set sources to populate the data.
 
         $filling->set_source_table('gradingform_btec_fillings',
-            array('instanceid' => backup::VAR_PARENTID));
+            ['instanceid' => backup::VAR_PARENTID]);
 
         // No need to annotate ids or files yet (one day when remark field supports
         // embedded fileds, they must be annotated here).

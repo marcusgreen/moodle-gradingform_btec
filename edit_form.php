@@ -53,21 +53,21 @@ class gradingform_btec_editbtec extends moodleform {
         $form->addElement('header', 'btecheader', get_string('gradeheading' , 'gradingform_btec'));
 
         // Name.
-        $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), array('size' => 52));
+        $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), ['size' => 52]);
         $form->addHelpButton('name', 'btecgrading', 'gradingform_btec');
         /*check grade type is scale and the scale is BTEC, if not present a warning */
         $areaid = optional_param('areaid', 0, PARAM_INT);
         $returnurl = optional_param('returnurl', 0, PARAM_TEXT);
         /*find the scale to check it is BTEC */
-        $gradeitem = $DB->get_record('grade_items', array('iteminstance' => $areaid,
-            'itemmodule' => 'assign', 'itemtype' => 'mod'), 'gradetype,scaleid', false);
+        $gradeitem = $DB->get_record('grade_items', ['iteminstance' => $areaid,
+            'itemmodule' => 'assign', 'itemtype' => 'mod'], 'gradetype,scaleid', false);
         /* lookup the id of the BTEC scale */
-        $btecscale = $DB->get_record('scale', array('name' => 'BTEC'), 'id', false);
+        $btecscale = $DB->get_record('scale', ['name' => 'BTEC'], 'id', false);
         if (($gradeitem !== false) && ($gradeitem->scaleid != $btecscale->id)) {
             /* Get the id for assign, probably always 1 */
-            $assignmodule = $DB->get_record('modules', array('name' => 'assign'), 'id');
+            $assignmodule = $DB->get_record('modules', ['name' => 'assign'], 'id');
             $error = get_string('scaletypewarning_text', 'gradingform_btec', $CFG->wwwroot);
-            $cm = $DB->get_record('course_modules', array('instance' => $areaid, 'module' => $assignmodule->id), 'id');
+            $cm = $DB->get_record('course_modules', ['instance' => $areaid, 'module' => $assignmodule->id], 'id');
             $error .= $cm->id . '#id_modstandardgrade>' . get_string('here', 'gradingform_btec');
             \core\notification::error($error);
         }
@@ -75,14 +75,14 @@ class gradingform_btec_editbtec extends moodleform {
         $form->setType('name', PARAM_TEXT);
         // Description.
         $options = gradingform_btec_controller::description_form_field_options($this->_customdata['context']);
-        $form->addElement('editor', 'description_editor', get_string('description'), array('rows' => 6), $options);
+        $form->addElement('editor', 'description_editor', get_string('description'), ['rows' => 6], $options);
         $form->setType('description_editor', PARAM_RAW);
         /* btec completion status. */
-        $choices = array();
+        $choices = [];
         $choices[gradingform_controller::DEFINITION_STATUS_DRAFT]    = html_writer::tag('span',
-            get_string('statusdraft', 'core_grading'), array('class' => 'status draft'));
+            get_string('statusdraft', 'core_grading'), ['class' => 'status draft']);
         $choices[gradingform_controller::DEFINITION_STATUS_READY]    = html_writer::tag('span',
-            get_string('statusready', 'core_grading'), array('class' => 'status ready'));
+            get_string('statusready', 'core_grading'), ['class' => 'status ready']);
         $form->addElement('select', 'status', get_string('btecstatus', 'gradingform_btec'), $choices)->freeze();
 
         /* btec editor. */
@@ -92,7 +92,7 @@ class gradingform_btec_editbtec extends moodleform {
 
         $form->setType('btec', PARAM_RAW);
 
-        $buttonarray = array();
+        $buttonarray = [];
         $buttonarray[] = &$form->createElement('submit', 'savebtec', get_string('savebtec', 'gradingform_btec'));
         if ($this->_customdata['allowdraft']) {
             $buttonarray[] = &$form->createElement('submit', 'savebtecdraft', get_string('savebtecdraft', 'gradingform_btec'));
@@ -101,7 +101,7 @@ class gradingform_btec_editbtec extends moodleform {
         $editbutton->freeze();
         $buttonarray[] = &$editbutton;
         $buttonarray[] = &$form->createElement('cancel');
-        $form->addGroup($buttonarray, 'buttonar', '', array(' '), false);
+        $form->addGroup($buttonarray, 'buttonar', '', [' '], false);
         $form->closeHeaderBefore('buttonar');
     }
 
@@ -138,7 +138,7 @@ class gradingform_btec_editbtec extends moodleform {
      */
     public function validation($data, $files) {
         $err = parent::validation($data, $files);
-        $err = array();
+        $err = [];
         $form = $this->_form;
         $btecel = $form->getElement('btec');
         if ($btecel->non_js_button_pressed($data['btec'])) {
@@ -203,7 +203,7 @@ class gradingform_btec_editbtec extends moodleform {
         // Freeze form elements and pass the values in hidden fields.
         // TODO description_editor does not freeze the normal way!
         $form = $this->_form;
-        foreach (array('btec', 'name') as $fieldname) {
+        foreach (['btec', 'name'] as $fieldname) {
             $el =& $form->getElement($fieldname);
             $el->freeze();
             $el->setPersistantFreeze(true);

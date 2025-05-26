@@ -43,7 +43,7 @@ if (!$controller->is_form_defined() || empty($options['alwaysshowdefinition'])) 
 }
 
 $title = get_string('gradingof', 'gradingform_btec', $manager->get_area_title());
-$PAGE->set_url(new moodle_url('/grade/grading/form/btec/preview.php', array('areaid' => $areaid)));
+$PAGE->set_url(new moodle_url('/grade/grading/form/btec/preview.php', ['areaid' => $areaid]));
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 

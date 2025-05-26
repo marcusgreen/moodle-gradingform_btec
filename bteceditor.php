@@ -102,18 +102,18 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         $data = $this->prepare_data(null, $this->wasvalidated);
         if (!$this->_flagFrozen) {
             $mode = gradingform_btec_controller::DISPLAY_EDIT_FULL;
-            $module = array('name' => 'gradingform_bteceditor',
+            $module = ['name' => 'gradingform_bteceditor',
                 'fullpath' => '/grade/grading/form/btec/js/bteceditor.js',
-                'strings' => array(
-                    array('confirmdeletecriterion', 'gradingform_btec'),
-                    array('clicktoedit', 'gradingform_btec'),
-                    array('clicktoeditname', 'gradingform_btec')
-            ));
-            $PAGE->requires->js_init_call('M.gradingform_bteceditor.init', array(
-                array('name' => $this->getName(),
+                'strings' => [
+                    ['confirmdeletecriterion', 'gradingform_btec'],
+                    ['clicktoedit', 'gradingform_btec'],
+                    ['clicktoeditname', 'gradingform_btec'],
+            ]];
+            $PAGE->requires->js_init_call('M.gradingform_bteceditor.init', [
+                ['name' => $this->getName(),
                     'criteriontemplate' => $renderer->criterion_template($mode, $data['options'], $this->getName()),
-                    'commenttemplate' => $renderer->comment_template($mode, $this->getName())
-                )), true, $module);
+                    'commenttemplate' => $renderer->comment_template($mode, $this->getName()),
+                ]], true, $module);
         } else {
             /* btec is frozen, no javascript needed. */
             if ($this->_persistantFreeze) {
@@ -156,11 +156,11 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             $this->nonjsbuttonpressed = false;
         }
 
-        $errors = array();
-        $return = array('criteria' => array(), 'options' => gradingform_btec_controller::get_default_options(),
-            'comments' => array());
+        $errors = [];
+        $return = ['criteria' => [], 'options' => gradingform_btec_controller::get_default_options(),
+            'comments' => []];
         if (!isset($value['criteria'])) {
-            $value['criteria'] = array();
+            $value['criteria'] = [];
             $errors['err_nocriteria'] = 1;
         }
         // If options are present in $value, replace default values with submitted values.
@@ -190,7 +190,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         foreach ($value['criteria'] as $id => $criterion) {
             if ($id == 'addcriterion') {
                 $id = $this->get_next_id(array_keys($value['criteria']));
-                $criterion = array('description' => '');
+                $criterion = ['description' => ''];
                 $this->nonjsbuttonpressed = true;
             }
 
@@ -233,7 +233,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
             foreach ($value['comments'] as $id => $comment) {
                 if ($id == 'addcomment') {
                     $id = $this->get_next_id(array_keys($value['comments']));
-                    $comment = array('description' => '');
+                    $comment = ['description' => ''];
                     $this->nonjsbuttonpressed = true;
                 }
                 if (array_key_exists('moveup', $comment) || $lastaction == 'movedown') {
@@ -270,7 +270,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         // Create validation error string (if needed).
         if ($withvalidation) {
             if (count($errors)) {
-                $rv = array();
+                $rv = [];
                 foreach ($errors as $error => $v) {
                     $rv[] = get_string($error, 'gradingform_btec');
                 }
@@ -329,11 +329,11 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         $d = $scaleletters['d'];
         $criteria = $value['criteria'];
         $shortnamerror = false;
-        $shortnames = array();
+        $shortnames = [];
         foreach ($criteria as $key => $element) {
             $level = trim($element['shortname']);
             $level = strtolower($level);
-            $a = array('level' => strtoupper($level), 'p' => strtoupper($p), 'm' => strtoupper($m), 'd' => strtoupper($d));
+            $a = ['level' => strtoupper($level), 'p' => strtoupper($p), 'm' => strtoupper($m), 'd' => strtoupper($d)];
             $level = substr($level, 0, 1);
             if ($element['shortname'] == "") {
                 $this->validationerrors .= get_string('level', 'gradingform_btec');

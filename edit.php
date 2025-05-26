@@ -38,12 +38,12 @@ require_capability('moodle/grade:managegradingforms', $context);
 
 $controller = $manager->get_controller('btec');
 
-$PAGE->set_url(new moodle_url('/grade/grading/form/btec/edit.php', array('areaid' => $areaid)));
+$PAGE->set_url(new moodle_url('/grade/grading/form/btec/edit.php', ['areaid' => $areaid]));
 $PAGE->set_title(get_string('definebtecmarking', 'gradingform_btec'));
 $PAGE->set_heading(get_string('definebtecmarking', 'gradingform_btec'));
 
-$mform = new gradingform_btec_editbtec(null, array('areaid' => $areaid, 'context' => $context,
-    'allowdraft' => !$controller->has_active_instances()), 'post', '', array('class' => 'gradingform_btec_editform'));
+$mform = new gradingform_btec_editbtec(null, ['areaid' => $areaid, 'context' => $context,
+    'allowdraft' => !$controller->has_active_instances()], 'post', '', ['class' => 'gradingform_btec_editform']);
 $data = $controller->get_definition_for_editing(true);
 
 $returnurl = optional_param('returnurl', $manager->get_management_url(), PARAM_LOCALURL);
