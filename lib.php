@@ -103,7 +103,7 @@ class gradingform_btec_controller extends gradingform_controller {
      * @param settings_navigation $settingsnav settings_navigation
      * @param navigation_node $node navigation_node
      */
-    public function extend_settings_navigation(settings_navigation $settingsnav, navigation_node $node = null) {
+    public function extend_settings_navigation(settings_navigation $settingsnav, ?navigation_node $node) {
         $node->add(
             get_string('definemarkingbtec', 'gradingform_btec'),
             $this->get_editor_url(),
@@ -124,7 +124,7 @@ class gradingform_btec_controller extends gradingform_controller {
      * @param navigation_node $node navigation_node
      * @return void
      */
-    public function extend_navigation(global_navigation $navigation, navigation_node $node = null) {
+    public function extend_navigation(global_navigation $navigation, ?navigation_node $node) {
         if (has_capability('moodle/grade:managegradingforms', $this->get_context())) {
             // No need for preview if user can manage forms, he will have link to manage.php in settings instead.
             return;
