@@ -1,6 +1,10 @@
 ### BTEC advanced grading method for Moodle by Marcus Green
 
-### Version 1.25 May 2026
+### Version 1.26 Oct 2025
+Comfirmed compatibility with Moodle 5.1
+Code compliance fixes with PHPCS/BF
+
+### Version 1.25 May 2025
 Comfirmed compatibility with Moodle 5.0
 Thanks to Andrew Rowatt of Massey University NZ for code to allow finer application of
 CSS and so customise the interface
