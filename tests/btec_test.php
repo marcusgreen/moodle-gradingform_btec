@@ -157,5 +157,4 @@ final class btec_test extends \basic_testcase {
         $template = $renderer->criterion_template(1, $options, 'btec', $options, $criterion, $validationerrors);
         $this->assertIsString($template, 'template returned should be of type string');
     }
-
 }

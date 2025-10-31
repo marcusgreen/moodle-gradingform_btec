@@ -24,11 +24,14 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot.'/lib/formslib.php');
+require_once($CFG->dirroot . '/lib/formslib.php');
 require_once($CFG->libdir . '/grade/constants.php');
-require_once(dirname(__FILE__).'/bteceditor.php');
-MoodleQuickForm::registerElementType('bteceditor', $CFG->dirroot.'/grade/grading/form/btec/bteceditor.php',
-    'moodlequickform_bteceditor');
+require_once(dirname(__FILE__) . '/bteceditor.php');
+MoodleQuickForm::registerElementType(
+    'bteceditor',
+    $CFG->dirroot . '/grade/grading/form/btec/bteceditor.php',
+    'moodlequickform_bteceditor'
+);
 
 /**
  * Defines the btec edit form
@@ -38,7 +41,6 @@ MoodleQuickForm::registerElementType('bteceditor', $CFG->dirroot.'/grade/grading
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gradingform_btec_editbtec extends moodleform {
-
     /**
      * Form element definition
      */
@@ -50,7 +52,7 @@ class gradingform_btec_editbtec extends moodleform {
         $form->addElement('hidden', 'returnurl');
         $form->setType('returnurl', PARAM_RAW);
 
-        $form->addElement('header', 'btecheader', get_string('gradeheading' , 'gradingform_btec'));
+        $form->addElement('header', 'btecheader', get_string('gradeheading', 'gradingform_btec'));
 
         // Name.
         $form->addElement('text', 'name', get_string('name', 'gradingform_btec'), ['size' => 52]);
@@ -79,10 +81,16 @@ class gradingform_btec_editbtec extends moodleform {
         $form->setType('description_editor', PARAM_RAW);
         /* btec completion status. */
         $choices = [];
-        $choices[gradingform_controller::DEFINITION_STATUS_DRAFT]    = html_writer::tag('span',
-            get_string('statusdraft', 'core_grading'), ['class' => 'status draft']);
-        $choices[gradingform_controller::DEFINITION_STATUS_READY]    = html_writer::tag('span',
-            get_string('statusready', 'core_grading'), ['class' => 'status ready']);
+        $choices[gradingform_controller::DEFINITION_STATUS_DRAFT]    = html_writer::tag(
+            'span',
+            get_string('statusdraft', 'core_grading'),
+            ['class' => 'status draft']
+        );
+        $choices[gradingform_controller::DEFINITION_STATUS_READY]    = html_writer::tag(
+            'span',
+            get_string('statusready', 'core_grading'),
+            ['class' => 'status ready']
+        );
         $form->addElement('select', 'status', get_string('btecstatus', 'gradingform_btec'), $choices)->freeze();
 
         /* btec editor. */
@@ -147,8 +155,10 @@ class gradingform_btec_editbtec extends moodleform {
         } else if (isset($data['editbtec'])) {
             // Continue editing.
             $err['btecdummy'] = 1;
-        } else if ((isset($data['savebtec']) && $data['savebtec']) ||
-                   (isset($data['savebtecdraft']) && $data['savebtecdraft'])) {
+        } else if (
+            (isset($data['savebtec']) && $data['savebtec']) ||
+                   (isset($data['savebtecdraft']) && $data['savebtecdraft'])
+        ) {
             // If user attempts to make btec active - it needs to be validated.
             if ($btecel->validate($data['btec']) !== false) {
                 $err['btecdummy'] = 1;

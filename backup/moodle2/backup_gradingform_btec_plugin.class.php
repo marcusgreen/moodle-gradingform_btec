@@ -30,7 +30,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
-
     /**
      * Declares marking btec structures to append to the grading form definition
      * @return backup_plugin_element
@@ -68,11 +67,15 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
 
         // Set sources to populate the data.
 
-        $criterion->set_source_table('gradingform_btec_criteria',
-                ['definitionid' => backup::VAR_PARENTID]);
+        $criterion->set_source_table(
+            'gradingform_btec_criteria',
+            ['definitionid' => backup::VAR_PARENTID]
+        );
 
-        $comment->set_source_table('gradingform_btec_comments',
-                ['definitionid' => backup::VAR_PARENTID]);
+        $comment->set_source_table(
+            'gradingform_btec_comments',
+            ['definitionid' => backup::VAR_PARENTID]
+        );
 
         // No need to annotate ids or files yet (one day when criterion definition supports
         // embedded files, they must be annotated here).
@@ -109,8 +112,10 @@ class backup_gradingform_btec_plugin extends backup_gradingform_plugin {
 
         // Set sources to populate the data.
 
-        $filling->set_source_table('gradingform_btec_fillings',
-            ['instanceid' => backup::VAR_PARENTID]);
+        $filling->set_source_table(
+            'gradingform_btec_fillings',
+            ['instanceid' => backup::VAR_PARENTID]
+        );
 
         // No need to annotate ids or files yet (one day when remark field supports
         // embedded fileds, they must be annotated here).

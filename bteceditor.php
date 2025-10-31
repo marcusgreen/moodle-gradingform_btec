@@ -33,7 +33,6 @@ require_once($CFG->dirroot . '/grade/grading/form/btec/lib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class moodlequickform_bteceditor extends HTML_QuickForm_input {
-
     /** @var string help message */
     public $_helpbutton = '';
 
@@ -58,7 +57,7 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
       * @param array $attributes
       * @param string $unusuedparam // Used to suppress codechecker useless override message.
       */
-    public function __construct($elementname=null, $elementlabel=null, $attributes=null, $unusuedparam=null) {
+    public function __construct($elementname = null, $elementlabel = null, $attributes = null, $unusuedparam = null) {
         parent::__construct($elementname, $elementlabel, $attributes);
     }
 
@@ -381,5 +380,4 @@ class moodlequickform_bteceditor extends HTML_QuickForm_input {
         $value = $this->prepare_data($this->_findValue($submitvalues));
         return $this->_prepareValue($value, $assoc);
     }
-
 }

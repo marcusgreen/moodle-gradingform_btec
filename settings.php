@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Not sure this file does anything at all
  *
@@ -29,6 +28,7 @@ If it ever gets read it should also include counts
  * of M and D criteria etc etc
  **/
 $settings->add(new admin_setting_configtext(
-'gradingform_btec/passcount',
-        get_string('countofpasscriteria', 'gradingform_btec'), 6
-        ));
+    'gradingform_btec/passcount',
+    get_string('countofpasscriteria', 'gradingform_btec'),
+    6
+));

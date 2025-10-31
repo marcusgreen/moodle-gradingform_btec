@@ -54,8 +54,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @param array $validationerrors An array containing validation errors to be shown
      * @return string
      */
-    public function criterion_template($mode, array $options, $elementname =
-            '{NAME}', $criterion = null, $value = null, $validationerrors = null) {
+    public function criterion_template($mode, array $options, $elementname = '{NAME}', $criterion = null, $value = null, $validationerrors = null) {
         if ($criterion === null || !is_array($criterion) || !array_key_exists('id', $criterion)) {
             $criterion = ['id' => '{CRITERION-id}',
                 'description' => '{CRITERION-description}',
@@ -105,10 +104,14 @@ class gradingform_btec_renderer extends plugin_renderer_base {
 
             $shortname = html_writer::tag('div', $shortname, ['name' => 'criterionshortname', 'class' => 'criterionname']);
 
-            $description = html_writer::tag('textarea', htmlspecialchars($criterion['description']),
-                    ['name' => '{NAME}[criteria][{CRITERION-id}][description]',
+            $description = html_writer::tag(
+                'textarea',
+                htmlspecialchars($criterion['description']),
+                ['name' => '{NAME}[criteria][{CRITERION-id}][description]',
                         'id' => '{NAME}[criteria][{CRITERION-id}][description]',
-                        'cols' => '65', 'rows' => '5']);
+                'cols' => '65',
+                'rows' => '5']
+            );
             $description = html_writer::tag('div', $description, ['class' => 'criteriondesc']);
         } else {
             if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN) {
@@ -123,14 +126,19 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                             'value' => $criterion['descriptionmarkers']]);
                 $criteriontemplate .= html_writer::empty_tag('input', ['type' => 'hidden',
                             'name' => '{NAME}[criteria][{CRITERION-id}][maxscore]', 'value' => $criterion['maxscore']]);
-            } else if ($mode == gradingform_btec_controller::DISPLAY_EVAL ||
-                    $mode == gradingform_btec_controller::DISPLAY_VIEW) {
+            } else if (
+                $mode == gradingform_btec_controller::DISPLAY_EVAL ||
+                    $mode == gradingform_btec_controller::DISPLAY_VIEW
+            ) {
                 $descriptionclass = 'descriptionreadonly';
             }
 
-            $shortname = html_writer::tag('div', $criterion['shortname'],
-                    ['class' => 'criterionshortname',
-                        'name' => '{NAME}[criteria][{CRITERION-id}][shortname]']);
+            $shortname = html_writer::tag(
+                'div',
+                $criterion['shortname'],
+                ['class' => 'criterionshortname',
+                'name' => '{NAME}[criteria][{CRITERION-id}][shortname]']
+            );
             $descmarkerclass = '';
             $descstudentclass = '';
             if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
@@ -141,32 +149,51 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                     $descstudentclass = ' hide';
                 }
             }
-            $description = html_writer::tag('div', $criterion['description'],
-                    ['class' => 'criteriondescription' . $descstudentclass,
-                    'name' => '{NAME}[criteria][{CRITERION-id}][descriptionmarkers]']);
-            $descriptionmarkers = html_writer::tag('div', $criterion['descriptionmarkers'],
-                    ['class' => 'criteriondescriptionmarkers' . $descmarkerclass,
-                        'name' => '{NAME}[criteria][{CRITERION-id}][descriptionmarkers]']);
-            $maxscore = html_writer::tag('div', $criterion['maxscore'],
-                    ['class' => 'criteriondescriptionscore',
-                        'name' => '{NAME}[criteria][{CRITERION-id}][maxscore]']);
+            $description = html_writer::tag(
+                'div',
+                $criterion['description'],
+                ['class' => 'criteriondescription' . $descstudentclass,
+                'name' => '{NAME}[criteria][{CRITERION-id}][descriptionmarkers]']
+            );
+            $descriptionmarkers = html_writer::tag(
+                'div',
+                $criterion['descriptionmarkers'],
+                ['class' => 'criteriondescriptionmarkers' . $descmarkerclass,
+                'name' => '{NAME}[criteria][{CRITERION-id}][descriptionmarkers]']
+            );
+            $maxscore = html_writer::tag(
+                'div',
+                $criterion['maxscore'],
+                ['class' => 'criteriondescriptionscore',
+                'name' => '{NAME}[criteria][{CRITERION-id}][maxscore]']
+            );
         }
 
         if (isset($criterion['error_description'])) {
             $descriptionclass .= ' error';
         }
 
-        $title = html_writer::tag('label', get_string('criterion', 'gradingform_btec'),
-                ['for' => '{NAME}[criteria][{CRITERION-id}][shortname]', 'class' => 'criterionnamelabel']);
+        $title = html_writer::tag(
+            'label',
+            get_string('criterion', 'gradingform_btec'),
+            ['for' => '{NAME}[criteria][{CRITERION-id}][shortname]', 'class' => 'criterionnamelabel']
+        );
         $title .= $shortname;
-        if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL ||
-                $mode == gradingform_btec_controller::DISPLAY_PREVIEW) {
+        if (
+            $mode == gradingform_btec_controller::DISPLAY_EDIT_FULL ||
+                $mode == gradingform_btec_controller::DISPLAY_PREVIEW
+        ) {
             /* change descriptionstudents for criteriarequirement */
-            $title .= html_writer::tag('label', get_string('criteriarequirements', 'gradingform_btec'),
-                    ['for' => '{NAME}[criteria][{CRITERION-id}][description]']);
+            $title .= html_writer::tag(
+                'label',
+                get_string('criteriarequirements', 'gradingform_btec'),
+                ['for' => '{NAME}[criteria][{CRITERION-id}][description]']
+            );
             $title .= $description;
-        } else if ($mode == gradingform_btec_controller::DISPLAY_PREVIEW_GRADED ||
-                $mode == gradingform_btec_controller::DISPLAY_VIEW) {
+        } else if (
+            $mode == gradingform_btec_controller::DISPLAY_PREVIEW_GRADED ||
+                $mode == gradingform_btec_controller::DISPLAY_VIEW
+        ) {
             $title .= $description;
         } else {
             $title .= $description . $descriptionmarkers;
@@ -239,25 +266,36 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 $scoreclass = 'error';
                 $currentscore = $validationerrors[$criterion['id']]['score']; // Show invalid score in form.
             }
-            $input = html_writer::tag('textarea', htmlspecialchars($currentremark),
-                    ['name' => '{NAME}[criteria][{CRITERION-id}][remark]',
+            $input = html_writer::tag(
+                'textarea',
+                htmlspecialchars($currentremark),
+                ['name' => '{NAME}[criteria][{CRITERION-id}][remark]',
                         'cols' => '65', 'rows' => '5',
-                        'class' => 'markingbtecremark']);
+                'class' => 'markingbtecremark']
+            );
             $criteriontemplate .= html_writer::tag('td', $input, ['class' => 'remark']);
         } else if ($mode == gradingform_btec_controller::DISPLAY_EVAL_FROZEN) {
             $criteriontemplate .= html_writer::empty_tag('input', ['type' => 'hidden',
                         'name' => '{NAME}[criteria][{CRITERION-id}][remark]', 'value' => $currentremark]);
-        } else if ($mode == gradingform_btec_controller::DISPLAY_REVIEW ||
-                $mode == gradingform_btec_controller::DISPLAY_VIEW) {
+        } else if (
+            $mode == gradingform_btec_controller::DISPLAY_REVIEW ||
+                $mode == gradingform_btec_controller::DISPLAY_VIEW
+        ) {
             $criteriontemplate .= html_writer::tag('td', $currentremark, ['class' => 'remark']);
             if (!empty($options['showmarkspercriterionstudents'])) {
                 /* replace score out of with in/complete */
                 if ($currentscore) {
-                    $criteriontemplate .= html_writer::tag('td',
-                    html_writer::span(get_string('completed', 'gradingform_btec')), ['class' => 'score score_completed']);
+                    $criteriontemplate .= html_writer::tag(
+                        'td',
+                        html_writer::span(get_string('completed', 'gradingform_btec')),
+                        ['class' => 'score score_completed']
+                    );
                 } else {
-                    $criteriontemplate .= html_writer::tag('td', html_writer::span(get_string('incomplete', 'gradingform_btec')),
-                     ['class' => 'score score_incomplete']);
+                    $criteriontemplate .= html_writer::tag(
+                        'td',
+                        html_writer::span(get_string('incomplete', 'gradingform_btec')),
+                        ['class' => 'score score_incomplete']
+                    );
                 }
             }
         }
@@ -316,8 +354,11 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             $criteriontemplate .= html_writer::end_tag('td'); // Controls.
             $criteriontemplate .= html_writer::empty_tag('input', ['type' => 'hidden',
                         'name' => '{NAME}[comments][{COMMENT-id}][sortorder]', 'value' => $comment['sortorder']]);
-            $description = html_writer::tag('textarea', htmlspecialchars($comment['description']),
-                    ['name' => '{NAME}[comments][{COMMENT-id}][description]', 'cols' => '65', 'rows' => '5']);
+            $description = html_writer::tag(
+                'textarea',
+                htmlspecialchars($comment['description']),
+                ['name' => '{NAME}[comments][{COMMENT-id}][description]', 'cols' => '65', 'rows' => '5']
+            );
             $description = html_writer::tag('div', $description, ['class' => 'criteriondesc']);
         } else {
             if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN) {
@@ -327,10 +368,14 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                             'name' => '{NAME}[comments][{COMMENT-id}][description]', 'value' => $comment['description']]);
             }
             if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
-                $description = html_writer::tag('span', htmlspecialchars($comment['description']),
-                        ['name' => '{NAME}[comments][{COMMENT-id}][description]',
+                $description = html_writer::tag(
+                    'span',
+                    htmlspecialchars($comment['description']),
+                    ['name' => '{NAME}[comments][{COMMENT-id}][description]',
                             'title' => get_string('clicktocopy', 'gradingform_btec'),
-                            'id' => '{NAME}[comments][{COMMENT-id}]', 'class' => 'markingbteccomment']);
+                    'id' => '{NAME}[comments][{COMMENT-id}]',
+                    'class' => 'markingbteccomment']
+                );
             } else {
                 $description = $comment['description'];
             }
@@ -406,10 +451,16 @@ class gradingform_btec_renderer extends plugin_renderer_base {
         }
 
         if (!empty($commentstr)) {
-            $btectemplate .= html_writer::tag('label', get_string('comments', 'gradingform_btec'),
-                    ['for' => '{NAME}-comments', 'class' => 'commentheader']);
-            $btectemplate .= html_writer::tag('table', $commentstr,
-                    ['class' => 'comments', 'id' => '{NAME}-comments']);
+            $btectemplate .= html_writer::tag(
+                'label',
+                get_string('comments', 'gradingform_btec'),
+                ['for' => '{NAME}-comments', 'class' => 'commentheader']
+            );
+            $btectemplate .= html_writer::tag(
+                'table',
+                $commentstr,
+                ['class' => 'comments', 'id' => '{NAME}-comments']
+            );
         }
         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
             $value = get_string('addcomment', 'gradingform_btec');
@@ -434,15 +485,23 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @return string
      */
     protected function btec_edit_options($mode, $options) {
-        if ($mode != gradingform_btec_controller::DISPLAY_EDIT_FULL &&
+        if (
+            $mode != gradingform_btec_controller::DISPLAY_EDIT_FULL &&
                 $mode != gradingform_btec_controller::DISPLAY_EDIT_FROZEN &&
-                $mode != gradingform_btec_controller::DISPLAY_PREVIEW) {
+                $mode != gradingform_btec_controller::DISPLAY_PREVIEW
+        ) {
             // Options are displayed only for people who can manage.
             return;
         }
         $html = html_writer::start_tag('div', ['class' => 'optionsheader']);
-        $html .= print_collapsible_region_start('btecoptions', uniqid('btecoptions'),
-                get_string('btecoptions', 'gradingform_btec'), '', true, true);
+        $html .= print_collapsible_region_start(
+            'btecoptions',
+            uniqid('btecoptions'),
+            get_string('btecoptions', 'gradingform_btec'),
+            '',
+            true,
+            true
+        );
         $attrs = ['type' => 'hidden', 'name' => '{NAME}[options][optionsset]',
             'value' => 1];
         $html .= html_writer::empty_tag('input', $attrs);
@@ -453,20 +512,27 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 'id' => '{NAME}-options-' . $option];
             switch ($option) {
                 case 'sortlevelsasc':
-
                     // Display option as dropdown.
                     $html .= html_writer::tag('span', get_string($option, 'gradingform_btec'), ['class' => 'label']);
                     $value = (int) (!!$value); // Make sure $value is either 0 or 1.
                     if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL) {
                         $selectoptions = [0 => get_string($option . '0', 'gradingform_btec'),
                             1 => get_string($option . '1', 'gradingform_btec')];
-                        $valuestr = html_writer::select($selectoptions, $attrs['name'], $value,
-                                false, ['id' => $attrs['id']]);
+                        $valuestr = html_writer::select(
+                            $selectoptions,
+                            $attrs['name'],
+                            $value,
+                            false,
+                            ['id' => $attrs['id']]
+                        );
                         $html .= html_writer::tag('span', $valuestr, ['class' => 'value']);
                         // Note add here button 'Sort levels'.
                     } else {
-                        $html .= html_writer::tag('span', get_string($option . $value, 'gradingform_btec'),
-                                ['class' => 'value']);
+                        $html .= html_writer::tag(
+                            'span',
+                            get_string($option . $value, 'gradingform_btec'),
+                            ['class' => 'value']
+                        );
                         if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN) {
                             $html .= html_writer::empty_tag('input', $attrs + ['type' => 'hidden',
                                         'value' => $value]);
@@ -474,7 +540,6 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                     }
                     break;
                 default:
-
                     if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN && $value) {
                         $html .= html_writer::empty_tag('input', $attrs + ['type' => 'hidden', 'value' => $value]);
                     }
@@ -484,8 +549,10 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                     if ($value) {
                         $attrs['checked'] = 'checked';
                     }
-                    if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN ||
-                            $mode == gradingform_btec_controller::DISPLAY_PREVIEW) {
+                    if (
+                        $mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN ||
+                            $mode == gradingform_btec_controller::DISPLAY_PREVIEW
+                    ) {
                         $attrs['disabled'] = 'disabled';
                         unset($attrs['name']);
                     }
@@ -520,8 +587,15 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @param array $validationerrors
      * @return string
      */
-    public function display_btec($criteria, $comments, $options, $mode,
-            $elementname = null, $values = null, $validationerrors = null) {
+    public function display_btec(
+        $criteria,
+        $comments,
+        $options,
+        $mode,
+        $elementname = null,
+        $values = null,
+        $validationerrors = null
+    ) {
         $criteriastr = "";
         if ($mode == gradingform_btec_controller::DISPLAY_EVAL) {
             $criteriastr = "<tr><td class = 'markingbtecyesno'>";
@@ -542,18 +616,25 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             } else {
                 $criterionvalue = null;
             }
-            $criteriastr .= $this->criterion_template($mode, $options, $elementname,
-                    $criterion, $criterionvalue, $validationerrors);
+            $criteriastr .= $this->criterion_template(
+                $mode,
+                $options,
+                $elementname,
+                $criterion,
+                $criterionvalue,
+                $validationerrors
+            );
         }
         $cnt = 0;
         $commentstr = '';
         // Check if comments should be displayed.
-        if ($mode == gradingform_btec_controller::DISPLAY_EDIT_FULL ||
+        if (
+            $mode == gradingform_btec_controller::DISPLAY_EDIT_FULL ||
                 $mode == gradingform_btec_controller::DISPLAY_EDIT_FROZEN ||
                 $mode == gradingform_btec_controller::DISPLAY_PREVIEW ||
                 $mode == gradingform_btec_controller::DISPLAY_EVAL ||
-                $mode == gradingform_btec_controller::DISPLAY_EVAL_FROZEN) {
-
+                $mode == gradingform_btec_controller::DISPLAY_EVAL_FROZEN
+        ) {
             foreach ($comments as $id => $comment) {
                 $comment['id'] = $id;
                 $comment['class'] = $this->get_css_class_suffix($cnt++, count($comments) - 1);
@@ -582,24 +663,36 @@ class gradingform_btec_renderer extends plugin_renderer_base {
                 $checkeds2 = $checked;
             }
 
-            $radio = html_writer::tag('input', get_string('showmarkerdesc', 'gradingform_btec'),
-                    ['type' => 'radio', 'style' => 'padding:25px;',
+            $radio = html_writer::tag(
+                'input',
+                get_string('showmarkerdesc', 'gradingform_btec'),
+                ['type' => 'radio', 'style' => 'padding:25px;',
                         'name' => 'showmarkerdesc',
-                        'value' => "true"] + $checked1);
-            $radio .= html_writer::tag('input', get_string('hidemarkerdesc', 'gradingform_btec'),
-                    ['type' => 'radio', 'style' => 'padding:25px;',
+                'value' => "true"] + $checked1
+            );
+            $radio .= html_writer::tag(
+                'input',
+                get_string('hidemarkerdesc', 'gradingform_btec'),
+                ['type' => 'radio', 'style' => 'padding:25px;',
                         'name' => 'showmarkerdesc',
-                        'value' => "false"] + $checked2);
+                'value' => "false"] + $checked2
+            );
             $output .= html_writer::tag('div', $radio, ['class' => 'showmarkerdesc']);
 
-            $radio = html_writer::tag('input', get_string('showstudentdesc', 'gradingform_btec'),
-                    ['type' => 'radio',
+            $radio = html_writer::tag(
+                'input',
+                get_string('showstudentdesc', 'gradingform_btec'),
+                ['type' => 'radio',
                         'name' => 'showstudentdesc',
-                        'value' => "true"] + $checkeds1);
-            $radio .= html_writer::tag('input', get_string('hidestudentdesc', 'gradingform_btec'),
-                    ['type' => 'radio',
+                'value' => "true"] + $checkeds1
+            );
+            $radio .= html_writer::tag(
+                'input',
+                get_string('hidestudentdesc', 'gradingform_btec'),
+                ['type' => 'radio',
                         'name' => 'showstudentdesc',
-                        'value' => "false"] + $checkeds2);
+                'value' => "false"] + $checkeds2
+            );
             $output .= html_writer::tag('div', $radio, ['class' => 'showstudentdesc']);
         }
         return $output;
@@ -647,7 +740,7 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             $return .= html_writer::end_tag('div');
         }
         /* The btec-grade controls the display of the final grade to students */
-        return "<div class='btec-grade'>".$defaultcontent . '</div><tr><td></td><td>' . $return . '</td></tr>';
+        return "<div class='btec-grade'>" . $defaultcontent . '</div><tr><td></td><td>' . $return . '</td></tr>';
     }
 
     /**
@@ -709,11 +802,9 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             return $html;
         }
         if (isset($scores['modulegrade']) && $scores['maxscore'] != $scores['modulegrade']) {
-            $html .= $this->box(html_writer::tag('div', get_string('btecmappingexplained', 'gradingform_btec', (object) $scores))
-                    , 'generalbox gradingform_btec-error');
+            $html .= $this->box(html_writer::tag('div', get_string('btecmappingexplained', 'gradingform_btec', (object) $scores)), 'generalbox gradingform_btec-error');
         }
 
         return $html;
     }
-
 }

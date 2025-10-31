@@ -37,11 +37,15 @@ class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
 
         $paths = [];
 
-        $paths[] = new restore_path_element('gradingform_btec_criterion',
-            $this->get_pathfor('/bteccriteria/bteccriterion'));
+        $paths[] = new restore_path_element(
+            'gradingform_btec_criterion',
+            $this->get_pathfor('/bteccriteria/bteccriterion')
+        );
 
-        $paths[] = new restore_path_element('gradingform_btec_comment',
-            $this->get_pathfor('/bteccomments/bteccomment'));
+        $paths[] = new restore_path_element(
+            'gradingform_btec_comment',
+            $this->get_pathfor('/bteccomments/bteccomment')
+        );
 
         return $paths;
     }
@@ -55,8 +59,10 @@ class restore_gradingform_btec_plugin extends restore_gradingform_plugin {
 
         $paths = [];
 
-        $paths[] = new restore_path_element('gradinform_btec_filling',
-            $this->get_pathfor('/fillings/filling'));
+        $paths[] = new restore_path_element(
+            'gradinform_btec_filling',
+            $this->get_pathfor('/fillings/filling')
+        );
 
         return $paths;
     }
