@@ -54,7 +54,14 @@ class gradingform_btec_renderer extends plugin_renderer_base {
      * @param array $validationerrors An array containing validation errors to be shown
      * @return string
      */
-    public function criterion_template($mode, array $options, $elementname = '{NAME}', $criterion = null, $value = null, $validationerrors = null) {
+    public function criterion_template(
+        $mode,
+        array $options,
+        $elementname = '{NAME}',
+        $criterion = null,
+        $value = null,
+        $validationerrors = null
+    ) {
         if ($criterion === null || !is_array($criterion) || !array_key_exists('id', $criterion)) {
             $criterion = ['id' => '{CRITERION-id}',
                 'description' => '{CRITERION-description}',
@@ -802,7 +809,10 @@ class gradingform_btec_renderer extends plugin_renderer_base {
             return $html;
         }
         if (isset($scores['modulegrade']) && $scores['maxscore'] != $scores['modulegrade']) {
-            $html .= $this->box(html_writer::tag('div', get_string('btecmappingexplained', 'gradingform_btec', (object) $scores)), 'generalbox gradingform_btec-error');
+            $html .= $this->box(
+                html_writer::tag('div', get_string('btecmappingexplained', 'gradingform_btec', (object) $scores)),
+                'generalbox gradingform_btec-error'
+            );
         }
 
         return $html;

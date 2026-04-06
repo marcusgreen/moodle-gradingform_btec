@@ -93,17 +93,17 @@ class gradingform_btec_controller extends gradingform_controller {
         return $scaleletters;
     }
 
-    /**
-     * Extends the module settings navigation with the btec grading settings
-     *
-     * This function is called when the context for the page is an activity module with the
-     * FEATURE_ADVANCED_GRADING, the user has the permission moodle/grade:managegradingforms
-     * and there is an area with the active grading method set to 'btec'.
-     *
-     * @param settings_navigation $settingsnav settings_navigation
-     * @param navigation_node $node navigation_node
-     */
-    public function extend_settings_navigation(settings_navigation $settingsnav, navigation_node $node = null) {
+     /**
+      * Extends the module settings navigation with the btec grading settings.
+      *
+      * This function is called when the context for the page is an activity module with the
+      * FEATURE_ADVANCED_GRADING, the user has the permission moodle/grade:managegradingforms
+      * and there is an area with the active grading method set to 'btec'.
+      *
+      * @param settings_navigation $settingsnav Settings navigation instance.
+      * @param navigation_node|null $node Active navigation node if present.
+      */
+    public function extend_settings_navigation(settings_navigation $settingsnav, ?navigation_node $node = null) {
         $node->add(
             get_string('definemarkingbtec', 'gradingform_btec'),
             $this->get_editor_url(),
@@ -114,17 +114,17 @@ class gradingform_btec_controller extends gradingform_controller {
         );
     }
 
-    /**
-     * Extends the module navigation
-     *
-     * This function is called when the context for the page is an activity module with the
-     * FEATURE_ADVANCED_GRADING and there is an area with the active grading method set to the given plugin.
-     *
-     * @param global_navigation $navigation global_navigation
-     * @param navigation_node $node navigation_node
-     * @return void
-     */
-    public function extend_navigation(global_navigation $navigation, navigation_node $node = null) {
+     /**
+      * Extends the module navigation.
+      *
+      * This function is called when the context for the page is an activity module with the
+      * FEATURE_ADVANCED_GRADING and there is an area with the active grading method set to the given plugin.
+      *
+      * @param global_navigation $navigation Global navigation instance.
+      * @param navigation_node|null $node Active navigation node if present.
+      * @return void
+      */
+    public function extend_navigation(global_navigation $navigation, ?navigation_node $node = null) {
         if (has_capability('moodle/grade:managegradingforms', $this->get_context())) {
             // No need for preview if user can manage forms, he will have link to manage.php in settings instead.
             return;
