@@ -1,11 +1,16 @@
 ### BTEC advanced grading method for Moodle by Marcus Green
 
+### Version 1.28 Oct 2026
+Confirmed compatibility with Moodle 5.3
+CI now tests Moodle 5.0 to 5.3 on PHP 8.2 to 8.4 with PostgreSQL and MariaDB
+Code compliance fixes, instance class moved to classes/instance.php
+
 ### Version 1.27 Apr 2026
-Comfirmed compatibility with Moodle 5.2
+Confirmed compatibility with Moodle 5.2
 Minor code compliance fixes
 
 ### Version 1.25 May 2025
-Comfirmed compatibility with Moodle 5.0
+Confirmed compatibility with Moodle 5.0
 Thanks to Andrew Rowatt of Massey University NZ for code to allow finer application of
 CSS and so customise the interface
 

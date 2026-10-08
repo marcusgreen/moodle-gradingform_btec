@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component  = 'gradingform_btec';
-$plugin->version    = 2026040600;
+$plugin->version    = 2026100800;
 $plugin->requires = 2025031400;  // Moodle 5.0.
 $plugin->supported = [500, 503];
-$plugin->release    = '1.27';
+$plugin->release    = '1.28';
 $plugin->maturity   = MATURITY_STABLE;
