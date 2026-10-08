@@ -33,8 +33,8 @@ require_once($CFG->dirroot . '/grade/grading/form/btec/lib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class moodlequickform_bteceditor extends HTML_QuickForm_input {
-    /** @var string help message */
-    public $_helpbutton = '';
+    /** @var string help message, name required as core formslib sets it directly */
+    public $_helpbutton = ''; // phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore
 
     /** @var null|false|string stores the result of the last validation: null - undefined, false - no errors,
      * string - error(s) text */
